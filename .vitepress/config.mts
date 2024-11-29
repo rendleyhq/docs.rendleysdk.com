@@ -74,19 +74,19 @@ export default defineConfig({
           { text: "Export video", link: "/getting-started/export" },
         ],
       },
-      {
-        text: "Advanced",
-        items: [
-          {
-            text: "Create Lottie clip",
-            // link: "/in-progress#",
-          },
-          {
-            text: "Create Custom clip",
-            // link: "/in-progress#",
-          },
-        ],
-      },
+      // {
+      //   text: "Advanced",
+      //   items: [
+      //     {
+      //       text: "Import After Effects compositions",
+      //       link: "/in-progress#",
+      //     },
+      //     {
+      //       text: "Create Custom clip",
+      //       link: "/in-progress#",
+      //     },
+      //   ],
+      // },
       {
         text: "Rendering",
         items: [
@@ -119,7 +119,13 @@ export default defineConfig({
       },
       {
         text: "Examples",
-        items: [{ text: "Slideshow Video", link: "/in-progress#" }],
+        items: [
+          { text: "Slideshow Video", link: "/examples/slideshow-video" },
+          {
+            text: "Remvre green background",
+            link: "/examples/remove-green-background",
+          },
+        ],
       },
       {
         text: "More",
@@ -132,8 +138,6 @@ export default defineConfig({
       },
     ],
 
-    socialLinks: [
-      { icon: "github", link: "https://github.com/vuejs/vitepress" },
-    ],
+    socialLinks: [{ icon: "github", link: "https://github.com/rendleyhq" }],
   },
 });
