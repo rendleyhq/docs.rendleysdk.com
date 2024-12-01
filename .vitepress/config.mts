@@ -6,7 +6,8 @@ export default defineConfig({
   base: "/docs/",
 
   title: "Rendley SDK",
-  description: "A VitePress Site",
+  description:
+    "Rendley provides a powerful SDK that handles all the complexities of video editing. Get the details in our documentation.",
 
   head: [
     [
@@ -17,6 +18,107 @@ export default defineConfig({
         size: "any",
         type: "image/svg+xml",
       },
+    ],
+
+    // Canonical URL
+    ["link", { rel: "canonical", href: "https://rendley.com/docs" }],
+
+    // Open Graph Meta Tags
+    ["meta", { property: "og:type", content: "website" }],
+    ["meta", { property: "og:url", content: "https://rendley.com/docs" }],
+    [
+      "meta",
+      {
+        property: "og:title",
+        content:
+          "Rendley SDK Documentation - Learn about our powerful video editing SDK",
+      },
+    ],
+    [
+      "meta",
+      {
+        property: "og:description",
+        content:
+          "Rendley provides a powerful SDK that handles all the complexities of video editing. Get the details in our documentation.",
+      },
+    ],
+    [
+      "meta",
+      { property: "og:image", content: "https://rendley.com/docs/og.jpg" },
+    ],
+    ["meta", { property: "og:image:width", content: "1200" }],
+    ["meta", { property: "og:image:height", content: "630" }],
+    [
+      "meta",
+      {
+        property: "og:image:alt",
+        content: "Rendley SDK - Javascript Video Editing SDK",
+      },
+    ],
+    [
+      "meta",
+      { property: "og:site_name", content: "Rendley SDK Documentation" },
+    ],
+
+    // Twitter Meta Tags
+    ["meta", { name: "twitter:card", content: "summary_large_image" }],
+    ["meta", { name: "twitter:site", content: "@rendleyhq" }],
+    ["meta", { name: "twitter:creator", content: "@rendleyhq" }],
+    [
+      "meta",
+      {
+        name: "twitter:title",
+        content:
+          "Rendley SDK Documentation - Learn about our powerful video editing SDK",
+      },
+    ],
+    [
+      "meta",
+      {
+        name: "twitter:description",
+        content:
+          "Rendley provides a powerful SDK that handles all the complexities of video editing. Get the details in our documentation.",
+      },
+    ],
+    [
+      "meta",
+      { name: "twitter:image", content: "https://rendley.com/docs/og.jpg" },
+    ],
+
+    // Google Analytics
+    [
+      "script",
+      {
+        src: "https://www.googletagmanager.com/gtag/js?id=G-QDNE5JN9GG",
+        async: "true",
+      },
+    ],
+    [
+      "script",
+      {},
+      `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-QDNE5JN9GG');
+      `,
+    ],
+
+    // Tawk.to Chat Integration
+    [
+      "script",
+      {},
+      `
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+          var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+          s1.async=true;
+          s1.setAttribute('crossorigin','*');
+          s1.src='https://embed.tawk.to/6622132d1ec1082f04e483cf/1hrqhlqj4';
+          s1.charset='UTF-8';
+          s0.parentNode.insertBefore(s1,s0);
+        })();
+      `,
     ],
   ],
 
@@ -50,7 +152,7 @@ export default defineConfig({
     nav: [
       {
         text: "API Reference",
-        link: "https://docs.rendley.com/api-reference/index.html",
+        link: "https://rendley.com/docs/api-reference/index.html",
       },
     ],
 
@@ -169,7 +271,7 @@ export default defineConfig({
         items: [
           {
             text: "API Reference",
-            link: "https://docs.rendley.com/api-reference/index.html",
+            link: "https://rendley.com/docs/api-reference/index.html",
           },
           { text: "Playground", link: "https://playground.rendley.com" },
           { text: "Blog", link: "https://blog.rendley.com" },

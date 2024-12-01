@@ -1,6 +1,6 @@
 # Quick Start
 
-To install the SDK, it is sufficient to use the following command:
+Rendley SDK can be installed via npm, yarn, or pnpm.
 
 :::tabs
 == npm

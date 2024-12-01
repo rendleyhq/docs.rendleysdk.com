@@ -68,11 +68,11 @@ The relevant folders that will be created are `dist` and `loader`.
 
 To integrate the project into your website, you have two options:
 
-### Publish as a private NPM package
+### 1. Publish as a private NPM package
 
 The recommeded way of using the Video Editor UI is to publish the package as a private NPM package. To do so, follow the instructions [here](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry).
 
-### Upload to CDN
+### 2. Upload to CDN
 
 The alternative way, would be to build the project and upload both, the `dist` and `loader` folders to a CDN. To embed the Video Editor UI into your website, you would have to use the CDN URL
 
