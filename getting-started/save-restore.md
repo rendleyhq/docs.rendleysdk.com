@@ -12,6 +12,10 @@ import { Engine } from "@rendley/sdk";
 const serialized = Engine.getInstance().serialize();
 ```
 
+::: info
+The serialized state will also contain a schema version that is used to ensure backwards compatibility.
+:::
+
 ## Deserialization
 
 Deserialization is the process of initializing the SDK from a JSON. It is important that before running the deserialize method, the Engine has been initialized.

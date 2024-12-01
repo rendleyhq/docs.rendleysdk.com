@@ -4,7 +4,7 @@ A list of best practices for getting the best performance of the SDK
 
 ## Do not add the same asset multiple times
 
-Instead of loading the same asset multiple times, you should reference it from [the library](/getting-started//library.md).
+Instead of loading the same asset multiple times, you should reference it from [the library](/getting-started/library.md).
 
 ## Do not upload images for simple shapes
 

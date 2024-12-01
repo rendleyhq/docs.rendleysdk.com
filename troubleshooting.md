@@ -9,3 +9,7 @@ This means your license has expired and you have to get a new one in order to co
 ::: details Engine is already initialized. Use Engine.isInitialized() to check if the instance was already created
 This happens when you try to initialize the Engine multiple times using `Engine.init()`.
 :::
+
+::: details The deserialized state doesn't load the videos/images/audios I have added
+If you don't see uploaded assets, there is a good chance you haven't stored them. It is not enough to add the files to the library. Take a look at the [Storage](/getting-started/storage.md) section for more information.
+:::

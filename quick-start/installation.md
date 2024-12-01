@@ -1,6 +1,6 @@
 # Quick Start
 
-The Video Editor UI is created using web components, making it embeddable into any website created with any library, whether it be React, Angular, Vue, PHP, or HTML.
+To install the SDK, it is sufficient to use the following command:
 
 :::tabs
 == npm

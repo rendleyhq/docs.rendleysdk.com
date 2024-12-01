@@ -3,8 +3,26 @@ import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base: "/docs/",
+
   title: "Rendley SDK",
   description: "A VitePress Site",
+
+  head: [
+    [
+      "link",
+      {
+        rel: "icon",
+        href: "/docs/favicon.svg",
+        size: "any",
+        type: "image/svg+xml",
+      },
+    ],
+  ],
+
+  sitemap: {
+    hostname: "https://rendley.com/docs/",
+  },
 
   markdown: {
     config(md) {
@@ -13,7 +31,13 @@ export default defineConfig({
   },
 
   themeConfig: {
-    nav: [{ text: "Home", link: "/#" }],
+    socialLinks: [
+      { icon: "github", link: "https://github.com/rendleyhq" },
+      {
+        icon: "discord",
+        link: "https://discord.gg/BwdeFFEVXR",
+      },
+    ],
 
     search: {
       provider: "local",
@@ -22,6 +46,13 @@ export default defineConfig({
     outline: {
       level: [2, 3],
     },
+
+    nav: [
+      {
+        text: "API Reference",
+        link: "https://docs.rendley.com/api-reference/index.html",
+      },
+    ],
 
     sidebar: [
       {
@@ -72,6 +103,7 @@ export default defineConfig({
             link: "/getting-started/save-restore",
           },
           { text: "Export video", link: "/getting-started/export" },
+          { text: "Settings", link: "/getting-started/settings" },
         ],
       },
       // {
@@ -112,6 +144,7 @@ export default defineConfig({
         items: [
           { text: "Overview", link: "/video-editor-ui/overview" },
           { text: "Installation", link: "/video-editor-ui/installation" },
+          { text: "Changelog", link: "/video-editor-ui/changelog" },
           // { text: "Self-hosting", link: "/in-progress#" },
           // { text: "Integration with Frameworks", link: "/in-progress#" },
           { text: "Pro Version ✨", link: "/video-editor-ui/pro" },
@@ -121,23 +154,28 @@ export default defineConfig({
         text: "Examples",
         items: [
           { text: "Slideshow Video", link: "/examples/slideshow-video" },
-          {
-            text: "Remvre green background",
-            link: "/examples/remove-green-background",
-          },
+          // {
+          //   text: "Remove green background",
+          //   link: "/examples/remove-green-background",
+          // },
+          // {
+          //   text: "Waveform animated by audio",
+          //   link: "/waveform-animated-by-audio",
+          // },
         ],
       },
       {
         text: "More",
         items: [
-          { text: "API Reference", link: "/in-progress#" },
-          { text: "Playground", link: "/in-progress#" },
-          { text: "Blog", link: "/in-progress#" },
-          { text: "Discord", link: "/in-progress#" },
+          {
+            text: "API Reference",
+            link: "https://docs.rendley.com/api-reference/index.html",
+          },
+          { text: "Playground", link: "https://playground.rendley.com" },
+          { text: "Blog", link: "https://blog.rendley.com" },
+          { text: "Discord", link: "https://discord.gg/BwdeFFEVXR" },
         ],
       },
     ],
-
-    socialLinks: [{ icon: "github", link: "https://github.com/rendleyhq" }],
   },
 });
