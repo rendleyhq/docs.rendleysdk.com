@@ -1,6 +1,6 @@
 # Layer
 
-The [Layer](https://rendley.com/docs/api-reference/classes/Layer.html) is where all clips and transitions are placed. Each layer is stacked on top of each other, which enables you to create overlapping compositions.
+The [Layer](https://docs.rendley.com/api-reference/classes/Layer.html) is where all clips and transitions are placed. Each layer is stacked on top of each other, which enables you to create overlapping compositions.
 
 There are no restrictions regarding what kind of clips you can add to a layer. You can add text, images, videos, audio, custom HTML elements, etc., all on the same layer.
 

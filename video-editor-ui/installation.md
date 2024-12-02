@@ -40,9 +40,9 @@ Follow the instructions [here](https://support.giphy.com/hc/en-us/articles/36002
 
 ## Interacting with the SDK
 
-The Video Editor UI utilizes the Rendley SDK under the hood, exposing it as a custom method. You can access the [`Engine`](https://rendley.com/docs/api-reference/classes/Engine.html) class as soon as the UI is ready.
+The Video Editor UI utilizes the Rendley SDK under the hood, exposing it as a custom method. You can access the [`Engine`](https://docs.rendley.com/api-reference/classes/Engine.html) class as soon as the UI is ready.
 
-Once you have access to the [`Engine`](https://rendley.com/docs/api-reference/classes/Engine.html) class, you can interact with the SDK, including adding listeners, deserializing or serializing projects, and more.
+Once you have access to the [`Engine`](https://docs.rendley.com/api-reference/classes/Engine.html) class, you can interact with the SDK, including adding listeners, deserializing or serializing projects, and more.
 
 ```javascript{10}
 // Get the video editor element
@@ -68,7 +68,7 @@ rendleyTemplateElement.addEventListener("onReady", async () => {
 ```
 
 ::: warning
-It is crucial to access the [`Engine`](https://rendley.com/docs/api-reference/classes/Engine.html) class only after the `onReady` event has confirmed that the video editor is loaded.
+It is crucial to access the [`Engine`](https://docs.rendley.com/api-reference/classes/Engine.html) class only after the `onReady` event has confirmed that the video editor is loaded.
 
 :::
 

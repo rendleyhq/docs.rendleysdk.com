@@ -10,7 +10,7 @@ The SDK supports keyframe animations, allowing you to animate various elements w
 
 ### The Animation Object
 
-An animation is structured as [`AnimationData`](https://rendley.com/docs/api-reference/interfaces/AnimationData.html), which includes details such as speed, offsets, and property-specific animations. The properties of the animation object are as follows:
+An animation is structured as [`AnimationData`](https://docs.rendley.com/api-reference/interfaces/AnimationData.html), which includes details such as speed, offsets, and property-specific animations. The properties of the animation object are as follows:
 
 - **name**: Identifier used for display and debugging.
 - **speed**: Playback speed (e.g., `2` for faster, `0.5` for slower).
@@ -22,7 +22,7 @@ An animation is structured as [`AnimationData`](https://rendley.com/docs/api-ref
 
 ### Property Animations
 
-Each property of a clip can have its own animation, defined by the [`PropertyAnimation`](https://rendley.com/docs/api-reference/interfaces/PropertyAnimation.html) interface. This interface includes a list of keyframes that specify the animation's timing and behavior:
+Each property of a clip can have its own animation, defined by the [`PropertyAnimation`](https://docs.rendley.com/api-reference/interfaces/PropertyAnimation.html) interface. This interface includes a list of keyframes that specify the animation's timing and behavior:
 
 - **property**: Identifier for a specific property (e.g., `positionX`, `positionY`, `scaleX`, `scaleY`, `alpha`, `rotation`).
 - **inOutOfRange**: Handles values out of range (original or first keyframe).
@@ -31,7 +31,7 @@ Each property of a clip can have its own animation, defined by the [`PropertyAni
 
 ### Keyframes
 
-[Keyframes](https://rendley.com/docs/api-reference/interfaces/Keyframe.html) are the building blocks of animations, defining specific values at certain times within the animation timeline. They can handle both numeric and string values and are applied in various visual spaces such as absolute or relative:
+[Keyframes](https://docs.rendley.com/api-reference/interfaces/Keyframe.html) are the building blocks of animations, defining specific values at certain times within the animation timeline. They can handle both numeric and string values and are applied in various visual spaces such as absolute or relative:
 
 - **time**: Time in seconds, offset by `AnimationData.offset` if set.
 - **value**: Value at that time; numeric values are interpolated, while strings are set as-is (e.g., text properties).
@@ -51,7 +51,7 @@ Each property of a clip can have its own animation, defined by the [`PropertyAni
 
 ### Set Animation
 
-Apply new animations to a clip. The type can be `"in"`, `"out"`, or `"loop"`, and the animation data is defined by the [`AnimationData`](https://rendley.com/docs/api-reference/interfaces/AnimationData.html) interface.
+Apply new animations to a clip. The type can be `"in"`, `"out"`, or `"loop"`, and the animation data is defined by the [`AnimationData`](https://docs.rendley.com/api-reference/interfaces/AnimationData.html) interface.
 
 ```typescript
 clip.animationController.setAnimation(type, animationData);

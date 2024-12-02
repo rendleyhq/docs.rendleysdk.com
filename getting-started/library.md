@@ -1,6 +1,6 @@
 # Library
 
-The [Library](https://rendley.com/docs/api-reference/classes/Library.html) is where all uploaded assets are stored. When you upload an image or a video, you add it to the Library and then reference it when creating a clip. The Library also stores SRT files in case you upload any.
+The [Library](https://docs.rendley.com/api-reference/classes/Library.html) is where all uploaded assets are stored. When you upload an image or a video, you add it to the Library and then reference it when creating a clip. The Library also stores SRT files in case you upload any.
 
 Before using any asset in a composition, you must upload it to the Library first.
 

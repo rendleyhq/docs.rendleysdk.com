@@ -1,6 +1,6 @@
 # Display
 
-The [Display](https://rendley.com/docs/api-reference/classes/Display.html) represents the WebGL canvas where the SDK renders its changes. Here, you can set the video's resolution and background color, and access methods to retrieve sprite elements positioned at specific coordinates.
+The [Display](https://docs.rendley.com/api-reference/classes/Display.html) represents the WebGL canvas where the SDK renders its changes. Here, you can set the video's resolution and background color, and access methods to retrieve sprite elements positioned at specific coordinates.
 
 ```typescript{9-11}
 import { Engine } from "@rendley/sdk";
@@ -40,7 +40,7 @@ Engine.getInstance()
 
 ## Get Clips by Position
 
-If you want to retrieve all clips that are under a specific coordinate, you can use the [getClipIdByCursorPosition](https://rendley.com/docs/api-reference/classes/Display.html#getClipIdByCursorPosition) method. This can be useful for identifying which clip the user clicked on. The x and y coordinates should be relative to the canvas element.
+If you want to retrieve all clips that are under a specific coordinate, you can use the [getClipIdByCursorPosition](https://docs.rendley.com/api-reference/classes/Display.html#getClipIdByCursorPosition) method. This can be useful for identifying which clip the user clicked on. The x and y coordinates should be relative to the canvas element.
 
 ```typescript
 Engine.getInstance().getDisplay().getClipIdByCursorPosition(100, 250);
