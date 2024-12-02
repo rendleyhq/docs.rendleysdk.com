@@ -1,8 +1,8 @@
 # Export
 
-The Rendley SDK allows you to export the final video using both client-side and server-side approaches. Each method has its strengths and weaknesses, so you can choose the one that best fits your application needs.
+The Rendley SDK allows you to export the final video using both [client-side](/rendering/render-on-device.md) and [server-side](/rendering/render-on-server.md) approaches. Each method has its strengths and weaknesses, so you can choose the one that best fits your application needs.
 
-To export the final video, simply call the `export()` function, which will return a Blob URL for the final video.
+To export the final video, simply call the [`export()`](/api-reference/classes/Engine.html#export) function, which will return a Blob URL for the final video.
 
 ```typescript
 const result = await Engine.getInstance().getTimeline().export();
@@ -39,12 +39,12 @@ const result = await Engine.getInstance().getTimeline().export({
 });
 ```
 
-If the rendering is successful, the `result` variable will contain the final Blob of the video, along with the file extension.
+If the rendering is successful, the [`result`](/api-reference/interfaces/ExportResult.html) variable will contain the final Blob of the video, along with the file extension.
 
 ::: info
-To learn more about on-device rendering and best practices, check out this [guide](/getting-started/render-on-device.md).
+To learn more about on-device rendering and best practices, check out this [guide](/rendering/render-on-device.md).
 :::
 
 ::: info
-To learn more about server rendering and best practices, check out this [guide](/getting-started/render-on-device.md).
+To learn more about server rendering and best practices, check out this [guide](/rendering/render-on-server.md).
 :::

@@ -1,6 +1,6 @@
 # Layer
 
-The Layer is where all clips and transitions are placed. Each layer has an incremental zIndex that enables you to create compositions that overlap each other.
+The [Layer](/api-reference/classes/Layer.html) is where all clips and transitions are placed. Each layer is stacked on top of each other, which enables you to create overlapping compositions.
 
 There are no restrictions regarding what kind of clips you can add to a layer. You can add text, images, videos, audio, custom HTML elements, etc., all on the same layer.
 

@@ -1,6 +1,6 @@
 # Display
 
-The Display represents the WebGL canvas where the SDK renders its changes. Here, you can set the video's resolution and background color, and access methods to retrieve sprite elements positioned at specific coordinates.
+The [Display](/api-reference/classes/Display.html) represents the WebGL canvas where the SDK renders its changes. Here, you can set the video's resolution and background color, and access methods to retrieve sprite elements positioned at specific coordinates.
 
 ```typescript{9-11}
 import { Engine } from "@rendley/sdk";
@@ -20,7 +20,7 @@ const engine = Engine.getInstance().init({
 
 ## Resolution
 
-When setting the display's width and height, ensure that it follows the same ratio required by the encoder. For instance, if we are encoding to H.264 by default, the width and height should be 2<sup>x</sup>.
+When setting the display's width and height, ensure that it follows the same ratio required by the encoder. For instance, if we are encoding to H.264 by default, the width and height should be divisible by 2.
 
 ## Changing Background Color
 
@@ -40,7 +40,7 @@ Engine.getInstance()
 
 ## Get Clips by Position
 
-If you want to retrieve all clips that are under a specific coordinate, you can use the `getClipIdByCursorPosition` method. This can be useful for identifying which clip the user clicked on. The x and y coordinates should be relative to the canvas element.
+If you want to retrieve all clips that are under a specific coordinate, you can use the [getClipIdByCursorPosition](/api-reference/classes/Display.html#getClipIdByCursorPosition) method. This can be useful for identifying which clip the user clicked on. The x and y coordinates should be relative to the canvas element.
 
 ```typescript
 Engine.getInstance().getDisplay().getClipIdByCursorPosition(100, 250);

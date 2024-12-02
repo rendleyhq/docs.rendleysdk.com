@@ -1,6 +1,6 @@
 # Listening to Events
 
-To create an interactive user interface around the SDK, you need a way to interact with its state. We achieve this by emitting events in response to SDK actions. For example, when a layer is created, or when a clip is modified, we emit corresponding events. Once you receive an event, you can store it in your preferred state management library and react accordingly to the changes. A complete list of supported events can be found here: [SDK Events](https://docs.rendley.com/api-reference/enums/EventsEnum.html).
+To create an interactive user interface around the SDK, you need a way to interact with its state. We achieve this by emitting [events](/api-reference/classes/EventEmitter.html) in response to SDK actions. For example, when a layer is created, or when a clip is modified, we emit corresponding events. Once you receive an event, you can store it in your preferred state management library and react accordingly to the changes. A complete list of supported events can be found here: [SDK Events](/api-reference/enums/EventsEnum.html).
 
 ## Setting Up Listeners
 

@@ -40,9 +40,9 @@ Follow the instructions [here](https://support.giphy.com/hc/en-us/articles/36002
 
 ## Interacting with the SDK
 
-The Video Editor UI utilizes the Rendley SDK under the hood, exposing it as a custom method. You can access the `Engine` class as soon as the UI is ready.
+The Video Editor UI utilizes the Rendley SDK under the hood, exposing it as a custom method. You can access the [`Engine`](/api-reference/classes/Engine.html) class as soon as the UI is ready.
 
-Once you have access to the `Engine` class, you can interact with the SDK, including adding listeners, deserializing or serializing projects, and more.
+Once you have access to the [`Engine`](/api-reference/classes/Engine.html) class, you can interact with the SDK, including adding listeners, deserializing or serializing projects, and more.
 
 ```javascript{10}
 // Get the video editor element
@@ -67,10 +67,15 @@ rendleyTemplateElement.addEventListener("onReady", async () => {
 });
 ```
 
-> **Warning:** It is crucial to access the `Engine` class only after the `onReady` event has confirmed that the video editor is loaded.
+::: warning
+It is crucial to access the [`Engine`](/api-reference/classes/Engine.html) class only after the `onReady` event has confirmed that the video editor is loaded.
+
+:::
 
 ## Limitations
 
 The free version of the Video Editor UI is not highly customizable, and you may find limited options for altering the display of elements.
 
-> **Tip:** To overcome the limitations of the free version, consider purchasing the source code of the Video Editor UI, which you can find [here](https://google.com).
+::: tip
+To overcome the limitations of the free version, consider purchasing the source code of the Video Editor UI, which you can find [here](https://checkout.rendley.com/buy/89371a6f-2b45-4a50-86cc-23dae580583c).
+:::

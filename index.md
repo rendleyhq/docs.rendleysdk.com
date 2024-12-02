@@ -1,11 +1,7 @@
 # Introduction
 
-Rendley SDK is a video editing SDK that handles the complexities of the video editing apps, including the necessary logic to create a composition, to do the trimming, apply effects,filters and transitions, to create and animate captions and much more. Besides the composition, we also handle the rendering of the final video and we can do it either on the client or on the server.
+Rendley SDK is a framework for building video editing applications. It simplifies the complexities of video editing by providing tools for creating compositions, trimming, applying effects, filters, and transitions, animating captions, and more. It also supports final video rendering, either on the client or server.
 
-Rendley SDK is like a framework for creating video editing apps. It helps you handle each aspect of the video editing process, from creating a composition to uploading assets to a server to saving and loading projects from a database to rendering the final video.
+To maximize performance, Rendley SDK leverages [WebGL](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Tutorial/Getting_started_with_WebGL) for rendering and the [WebCodecs API](https://developer.mozilla.org/en-US/docs/Web/API/WebCodecs_API) for hardware-accelerated encoding and decoding. For environments without WebCodecs support, it uses a fallback WASM-based approach. The same SDK supports both **client-side and server-side rendering**, ensuring consistent results.
 
-To achieve maximum performance, we leverage WebGL for rendering and WebCodecs API for hardware-accelerated encoding and decoding. For browsers that don't support WebCodecs API, we fallback to a FFmpeg WASM based approach which is widely supported everywhere. You can as well render the final video on the server and handle the editing on the client. Because server rendering is using the same SDK, you can be sure that final video will visually match.
-
-By default, Rendley SDK does not come up with a UI, giving you the power to create everything you want with it, be it a video editor, a video automation tool or something else.
-
-As for rendering, our biggest goal is to make it as efficient as possible on the client so that you don't have to manage complex infrastructure. However, you always can render on the server as well using our open source example.
+Rendley SDK is UI-agnostic, allowing you to build custom solutions such as video editors, automation tools, video players, or other creative applications. It prioritizes efficient client-side rendering to minimize infrastructure needs while offering server-side rendering as an option.

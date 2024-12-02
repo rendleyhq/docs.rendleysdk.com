@@ -1,14 +1,14 @@
 # Library
 
-The Library is where all uploaded assets are stored. When you upload an image or a video, you add it to the Library and then reference it when creating a clip. The Library also stores SRT files in case you upload any.
+The [Library](/api-reference/classes/Library.html) is where all uploaded assets are stored. When you upload an image or a video, you add it to the Library and then reference it when creating a clip. The Library also stores SRT files in case you upload any.
 
 Before using any asset in a composition, you must upload it to the Library first.
 
 ## Add Assets to the Library
 
-Adding an asset to the Library will not save it to storage; it will only load it into memory. Additionally, when serializing the project, you will not find the video included.
+Adding an asset to the Library will not save it to storage, it will only load it into memory. Additionally, when serializing the project, you will not find the video included.
 
-You can add an asset to the Library using the following formats: String, File, and UInt8Array buffer.
+You can add an asset to the Library using the following formats: <u>String</u>, <u>File</u>, and <u>UInt8Array</u> buffer.
 
 ```typescript
 const mediaId = await Engine.getInstance()
@@ -45,6 +45,14 @@ You can use the same data types as in the `addMedia` method, which are String, F
 
 The Library is also where subtitles are stored. You can learn more about how to manage subtitles [here](/getting-started/subtitles.md).
 
-## Set Custom Metadata for Assets
+## Set custom metadata to assets
 
-To add extra information to an asset that will be included in the serialized state, you c
+You can add extra information to an asset included in the serialized state by using the following method:
+
+```typescript{3}
+const mediaData = Engine.getInstance().getLibrary().getMediaById(mediaId);
+
+mediaData.setCustomData("MY_KEY", "MY_VALUE");
+```
+
+The `setCustomData` method accepts an optional third parameter, which determines whether the existing data should be overwritten if the key already exists.

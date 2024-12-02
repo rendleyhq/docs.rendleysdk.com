@@ -2,7 +2,7 @@
 
 The server approach utilizes the same SDK that is used on the client side; however, it operates in a controlled environment where you have greater control over the rendering process and resources. This method launches a headless Chromium browser to handle the rendering.
 
-You can find the repository for the server rendering [here](https://github.com/rendleyhq/video-rendering-server).
+You can find the full implementation on [GitHub](https://github.com/rendleyhq/video-rendering-server).
 
 ## Requirements
 

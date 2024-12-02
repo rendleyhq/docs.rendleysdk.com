@@ -9,6 +9,11 @@ export default defineConfig({
   description:
     "Rendley provides a powerful SDK that handles all the complexities of video editing. Get the details in our documentation.",
 
+  vite: {
+    server: {
+      host: "0.0.0.0",
+    },
+  },
   head: [
     [
       "link",
@@ -152,7 +157,7 @@ export default defineConfig({
     nav: [
       {
         text: "API Reference",
-        link: "https://rendley.com/docs/api-reference/index.html",
+        link: "/api-reference/index.html",
       },
     ],
 
@@ -271,11 +276,15 @@ export default defineConfig({
         items: [
           {
             text: "API Reference",
-            link: "https://rendley.com/docs/api-reference/index.html",
+            link: "/api-reference/index.html",
           },
           { text: "Playground", link: "https://playground.rendley.com" },
           { text: "Blog", link: "https://blog.rendley.com" },
           { text: "Discord", link: "https://discord.gg/BwdeFFEVXR" },
+          {
+            text: "Report issues",
+            link: "https://github.com/rendleyhq/rendley-sdk-issues/issues",
+          },
         ],
       },
     ],

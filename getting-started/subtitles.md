@@ -1,10 +1,10 @@
 # Subtitles / Captions
 
-The Subtitles Clip is responsible for displaying and syncing subtitles or captions with your video content.
+The [Subtitles](/api-reference/classes/SubtitlesClip) clip is responsible for displaying and syncing subtitles or captions with your video content.
 
 ## Adding Subtitles Manually
 
-To add subtitles manually, you need to define a `Subtitles` object that contains a list of text blocks. Each text block specifies the text content, the start time, and the duration, all measured in seconds.
+To add subtitles manually, you need to define a [Subtitles](/api-reference/classes/Subtitles.html) object that contains a list of text blocks. Each text block specifies the text content, the start time, and the duration, all measured in seconds.
 
 ```typescript
 import { Engine, Subtitles, SubtitlesClip } from "@rendley/sdk";
@@ -38,7 +38,7 @@ const layer = Engine.getInstance().getTimeline().createLayer();
 await layer.addClip(subtitlesClip);
 ```
 
-## Importing Subtitles from SRT
+## Adding Subtitles to Layer
 
 To import subtitles from an SRT file, the SDK can automatically parse the SRT string and construct the corresponding `Subtitles` object.
 
@@ -81,7 +81,7 @@ const subtitlesId = Engine.getInstance().getLibrary().addSubtitles(subtitles);
 clip.setSubtitles(subtitlesId);
 ```
 
-To delay the appearance of subtitles, use the `setSubtitlesOffset` method, passing the offset value in seconds.
+To delay the appearance of subtitles, use the [`setSubtitlesOffset`](/api-reference/classes/SubtitlesClip.html#setSubtitlesOffset) method, passing the offset value in seconds.
 
 ```typescript
 clip.setSubtitlesOffset(value);
@@ -93,7 +93,7 @@ You have full control over the styling of subtitles, including both the main tex
 
 ### Main Text Styling
 
-To set the style for the underlying subtitle text, use the `setMainTextStyle` method:
+To set the style for the underlying subtitle text, use the [`setMainTextStyle`](/api-reference/classes/SubtitlesManager.html#setMainTextStyle) method:
 
 ```typescript
 Engine.getInstance().getSubtitlesManager().setMainTextStyle({
@@ -104,10 +104,10 @@ Engine.getInstance().getSubtitlesManager().setMainTextStyle({
 
 ### Highlighted Word Styling
 
-To customize the appearance of highlighted words, such as making them bold or changing their color:
+To customize the appearance of highlighted words, such as making them bold or changing their color, use the [`setHighlightedTextStyle`](/api-reference/classes/SubtitlesManager.html#setHighlightedTextStyle) method:
 
 ```typescript
-Engine.getInstance().getSubtitlesManager().setHighlightStyle({
+Engine.getInstance().getSubtitlesManager().setHighlightedTextStyle({
   fontWeight: "bold",
   color: "#FFFF00",
   strokeColor: "#000000",
@@ -126,7 +126,7 @@ Available modes include `"full"` (to show the complete text) and `"partial"` (to
 
 ## Animations
 
-Highlight animations for the active word can add visual appeal to your subtitles. The SDK offers a variety of built-in animations to cover most use cases. To apply a highlight animation:
+You can also use animations to control the appearance of subtitles. For example, you can use the [`setHighlightAnimation`](/api-reference/classes/SubtitlesManager.html#setHighlightAnimation) method to make the highlighted word wiggle:
 
 ```typescript
 const speed = 0.6;
@@ -136,4 +136,6 @@ Engine.getInstance()
   .setHighlightAnimation("wiggle", speed);
 ```
 
-Here, `speed` controls the animation playback speed.
+Some of the supported animations are: `"pop"`, `"pop_rotate"`, `"wiggle"`. The full list can be found [here](/api-reference/enums/HighlightAnimationEnum.html).
+
+The `speed` property controls the animation playback speed.

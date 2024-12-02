@@ -1,6 +1,6 @@
 # Engine
 
-The Engine is the main entry point for our SDK. It is a singleton instance, ensuring that only one instance of the Engine exists at any given time.
+The [Engine](/api-reference/classes/Engine.html) is the main entry point for our SDK. It is a singleton instance, ensuring that only one instance of the Engine exists at any given time.
 
 It is responsible for initializing the SDK, serializing the project's output, loading new projects, and providing getters for easy access to other parts of the system.
 

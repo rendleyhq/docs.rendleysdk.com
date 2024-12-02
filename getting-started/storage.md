@@ -1,6 +1,6 @@
 # Storage
 
-By default, the SDK does not upload your assets anywhere; files are kept in memory and will disappear after a page refresh. The storage system allows you to configure how you want to upload your assets, whether to AWS S3, your server, or even IndexedDB.
+By default, the SDK does not upload your assets anywhere, files are kept in memory and will disappear after a page refresh. The storage system allows you to configure how you want to upload your assets, whether to AWS S3, your server, or even IndexedDB.
 
 There are two primary methods for storing your assets:
 
@@ -28,7 +28,9 @@ The SDK leverages methods from the Storage Provider when uploading assets and lo
 
 ### Creating a Storage Provider
 
-To implement your own custom storage solution, extend the `StorageProviderBase` class. Below is an example demonstrating how to create a custom storage solution:
+To implement your own custom storage solution, extend the [`StorageProviderBase`](/api-reference/classes/StorageProviderBase.html) class. Below is an example demonstrating how to create a custom storage solution:
+
+::: details Example Implementation
 
 ```typescript
 import {
@@ -56,7 +58,7 @@ export class MyCustomStorageSolution extends StorageProviderBase {
   async storeMedia(
     storageData: StorageMediaData
   ): Promise<StorageStoreResults> {
-    const { hash, data } = storageData;
+    const { hash, data, mediaId } = storageData;
 
     // Upload the asset to your server.
     // The 'hash' serves as the asset's unique identifier, and 'data' contains the asset's buffer.
@@ -88,7 +90,11 @@ export class MyCustomStorageSolution extends StorageProviderBase {
 }
 ```
 
-> **Tip**: Group the assets based on the project they are used in and use the media hash as the unique identifier (the filename).
+:::
+
+::: tip
+Group the assets based on the project they are used in and use the media hash as the unique identifier (the filename).
+:::
 
 For an example of implementing AWS S3 storage using presigned URLs, check out our [AWS S3 Example Repository](https://github.com/rendleyhq/rendley-sdk-examples/tree/main/storages/s3-with-presigned-urls).
 
@@ -96,19 +102,28 @@ For an example of implementing AWS S3 storage using presigned URLs, check out ou
 
 To connect your storage solution to the SDK, initialize the Engine with your storage providers. You can also combine multiple storage providers to create workflows, such as loading to IndexedDB and then to other storage providers, making uploads appear instantaneous.
 
-```typescript
+```typescript{4}
 import { Engine, StorageIndexedDB } from "@rendley/sdk";
 
-Engine.init({
+await Engine.getInstance().init({
   storages: [new StorageIndexedDB(), new MyCustomStorageSolution()],
+  license: {
+    licenseName: "YOUR_LICENSE_NAME",
+    licenseKey: "YOUR_LICENSE_KEY",
+  },
+  display: {
+    width: 1920,
+    height: 1080,
+    backgroundColor: "#000000",
+  },
 });
 ```
 
-The order of the storage providers is crucial, as it dictates the sequence in which assets are uploaded and loaded. In the example above, the file will first be uploaded to IndexedDB, followed by the `MyCustomStorageSolution`. When loading assets into the project, the SDK attempts to resolve each source in order, starting with `StorageIndexedDB`.
+The order of the storage providers is crucial, as it dictates the sequence in which assets are uploaded and loaded. In the example above, the file will first be uploaded to IndexedDB, followed by the `MyCustomStorageSolution`. When loading assets into the project, the SDK attempts to resolve each source in order, starting with [`StorageIndexedDB`](/api-reference/classes/StorageIndexedDB.html).
 
 ### Uploading Assets
 
-To upload an asset to the library, use the `mediaData.store()` function. This triggers the upload workflow, handling the storage process according to your configured storage solution(s). Additionally, you can use the `mediaData.restore()` method to reload or recover assets when needed.
+To upload an asset to the library, use the [`mediaData.store()`](/api-reference/classes/MediaData.html#store) function. This triggers the upload workflow, handling the storage process according to your configured storage solution(s). Additionally, you can use the [`mediaData.restore()`](/api-reference/classes/MediaData.html#restore) method to reload or recover assets when needed.
 
 ```typescript
 import { Engine } from "@rendley/sdk";
@@ -119,9 +134,10 @@ const mediaData = Engine.getLibrary().getMediaById(mediaId);
 await mediaData.store();
 ```
 
+<!--
 ### Handling Failures
 
-_In progress... 🚧_
+_In progress... 🚧_ -->
 
 ### Available Storage Providers
 

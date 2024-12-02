@@ -1,6 +1,6 @@
 # Filters
 
-Our filters utilize LUTs (Lookup Tables), giving you high control over the color grading process. LUTs are widely used in the cinematic industry and can be exported from tools like Adobe Photoshop.
+Our [filters](/api-reference/classes/Filter.html) utilize LUTs, giving you high control over the color grading process. LUTs are widely used in the cinematic industry and can be exported from tools like Adobe Photoshop.
 
 ## Adding Filters
 
@@ -25,6 +25,6 @@ To remove a filter, call the `removeFilter` method with the ID of the filter you
 clip.removeFilter("randomId"); // Remove the filter with the specified ID
 ```
 
-## Create a LUT
+<!-- ## Create a LUT
 
-_In Progress 🚧_
+_In Progress 🚧_ -->

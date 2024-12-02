@@ -1,10 +1,8 @@
 # Effects
 
-With WebGL, we can utilize GLSL shaders to create advanced effects that are computed directly on the GPU, ensuring high performance. An effect can range from making the clip move in waves to applying a blur. You can apply these effects to any clips added to the composition.
+With WebGL, we can utilize GLSL shaders to create advanced [effects](/api-reference/classes/Effect.html) that are computed directly on the GPU, ensuring high performance. An effect can range from making the clip move in waves to applying a blur. You can apply these effects to any clips added to the composition.
 
-## Example: Glow Effect
-
-Here’s an example of a GLSL shader for a glow effect:
+::: details Example: Glow Effect
 
 ```glsl
 precision highp float;
@@ -38,6 +36,8 @@ void main() {
     gl_FragColor = vec4(colorRGB * 10.0 - 5.0 + pattern(), color.a);
 }
 ```
+
+:::
 
 ## Adding Effects
 

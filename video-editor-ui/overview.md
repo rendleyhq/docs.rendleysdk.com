@@ -21,6 +21,6 @@ The video editor was created using web components, making it embeddable into any
 
 - [Stencil](https://stenciljs.com/)
 - [Typescript](https://www.typescriptlang.org/)
-- [Rendley SDK](https://docs.rendley.com/)
+- [Rendley SDK](https://rendley.com/docs/)
 - [MobX](https://mobx.js.org/)
 - [Moveable.js](https://github.com/daybrush/moveable)

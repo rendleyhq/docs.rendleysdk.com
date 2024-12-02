@@ -1,8 +1,8 @@
 # Styling
 
-When styling a clip, you can modify various properties such as position, size, rotation, border radius, and more. Most clips share similar styling attributes; however, some clips, like text clips, have additional properties that can be adjusted, including font size, color, alignment, and others.
+When styling a clip, you can modify various properties such as position, size, rotation, border radius, and more. Most clips share similar [styling](/api-reference/classes/ClipStyle.html) attributes, however, some clips, like text clips, have additional properties that can be adjusted, including font size, color, alignment, and others.
 
-The clips with more than the default styling properties are the **Text** and **Shape** clips.
+The clips with more than the default styling properties are the [**Text**](/api-reference/classes/TextStyle.html) and [**Shape**](/api-reference/classes/ShapeStyle.html) clips.
 
 ## Example
 
