@@ -1,34 +1,30 @@
 # Filters
 
-Our filters work based on LUTs (Lookup Tables), which enables you to have a high level of control over the color grading process. LUTs are widely used in the cinematic industry and can also be exported from tools like Adobe Photoshop.
-
-If you are wondering how does a LUT look like, here is an example
-
-In Progress 🚧
+Our filters utilize LUTs (Lookup Tables), giving you high control over the color grading process. LUTs are widely used in the cinematic industry and can be exported from tools like Adobe Photoshop.
 
 ## Adding Filters
 
-To create a filter, you have to give it an id and the path to the LUT file. The id is used to identify the filter later on.
+To create a filter, provide an ID and the path to the LUT file. The ID is used to identify the filter later on.
 
 ```typescript
 import { Filter } from "@rendley/sdk";
 
 clip.addFilter(
   new Filter({
-    sourceId: "randomId",
-    lutUrl: "/path/to/lut.jpeg",
+    sourceId: "randomId", // Unique identifier for the filter
+    lutUrl: "/path/to/lut.jpeg", // Path to the LUT file
   })
 );
 ```
 
 ## Removing Filters
 
-To remove a filter, you have to call the `removeFilter` method with the id of the filter you want to remove
+To remove a filter, call the `removeFilter` method with the ID of the filter you want to remove:
 
 ```typescript
-clip.removeFilter("randomId");
+clip.removeFilter("randomId"); // Remove the filter with the specified ID
 ```
 
 ## Create a LUT
 
-In Progress 🚧
+_In Progress 🚧_

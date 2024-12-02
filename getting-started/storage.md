@@ -1,58 +1,61 @@
 # Storage
 
-By default the SDK does not upload your assets anywhere. The files live in-memory and after refreshing the page they disappear. The storage system is where you configure how would you like to upload them, be it on a AWS S3, your server or even IndexedDB.
+By default, the SDK does not upload your assets anywhere; files are kept in memory and will disappear after a page refresh. The storage system allows you to configure how you want to upload your assets, whether to AWS S3, your server, or even IndexedDB.
 
-There are two ways in which you can store your assets:
+There are two primary methods for storing your assets:
 
-`Permanent URLs` - Suitable for use cases where you have a static URL to your assets, such as a CDN.
-
-`Storage Provider` - Recommended for use cases when you want to upload and retreive the assets to your server, also, if you have a custom implementation of how the uploading and retreival should happen as in the case for pre signed URLs.
+1. **Permanent URLs**: Suitable for use cases where you have a static URL to your assets, such as a CDN.
+2. **Storage Provider**: Recommended for use cases where you want to upload and retrieve assets to/from your server or have a custom implementation for uploading and retrieval, as in the case of presigned URLs.
 
 ## Permanent URLs
 
-The permanent URL is a static URL that points to the location of your asset. To set it, you have to get the assets uploaded to the library and then access its `MediaData` object.
+A permanent URL is a static link that points to the location of your asset. To set it, you need to upload the asset to the library and then access its `MediaData` object.
 
-```typescript{7}
+```typescript
 import { Engine } from "@rendley/sdk";
 
 const mediaId = await Engine.getInstance().getLibrary().addMedia(myFile);
-
 const mediaData = Engine.getLibrary().getMediaById(mediaId);
 
-mediaData.setPermanentUrl('https://example.com/image.jpg');
+mediaData.setPermanentUrl("https://example.com/image.jpg");
 ```
 
 ## Storage Provider
 
-A storage provider represents a custom implementation of how the assets should be uploaded and retreived. You can have the logic of uploading to your own server, to AWS S3 or any other service.
+A storage provider represents a custom implementation for how assets should be uploaded and retrieved. This can include uploading to your own server, AWS S3, or any other service.
 
-The SDK laverages methods from the Storage Provider when uploading assets and loading the project, making sure the assets are being retreived from the correct source.
+The SDK leverages methods from the Storage Provider when uploading assets and loading projects, ensuring that assets are retrieved from the correct source. The SDK computes unique hashes based on the content of each file, preventing duplicated resources in your project.
 
-The SDK computes unique hashes based on the content of each file making sure you don't have duplicated resources in your project.
+### Creating a Storage Provider
 
-### Create a Storage Provider
+To implement your own custom storage solution, extend the `StorageProviderBase` class. Below is an example demonstrating how to create a custom storage solution:
 
-To implement your own custom storage solution, you should extend the `StorageProviderBase` class. Below is an example showing how to create a custom solution:
-
-```typescript{7,11,15,22,26,30,34,38,42,46}
-import { StorageProviderBase } from "@rendley/sdk";
+```typescript
+import {
+  StorageProviderBase,
+  StorageProviderTypeEnum,
+  StorageMediaData,
+  StorageStoreResults,
+} from "@rendley/sdk";
 
 // Extend the StorageProviderBase with your custom storage implementation.
 export class MyCustomStorageSolution extends StorageProviderBase {
   constructor() {
-    // Define if this storage is remote or local
+    // Define if this storage is remote or local.
     super(StorageProviderTypeEnum.REMOTE);
   }
 
   async init(projectId: string): Promise<void> {
-    // Initialize the connection to your storage (if needed)
+    // Initialize the connection to your storage (if needed).
   }
 
   async destroy(): Promise<void> {
-    // Clean up any resources or connections
+    // Clean up any resources or connections.
   }
 
-  async storeMedia(storageData: StorageMediaData): Promise<StorageStoreResults> {
+  async storeMedia(
+    storageData: StorageMediaData
+  ): Promise<StorageStoreResults> {
     const { hash, data } = storageData;
 
     // Upload the asset to your server.
@@ -85,16 +88,15 @@ export class MyCustomStorageSolution extends StorageProviderBase {
 }
 ```
 
-> [!TIP]
-> Group the assets based on the project they are being used in and use the media hash as the unique identifier (the filename).
+> **Tip**: Group the assets based on the project they are used in and use the media hash as the unique identifier (the filename).
 
-You can see an example of how we've implemented AWS S3 storage using presigned URLs in our [AWS S3 Example Repository](https://github.com/rendleyhq/rendley-sdk-examples/tree/main/storages/s3-with-presigned-urls).
+For an example of implementing AWS S3 storage using presigned URLs, check out our [AWS S3 Example Repository](https://github.com/rendleyhq/rendley-sdk-examples/tree/main/storages/s3-with-presigned-urls).
 
-### Connect a Storage Provider
+### Connecting a Storage Provider
 
-To connect your storage solution to the SDK, you simply need to initialize the Engine with your storage providers. You can also combine multiple storage providers together, getting to flows in which you first load to IndexedDB and then to other storage providers, making the the uploading look instant.
+To connect your storage solution to the SDK, initialize the Engine with your storage providers. You can also combine multiple storage providers to create workflows, such as loading to IndexedDB and then to other storage providers, making uploads appear instantaneous.
 
-```typescript{4}
+```typescript
 import { Engine, StorageIndexedDB } from "@rendley/sdk";
 
 Engine.init({
@@ -102,31 +104,30 @@ Engine.init({
 });
 ```
 
-The order of the storage providers is very important since it dictates the order in which the assets will be uploaded and loaded, for instance, in the example above, the file will first be uploaded into IndexedDB and then uploaded to MyCustomStorageSolution. When loading the assets into the project, the SDK will try to resolve from each of the sources until it manages it do so, for instance, try and load the file from StorageIndexedDB, if it fails, try and load it from MyCustomStorageSolution.
+The order of the storage providers is crucial, as it dictates the sequence in which assets are uploaded and loaded. In the example above, the file will first be uploaded to IndexedDB, followed by the `MyCustomStorageSolution`. When loading assets into the project, the SDK attempts to resolve each source in order, starting with `StorageIndexedDB`.
 
-### Uploading assets
+### Uploading Assets
 
-To upload an asset to the library, use the `mediaData.store()` function. This will trigger the upload workflow, handling the storage process according to the storage solution(s) you've configured. Additionally, you can use the `mediaData.restore()` method to reload or recover assets when needed.
+To upload an asset to the library, use the `mediaData.store()` function. This triggers the upload workflow, handling the storage process according to your configured storage solution(s). Additionally, you can use the `mediaData.restore()` method to reload or recover assets when needed.
 
-```typescript{7}
+```typescript
 import { Engine } from "@rendley/sdk";
 
 const mediaId = await Engine.getInstance().getLibrary().addMedia(myFile);
-
 const mediaData = Engine.getLibrary().getMediaById(mediaId);
 
 await mediaData.store();
 ```
 
-### Handling failures
+### Handling Failures
 
-In progress 🚧
+_In progress... 🚧_
 
 ### Available Storage Providers
 
 Here’s a list of the pre-built storage providers:
 
-| Format                     |                                                Support                                                |
-| -------------------------- | :---------------------------------------------------------------------------------------------------: |
-| IndexedDB                  |                                               Built-in                                                |
+| Format                     | Support                                                                                               |
+| -------------------------- | ----------------------------------------------------------------------------------------------------- |
+| IndexedDB                  | Built-in                                                                                              |
 | AWS S3 with Presigned URLs | [GitHub](https://github.com/rendleyhq/rendley-sdk-examples/tree/main/storages/s3-with-presigned-urls) |

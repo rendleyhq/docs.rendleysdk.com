@@ -1,10 +1,10 @@
-# Listening to events
+# Listening to Events
 
-To create an interactive user interface around the SDK, you need a way to interact with it's state. The way we do it is we emit events as a result of SDK actions. For instance, when a layer is created, we emit an event about that, or when you changed something about the clip, we emit an event about that as well. Once you receive the event, you can store it in your state management library of choice and react accordingly to the changes. The complete list of events we support can be found here [SDK Events](https://docs.rendley.com/api-reference/enums/EventsEnum.html).
+To create an interactive user interface around the SDK, you need a way to interact with its state. We achieve this by emitting events in response to SDK actions. For example, when a layer is created, or when a clip is modified, we emit corresponding events. Once you receive an event, you can store it in your preferred state management library and react accordingly to the changes. A complete list of supported events can be found here: [SDK Events](https://docs.rendley.com/api-reference/enums/EventsEnum.html).
 
-## Setting up listeners
+## Setting Up Listeners
 
-Here is how to listen to an event
+To listen for an event, use the following code:
 
 ```typescript
 Engine.getInstance().events.on("layer:added", ({ layerId }) => {
@@ -12,17 +12,17 @@ Engine.getInstance().events.on("layer:added", ({ layerId }) => {
 });
 ```
 
-When using typescript, you will get automatic validation of the received payload so that you always know what you are receiving.
+When using TypeScript, you will benefit from automatic validation of the received payload, ensuring you always know what data you are receiving.
 
-## Removing listeners
+## Removing Listeners
 
-It is a good practice to remove listeners when you are done with them.
+It is a good practice to remove listeners when you are done with them. You can do this as follows:
 
 ```typescript
 Engine.getInstance().events.off("layer:added", handleLayerAdded);
 ```
 
-You can also remove all listeners by using the
+To remove all listeners, you can use:
 
 ```typescript
 Engine.getInstance().events.removeAllListeners();

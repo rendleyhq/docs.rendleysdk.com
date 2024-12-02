@@ -1,14 +1,14 @@
 # Styling
 
-When styling a clip, we enable modifying its position, size, rotation, border radius and many more properties. Most of the clips have similar styling attributes, however, there are some exceptions, such as text clips. Text clips have more properties that you can change, such as font size, color, alignment and more.
+When styling a clip, you can modify various properties such as position, size, rotation, border radius, and more. Most clips share similar styling attributes; however, some clips, like text clips, have additional properties that can be adjusted, including font size, color, alignment, and others.
 
-The clips that have more than the default styling properties are the `Text` and the `Shape` clips
+The clips with more than the default styling properties are the **Text** and **Shape** clips.
 
 ## Example
 
-The way to interact with the styling is to use the `style` property of the clip. For example, to change the font size of a text clip, its color and position, you can do the following:
+You interact with the styling of a clip using its `style` property. For instance, to change the font size, color, and position of a text clip, you can do the following:
 
-```typescript{8-10}
+```typescript
 const textClip = await layer.addClip({
   type: "text",
   text: "Hello World",
@@ -16,14 +16,15 @@ const textClip = await layer.addClip({
   duration: 5,
 });
 
+// Modify styling properties
 textClip.style.setFontSize(24);
 textClip.style.setColor("#FF0000");
 textClip.style.setPosition(100, 100);
 ```
 
-You can also initialize a clip with a style object directly:
+Alternatively, you can initialize a clip with a style object directly:
 
-```typescript{7-9}
+```typescript
 const textClip = await layer.addClip({
   type: "text",
   text: "Hello World",

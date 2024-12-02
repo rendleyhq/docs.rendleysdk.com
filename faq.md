@@ -2,6 +2,6 @@
 
 Find answers to frequently asked questions about the SDK.
 
-::: details How to add a GLSL shader to a clip?
-To add a GLSL shader, you have to look at the [Effect](/getting-started/effects.md) mechanism.
+::: details How do I add a GLSL Shader to a Clip?
+To add a GLSL shader, refer to the [Effect](/getting-started/effects.md) mechanism.
 :::

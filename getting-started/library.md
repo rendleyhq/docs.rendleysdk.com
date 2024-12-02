@@ -1,14 +1,14 @@
 # Library
 
-The library is where all the uploaded assets are being stored. Whenever uploading an image, or a video, you add it to the library and then reference it when creating a clip. Inside the library we also store the SRT files in case you upload any.
+The Library is where all uploaded assets are stored. When you upload an image or a video, you add it to the Library and then reference it when creating a clip. The Library also stores SRT files in case you upload any.
 
-Before using any asset in the composition, you have to upload it to the library first.
+Before using any asset in a composition, you must upload it to the Library first.
 
-## Add assets to the library
+## Add Assets to the Library
 
-Adding to the library will not save the asset to the storage. It will just load it in the memory. Also, when serializing the project, you will not find the video in there.
+Adding an asset to the Library will not save it to storage; it will only load it into memory. Additionally, when serializing the project, you will not find the video included.
 
-You can add the asset to the library using the following formats: String, File and UInt8Array buffer.
+You can add an asset to the Library using the following formats: String, File, and UInt8Array buffer.
 
 ```typescript
 const mediaId = await Engine.getInstance()
@@ -18,41 +18,33 @@ const mediaId = await Engine.getInstance()
   );
 ```
 
-Adititionally, you can pass a second argument to the `addMedia` to help identifying the mime type correctly for use cases where it cannot be inferred from the source.
+Additionally, you can pass a second argument to the `addMedia` method to help identify the MIME type correctly for use cases where it cannot be inferred from the source.
 
 > [!NOTE]
-> Without storing the asset, it will not be included in the serialized state. Check the [Storage](/getting-started/storage.md) to learn how to store the assets.
+> Without storing the asset, it will not be included in the serialized state. Check the [Storage](/getting-started/storage.md) section to learn how to store the assets.
 
-## Remove assets from the library
+## Remove Assets from the Library
 
-Deleting an asset from the library will also remove any associtated clip with it. This is done in order to avoid playback issues. To remove an asset from the library, you can use the following:
+Deleting an asset from the Library will also remove any associated clips. This is done to avoid playback issues. To remove an asset from the Library, you can use the following:
 
 ```typescript
 await Engine.getInstance().getLibrary().removeMedia(mediaId);
 ```
 
-## Replace asset with another one
+## Replace an Asset with Another
 
-For use cases where you want the user to replace the asset with another one, while keeping the whole composition. You can use the following:
+If you want the user to replace an asset with another while keeping the whole composition, you can use the following:
 
 ```typescript
 await Engine.getInstance().getLibrary().replaceMedia(mediaId, MY_FILE);
 ```
 
-Instead of my file, you can use the same data types as in the `addMedia` method, which are String, File and UInt8Array buffer. The function also accepts a third parameter, which is the mime type.
+You can use the same data types as in the `addMedia` method, which are String, File, and UInt8Array buffer. The function also accepts a third parameter, which is the MIME type.
 
-## Add and remove subtitles
+## Add and Remove Subtitles
 
-The library is also the place where the subtitles are being stored. You can learn more about how to do it [here](/getting-started/subtitles.md).
+The Library is also where subtitles are stored. You can learn more about how to manage subtitles [here](/getting-started/subtitles.md).
 
-## Set custom metadata to assets
+## Set Custom Metadata for Assets
 
-To add extra information to an asset that is being included in the serialized state, you can use the following:
-
-```typescript{3}
-const mediaData = Engine.getInstance().getLibrary().getMediaById(mediaId);
-
-mediaData.setCustomData("MY_KEY", "MY_VALUE");
-```
-
-The function accepts a third parameter which tells if the data should be overwritten or not in case it exists.
+To add extra information to an asset that will be included in the serialized state, you c

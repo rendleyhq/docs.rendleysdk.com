@@ -1,8 +1,8 @@
-# Create your first video
+# Create Your First Video
 
-## Get a license
+## Get a License
 
-In order to be able to use the SDK, you need a license. You can obtain one by visiting [our website](https://app.rendley.com/).
+To use the SDK, you need a license. You can obtain one by visiting [our website](https://app.rendley.com/).
 
 ## Initialize the Engine
 
@@ -23,11 +23,11 @@ const engine = Engine.getInstance().init({
 });
 ```
 
-First thing first, replace `YOUR_LICENSE_NAME` and `YOUR_LICENSE_KEY` with your actual license. Also, make sure to set the correct canvas element in the `view` property.
+First, replace `YOUR_LICENSE_NAME` and `YOUR_LICENSE_KEY` with your actual license details. Also, ensure that you set the correct canvas element in the `view` property.
 
-If the Engine was initialized correctly, you should see the canvas get black and have the dimension of 1080x1920, if not, make sure the canvas element was correctly referenced.
+If the Engine is initialized correctly, the canvas should turn black and have dimensions of 1080x1920. If not, verify that the canvas element is referenced correctly.
 
-## Upload an asset
+## Upload an Asset
 
 ```typescript
 const mediaId = await Engine.getInstance()
@@ -37,19 +37,19 @@ const mediaId = await Engine.getInstance()
   );
 ```
 
-We have just uploaded an image directly from Pexels into our Library. The Library returned back an unique identifier for the file, which we can use later for displaying the image in the canvas.
+We have uploaded an image directly from Pexels into our Library. The Library returns a unique identifier for the file, which we can use later to display the image on the canvas.
 
-## Create a layer
+## Create a Layer
 
-You probably don't see the image being displayed in the canvas yet, and that's expected because we haven't attached it to anything yet. A clip is part of a layer, so let's create one first
+You may not see the image displayed on the canvas yet, which is expected because we haven't attached it to anything. A clip is part of a layer, so let's create one first.
 
 ```typescript
 const layer = Engine.getInstance().getTimeline().createLayer();
 ```
 
-## Add a clip
+## Add a Clip
 
-Now that we have an available layer, let's create a clip containing the above image and add it to the layer. Also, let's make the clip take 5 seconds.
+Now that we have a layer, let's create a clip containing the image we just uploaded and add it to the layer. We will also make the clip last for 5 seconds.
 
 ```typescript
 await layer.addClip({
@@ -59,18 +59,18 @@ await layer.addClip({
 });
 ```
 
-## Play the composition
+## Play the Composition
 
-To play the composition, we can simply call the `play()` function.
+To play the composition, simply call the `play()` function.
 
 ```typescript
 Engine.getInstance().getTimeline().play();
 ```
 
-## Export the final video
+## Export the Final Video
 
-To export the final video, it is sufficient to call the `export()` function wich will return a blob url for the final video.
+To export the final video, call the `export()` function, which will return a blob URL for the final video.
 
 ```typescript
-const finalVideo = await Engine.export();
+const finalVideo = await Engine.getInstance().export();
 ```

@@ -1,18 +1,18 @@
 # Settings
 
-We enable you to configure global settings for the SDK, including the output format, bitrate, decoding acceleration and more.
+You can configure global settings for the Rendley SDK, including output format, bitrate, decoding acceleration, and more.
 
-## Show rendering preview
+## Show Rendering Preview
 
-If you don't want the canvas to display frames as they are being rendered, set the `setShowRenderPreview` property to false, otherwise, it will display the frames;
+If you prefer not to display frames as they are being rendered on the canvas, set the `setShowRenderPreview` property to `false`. By default, frames will be displayed.
 
 ```typescript
 Engine.getInstance().getSettings().setShowRenderPreview(false);
 ```
 
-## Rendering videos with alpha
+## Rendering Videos with Alpha
 
-If you want to render videos that have an alpha channel, you would have to render to a codec that supports alpha, such as VP8 or VP9. Also, this is not something that WebCodecs supports, which means that you have to switch to our WASM based rendering approached.
+To render videos that include an alpha channel, you need to use a codec that supports alpha, such as VP8 or VP9. Note that this feature is not supported by WebCodecs, so you'll need to switch to our WASM-based rendering approach.
 
 ```typescript
 Engine.getInstance().getSettings().setEncoderUseWebCodecs(false);
@@ -20,15 +20,15 @@ Engine.getInstance().getSettings().setEncoderUseAlpha(true);
 Engine.getInstance().getSettings().setEncoderCodec("vp8");
 ```
 
-## Changing the bitrate
+## Changing the Bitrate
 
-To change the encoding bitrate, you can do the following:
+To modify the encoding bitrate, use the following code:
 
 ```typescript
 Engine.getInstance().getSettings().setEncoderBitrate(1000000);
 ```
 
-## Changing the encoder codec
+## Changing the Encoder Codec
 
 To change the encoder codec, you can do the following:
 
@@ -36,17 +36,17 @@ To change the encoder codec, you can do the following:
 Engine.getInstance().getSettings().setEncoderCodec("vp8");
 ```
 
-## Changing the encoding CRF
+## Changing the Encoding CRF
 
-To change the Constant Rate Factor, you can do the following:
+To adjust the Constant Rate Factor (CRF), use this code:
 
 ```typescript
 Engine.getInstance().getSettings().setEncoderCrf(24);
 ```
 
-## Changing encoding and decoding acceleration
+## Changing Encoding and Decoding Acceleration
 
-There are use cases where you would like to have control over the encoding and decoding acceleration. You can do it as follows:
+If you want to control the encoding and decoding acceleration, you can specify your preferences as follows:
 
 ```typescript
 Engine.getInstance()

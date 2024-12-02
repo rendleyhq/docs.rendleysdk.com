@@ -1,10 +1,10 @@
 # Clips
 
-The clip represents the smallest unit of the composition. It can either be a text, an image, a video, an audio or even a custom HTML element.
+A clip represents the smallest unit of a composition. It can be a text, image, video, audio, or even a custom HTML element.
 
-## Create clip
+## Create a Clip
 
-Clips are part of layers. To create a clip, you can use the following:
+Clips are part of layers. To create a clip, you can use the following code:
 
 ```typescript
 const layer = Engine.getInstance().getTimeline().createLayer();
@@ -20,14 +20,14 @@ await layer.addClip({
 });
 ```
 
-There are various types of clips and depending on their type, they might have a different set of properties and constructors. For instance, clips that are being created with a resource from library, will need to include the `mediaDataId` property, whereas clips that don't, will just have to specify the type of the clip Check below how to create each type of clip.
+There are various types of clips, and depending on their type, they may have a different set of properties and constructors. For instance, clips created with a resource from the library will need to include the `mediaDataId` property, while clips that do not will only need to specify the type of the clip. Check below for how to create each type of clip.
 
 > [!NOTE]
-> Two clips can't overlap on the same layer. If you want a clip to go on top of another, you need to create a new layer and add the clip to it.
+> Two clips cannot overlap on the same layer. If you want a clip to go on top of another, you need to create a new layer and add the clip to it.
 
 ## Image
 
-Responsible for loading and displaying images
+Responsible for loading and displaying images.
 
 ```typescript
 await layer.addClip({
@@ -37,7 +37,7 @@ await layer.addClip({
 });
 ```
 
-::: details List of the supported formats
+::: details List of Supported Formats
 | Format | Support |
 | ------ | :-----: |
 | JPEG | ✅ |
@@ -50,7 +50,7 @@ await layer.addClip({
 
 ## Video
 
-Responsible for loading and displaying videos
+Responsible for loading and displaying videos.
 
 ```typescript
 await layer.addClip({
@@ -60,10 +60,10 @@ await layer.addClip({
 ```
 
 ::: warning
-The duration of the video clip is being inferred from the media data. If you want to modify it, you can use trimming.
+The duration of the video clip is inferred from the media data. If you want to modify it, you can use trimming.
 :::
 
-::: details List of the supported formats
+::: details List of Supported Formats
 | Format | Support |
 | ------ | :-----: |
 | MP4 | ✅ |
@@ -76,7 +76,7 @@ The duration of the video clip is being inferred from the media data. If you wan
 
 ## Audio
 
-Responsible for loading and playing audio
+Responsible for loading and playing audio.
 
 ```typescript
 await layer.addClip({
@@ -86,20 +86,22 @@ await layer.addClip({
 ```
 
 ::: warning
-The duration of the audio clip is being inferred from the media data. If you want to modify it, you can use trimming.
+The duration of the audio clip is inferred from the media data. If you want to modify it, you can use trimming.
 :::
 
-::: details List of the supported formats
+::: details List of Supported Formats
 | Format | Support |
 | ------ | :-----: |
 | MP3 | ✅ |
 | M4A | ✅ |
 | OGG | ✅ |
 | WAV | ✅ |
-| ACC | ✅ |
+| AAC | ✅ |
 :::
 
-## Gif
+## GIF
+
+Responsible for rendering GIFs. It can also be used for rendering stickers, as it supports transparency.
 
 ```typescript
 await layer.addClip({
@@ -108,11 +110,9 @@ await layer.addClip({
 });
 ```
 
-Responsible for rendering gifs. It can also be used for rendering stickers as it supports transparency
-
 ## Shape
 
-Responsible for rendering various shapes such as rectangles, circles, triangles and elipses. If you need a shape in your composition, it is better to use this clip instead of using an image.
+Responsible for rendering various shapes such as rectangles, circles, triangles, and ellipses. If you need a shape in your composition, it is better to use this clip instead of using an image.
 
 ```typescript
 await layer.addClip({
@@ -130,18 +130,18 @@ await layer.addClip({
 });
 ```
 
-::: details List of the supported shapes
-| Format | Support |
+::: details List of Supported Shapes
+| Shape | Support |
 | ------ | :-----: |
-| rectangle | ✅ |
-| circle | ✅ |
-| triangle | ✅ |
-| elipse | ✅ |
+| Rectangle | ✅ |
+| Circle | ✅ |
+| Triangle | ✅ |
+| Ellipse | ✅ |
 :::
 
 ## Text
 
-Create and display text elements
+Create and display text elements.
 
 ```typescript
 const textClip = await layer.addClip({
@@ -155,29 +155,29 @@ const textClip = await layer.addClip({
 });
 ```
 
-The text clip also supports setting a background color that goes behind the text. You can set it like this
+The text clip also supports setting a background color that goes behind the text. You can set it like this:
 
 ```typescript
 textClip.style.setBackgroundColor("#0000FF");
 ```
 
-- ### Changing the text
+### Changing the Text
 
-  To change the text, simply run
+To change the text, simply run:
 
-  ```typescript
-  textClip.setText("Hello World");
-  ```
+```typescript
+textClip.setText("New Text");
+```
 
-  If you want to retreieve the text, you can use
+If you want to retrieve the text, you can use:
 
-  ```typescript
-  const myText = textClip.getText();
-  ```
+```typescript
+const myText = textClip.getText();
+```
 
 ## HTML Text
 
-If you have a custom HTML text element, you can use this clip. Everything will be rendered inside a span element, which means that you could also use it for styling.
+If you have a custom HTML text element, you can use this clip. Everything will be rendered inside a span element, allowing for additional styling.
 
 ```typescript
 await layer.addClip({
@@ -194,16 +194,16 @@ await layer.addClip({
 ```
 
 ::: warning
-If you use any fonts inside the HTML element, it is important to add the font names inside the `fonts` array
+If you use any fonts inside the HTML element, it is important to add the font names inside the `fonts` array.
 :::
 
 ::: info
-You can also have divs inside and other HTML elements
+You can also include divs and other HTML elements.
 :::
 
 ## Lottie
 
-A Lottie clip is a special clip that allows loading Adobe After Effects compositions. Besides loading the composition, we implemented a system for modifying its elements. The assets url can be both, inferred from the data of the composition or provided manually via the `assetsUrl` property.
+A Lottie clip is a special type that allows loading Adobe After Effects compositions. Besides loading the composition, it includes a system for modifying its elements. The assets URL can be inferred from the data of the composition or provided manually via the `assetsUrl` property.
 
 ```typescript
 import { LottieClip } from "@rendley/sdk";
@@ -211,74 +211,73 @@ import { LottieClip } from "@rendley/sdk";
 const lottieClip = new LottieClip({
   dataUrl: "/path/to/data.json",
   assetsUrl: "/path/to/assets",
-  //   propertiesUrl: "/path/to/properties.json",
   startTime: 0,
 });
 
 await layer.addClip(lottieClip);
 ```
 
-- ### Changing properties of the composition
+### Changing Properties of the Composition
 
-  If you want to configure the composition, you can use our built in system for working with properties. It requires a JSON storing the properties of the composition.
+If you want to configure the composition, you can use the built-in system for working with properties. It requires a JSON file storing the properties of the composition.
 
-  ::: details Example `properties.json` file
+::: details Example `properties.json` file
 
-  ```json
-  [
-    {
-      "type": "text",
-      "label": "Title",
-      "name": "Title 01/Title Animation 01/Text 01/Text 01"
-    },
-    {
-      "type": "text",
-      "label": "Subtitle",
-      "name": "Title 01/Title Animation 01/Text 02/Text 02"
-    }
-  ]
-  ```
+```json
+[
+  {
+    "type": "text",
+    "label": "Title",
+    "name": "Title 01/Title Animation 01/Text 01/Text 01"
+  },
+  {
+    "type": "text",
+    "label": "Subtitle",
+    "name": "Title 01/Title Animation 01/Text 02/Text 02"
+  }
+]
+```
 
-  :::
+:::
 
-  ```typescript
-  import { LottieClip } from "@rendley/sdk";
+```typescript
+import { LottieClip } from "@rendley/sdk";
 
-  const lottieClip = new LottieClip({
-    dataUrl: "/path/to/data.json",
-    propertiesUrl: "/path/to/properties.json",
-    startTime: 0,
-  });
+const lottieClip = new LottieClip({
+  dataUrl: "/path/to/data.json",
+  propertiesUrl: "/path/to/properties.json",
+  startTime: 0,
+});
 
-  await layer.addClip(lottieClip);
-  ```
+await layer.addClip(lottieClip);
+```
 
-  To change the value of a property, you should use
+To change the value of a property, use:
 
-  ```typescript
-  this.clip.setProperty("propertyName", "propertyValue");
-  ```
+```typescript
+lottieClip.setProperty("propertyName", "propertyValue");
+```
 
-  If you need to get the list of all the properties, you can use
+To get the list of all properties, use:
 
-  ```typescript
-  const propertiesList = clip.getProperties();
-  ```
+```typescript
+const propertiesList = lottieClip.getProperties();
+```
 
-  and, if you are interested in getting the value of a specific property, you can use
+To get the value of a specific property, use:
 
-  ```typescript
-  const propertyValue = clip.getProperty("propertyName");
-  ```
+```typescript
+const propertyValue = lottieClip.getProperty("propertyName");
+```
 
 ::: info
-If you want to learn about how to export an After Effects composition, check out this [guide](/in-progress.md)
+If you want to learn how to export an After Effects composition, check out this [guide](/in-progress.md).
 :::
 
 ## Custom
 
-Each of the clips above are extensions of a baseclip class. We exposed it for you as well to be able to create your own implements. A good example of a custom clip could be a Waveform clip that gets animated based on the audio.
+Each of the clips above is an extension of a base clip class. We have exposed it for you to create your own implementations. A good example of a custom clip could be a Waveform clip that animates based on audio.
 
 ::: info
-If you want to learn about how to create a custom clip, check out this [guide](/in-progress.md)
+If you want to learn how to create a custom clip, check out this [guide](/in-progress.md).
 :::

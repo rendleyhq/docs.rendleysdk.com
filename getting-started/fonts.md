@@ -2,11 +2,11 @@
 
 The SDK supports displaying custom fonts and different styles on the canvas, giving you complete control over the typography in your projects.
 
-By default, no fonts are loaded, so you can work with the browser's default fonts. But if you want to bring in your own custom fonts, you can do so.
+By default, no fonts are loaded, so you can work with the browser's default fonts. However, if you want to bring in your own custom fonts, you can do so.
 
-Once the font is loaded through the registry, it will be available in the DOM for futher use.
+Once the font is loaded through the registry, it will be available in the DOM for further use.
 
-## Import from CSS files
+## Import from CSS Files
 
 You can import a font by specifying the URL to the font face or providing a CSS entry point with all the styles set up. Here's an example:
 
@@ -16,11 +16,11 @@ const fontCssUrl = "https://fonts.googleapis.com/css2?family=Roboto:ital,wght@;1
 await Engine.getInstance().getFontRegistry().loadFromCssUrl("Roboto", fontCssUrl);
 ```
 
-This will parse the css and load all the font faces defined in the file.
+This will parse the CSS and load all the font faces defined in the file.
 
-## Import from font files
+## Import from Font Files
 
-You can also import a font by specifying the URL to the font file. The font should be in a format support by the [FontFace](https://developer.mozilla.org/en-US/docs/Web/API/FontFace) API Here's an example:
+You can also import a font by specifying the URL to the font file. The font should be in a format supported by the [FontFace](https://developer.mozilla.org/en-US/docs/Web/API/FontFace) API. Here's an example:
 
 ```typescript{3}
 const fontUrl = "https://myapp.com/fonts/Roboto.woff";

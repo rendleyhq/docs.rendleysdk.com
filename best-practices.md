@@ -1,15 +1,15 @@
 # Best Practices
 
-A list of best practices for getting the best performance of the SDK
+Here are some best practices to achieve optimal performance with the SDK.
 
 ## Do not add the same asset multiple times
 
-Instead of loading the same asset multiple times, you should reference it from [the library](/getting-started/library.md).
+Instead of loading the same asset multiple times, reference it from [the Library](/getting-started/library.md).
 
 ## Do not upload images for simple shapes
 
-If you need a rectangle, a circle or some other primary shape, it is better to use the [Shape](/getting-started/clips.md#shape) clip instead.
+If you need a rectangle, circle, or any other basic shape, it is better to use the [Shape](/getting-started/clips.md#shape) clip instead.
 
-## Avoid calling `deserialize` multiple times
+## Avoid calling `deserialize` to apply updates
 
-When calling deserialize multiple times, a lot of internal resources are being initialized. If you are frequently applying updates using a JSON, it is better to identify the changes and apply them manually.
+Calling `deserialize` multiple times can initialize many internal resources unnecessarily. If you frequently apply updates using JSON, it is more efficient to identify the changes and apply them manually.

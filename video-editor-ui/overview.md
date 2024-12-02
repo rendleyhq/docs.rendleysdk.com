@@ -4,8 +4,6 @@ This is an advanced video editor that can be embedded into any website. It uses 
 
 The video editor was created using web components, making it embeddable into any website created with any library, whether it be React, Angular, Vue, PHP, or HTML.
 
-## Features
-
 - Drag and drop clips
 - Split and trim clips
 - Change text properties

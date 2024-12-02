@@ -1,10 +1,10 @@
 # Subtitles / Captions
 
-The Subtitles Clip is responsible for drawing and syncing subtitles or captions with your video content.
+The Subtitles Clip is responsible for displaying and syncing subtitles or captions with your video content.
 
 ## Adding Subtitles Manually
 
-When adding subtitles manually, you need to define a `Subtitles` object, which contains a list of text blocks. Each text block specifies the text content, the start time, and the duration, all in seconds.
+To add subtitles manually, you need to define a `Subtitles` object that contains a list of text blocks. Each text block specifies the text content, the start time, and the duration, all measured in seconds.
 
 ```typescript
 import { Engine, Subtitles, SubtitlesClip } from "@rendley/sdk";
@@ -40,7 +40,7 @@ await layer.addClip(subtitlesClip);
 
 ## Importing Subtitles from SRT
 
-When importing subtitles from an SRT file, the SDK can automatically parse the SRT string and construct the corresponding `Subtitles` object.
+To import subtitles from an SRT file, the SDK can automatically parse the SRT string and construct the corresponding `Subtitles` object.
 
 ```typescript
 import { Engine, Subtitles, SubtitlesClip } from "@rendley/sdk";
@@ -71,7 +71,7 @@ await layer.addClip(subtitlesClip);
 
 ## Connecting Subtitles with Clips
 
-In some cases, you may want the subtitles to be directly attached to a specific clip so that they move or trim in sync with that clip. Here's how you can do it:
+You may want the subtitles to be directly attached to a specific clip so that they move or trim in sync with that clip. Here's how to do it:
 
 ```typescript
 // Store subtitles in the library
@@ -81,7 +81,7 @@ const subtitlesId = Engine.getInstance().getLibrary().addSubtitles(subtitles);
 clip.setSubtitles(subtitlesId);
 ```
 
-To make the subtitles appear after a delay, use the `setSubtitlesOffset` method, passing the offset value in seconds.
+To delay the appearance of subtitles, use the `setSubtitlesOffset` method, passing the offset value in seconds.
 
 ```typescript
 clip.setSubtitlesOffset(value);
@@ -126,7 +126,7 @@ Available modes include `"full"` (to show the complete text) and `"partial"` (to
 
 ## Animations
 
-Highlight animations for the active word can add more visual appeal to your subtitles. The SDK offers a variety of built-in animations to cover most use cases. To apply a highlight animation:
+Highlight animations for the active word can add visual appeal to your subtitles. The SDK offers a variety of built-in animations to cover most use cases. To apply a highlight animation:
 
 ```typescript
 const speed = 0.6;
@@ -136,4 +136,4 @@ Engine.getInstance()
   .setHighlightAnimation("wiggle", speed);
 ```
 
-Here, `speed` controls how fast the animation plays.
+Here, `speed` controls the animation playback speed.

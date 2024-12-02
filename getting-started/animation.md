@@ -1,61 +1,57 @@
 # Animation
 
-The SDK supports keframe animations that enables you to animate any of the elements of the composition.
+The SDK supports keyframe animations, allowing you to animate various elements within the composition. Clips can utilize three distinct animation types that work seamlessly together:
 
-Clips support three distinct animation types that can seamlessly work together:
-
-- `In`: The animation that plays when the clip starts.
-- `Out`: The animation that plays when the clip reaches its end.
-- `Loop`: The animation that plays between the In and Out animations, cycling based on the loop count.
+- **In**: The animation that plays when the clip starts.
+- **Out**: The animation that plays when the clip reaches its end.
+- **Loop**: The animation that plays between the In and Out animations, cycling based on the specified loop count.
 
 ## Key Concepts
 
-### The animation object
+### The Animation Object
 
-An animation is structured as AnimationData, which includes details like speed, offsets, and property-specific animations.
+An animation is structured as `AnimationData`, which includes details such as speed, offsets, and property-specific animations. The properties of the animation object are as follows:
 
-- `name`: Identifier used for display/debugging
-- `speed`: Playback speed, 2 = faster, 0.5 = slower
-- `offset`: Offset in seconds for the animation keyframes
-- `amplification`: Amplifies the effect for relative properties
-- `inOutOfRange`: Handle values out of range: original or first keyframe?
-- `outOutOfRange`: Handle values out of range: original or last keyframe
-- `propertyAnimations`: List of individual property animations
+- **name**: Identifier used for display and debugging.
+- **speed**: Playback speed (e.g., `2` for faster, `0.5` for slower).
+- **offset**: Offset in seconds for the animation keyframes.
+- **amplification**: Amplifies the effect for relative properties.
+- **inOutOfRange**: Handles values out of range (original or first keyframe).
+- **outOutOfRange**: Handles values out of range (original or last keyframe).
+- **propertyAnimations**: List of individual property animations.
 
 ### Property Animations
 
-Each property of a clip can have its own animation, defined by the PropertyAnimation interface. This interface includes a list of keyframes that specify the animation's timing and behavior:
+Each property of a clip can have its own animation, defined by the `PropertyAnimation` interface. This interface includes a list of keyframes that specify the animation's timing and behavior:
 
-- `property`: Identifier for a specific property (e.g., PositionX, ScaleX, etc.)
-- `inOutOfRange`: Handle values out of range: original or first keyframe?
-- `outOutOfRange`: Handle values out of range: original or last keyframe
-- `keyframes`: List of keyframes, with easing determined by the previous keyframe
+- **property**: Identifier for a specific property (e.g., `PositionX`, `ScaleX`, etc.).
+- **inOutOfRange**: Handles values out of range (original or first keyframe).
+- **outOutOfRange**: Handles values out of range (original or last keyframe).
+- **keyframes**: List of keyframes, with easing determined by the previous keyframe.
 
 ### Keyframes
 
 Keyframes are the building blocks of animations, defining specific values at certain times within the animation timeline. They can handle both numeric and string values and are applied in various visual spaces such as absolute or relative:
 
-- `time`: Time in seconds, offset by AnimationData.offset if set
-- `value`: Value at that time; numeric values are interpolated, strings are set as-is (e.g., text properties)
-- `easing`: Easing preset for the time segment defined by this and the next keyframe
-- `space`: Space to use for the keyframe
-- `relativeProperty`: Base value property for relative animations
+- **time**: Time in seconds, offset by `AnimationData.offset` if set.
+- **value**: Value at that time; numeric values are interpolated, while strings are set as-is (e.g., text properties).
+- **easing**: Easing preset for the time segment defined by this and the next keyframe.
+- **space**: Space to use for the keyframe.
+- **relativeProperty**: Base value property for relative animations.
 
   ::: tip
-
   You can specify a base property using the `relativeProperty` field, which defaults to the same property if not set.
   :::
 
   ::: tip
-
-  Keyframe values apply to the same base value and do not stack up.
+  Keyframe values apply to the same base value and do not stack.
   :::
 
 ## Animation Controls
 
 ### Set Animation
 
-Apply new animations to a clip. The type can be `"in"`, `"out"`, or `"loop"` and the animation data is defined by the AnimationData interface.
+Apply new animations to a clip. The type can be `"in"`, `"out"`, or `"loop"`, and the animation data is defined by the `AnimationData` interface.
 
 ```typescript
 clip.animationController.setAnimation(type, animationData);
@@ -71,7 +67,7 @@ clip.animationController.loadAnimation(type, JSON.stringify(animationData));
 
 ### Set Duration
 
-Adjust animation duration.
+Adjust the duration of an animation.
 
 ```typescript
 clip.animationController.setAnimationDuration(type, durationInSeconds);
@@ -95,13 +91,14 @@ clip.animationController.setLoopCount(loopCount);
 
 ## Prioritization
 
-The controller prioritizes the In, Out, and Loop points in that order. If all three cannot fit within the clip’s timeline, the In animation is prioritized first, followed by Out, and then Loop.
+The animation controller prioritizes the In, Out, and Loop animations in that order. If all three cannot fit within the clip’s timeline, the In animation is prioritized first, followed by Out, and then Loop.
 
-- `Loop Time`: Automatically determined based on the durations of the In and Out animations and is stretched to cover the entire clip timeline (from StartBounds to EndBounds).
-
-- `Loop Count`: Set the number of times the Loop animation should repeat between the In and Out animations using the `setLoopCount` method.
+- **Loop Time**: Automatically determined based on the durations of the In and Out animations and stretched to cover the entire clip timeline (from StartBounds to EndBounds).
+- **Loop Count**: Set the number of times the Loop animation should repeat between the In and Out animations using the `setLoopCount` method.
 
 ## Example Animation
+
+Here's an example of defining an animation:
 
 ```typescript
 import {
@@ -126,7 +123,11 @@ const animationData: AnimationData = {
           easing: EasingEnum.ElasticOut,
           space: AnimationSpaceEnum.RELATIVE_ADDITIVE,
         },
-        { time: 0.75, value: 0, space: AnimationSpaceEnum.RELATIVE_ADDITIVE },
+        {
+          time: 0.75,
+          value: 0,
+          space: AnimationSpaceEnum.RELATIVE_ADDITIVE,
+        },
       ],
     },
     {
@@ -146,7 +147,11 @@ const animationData: AnimationData = {
           easing: EasingEnum.ElasticInOut,
           space: AnimationSpaceEnum.ABSOLUTE,
         },
-        { time: 2, value: 2, space: AnimationSpaceEnum.ABSOLUTE },
+        {
+          time: 2,
+          value: 2,
+          space: AnimationSpaceEnum.ABSOLUTE,
+        },
       ],
     },
     {
@@ -166,7 +171,11 @@ const animationData: AnimationData = {
           easing: EasingEnum.ElasticInOut,
           space: AnimationSpaceEnum.ABSOLUTE,
         },
-        { time: 2, value: 2, space: AnimationSpaceEnum.ABSOLUTE },
+        {
+          time: 2,
+          value: 2,
+          space: AnimationSpaceEnum.ABSOLUTE,
+        },
       ],
     },
   ],

@@ -1,15 +1,16 @@
 # Export
 
-Rendley SDK is able to export the final video using both, a client side approach and server side approach. Both of these mechanisms have their strenghts and weaknesses, and it is up to you to decide which one is best for your application.
-To export the final video, it is sufficient to call the `export()` function wich will return a blob url for the final video.
+The Rendley SDK allows you to export the final video using both client-side and server-side approaches. Each method has its strengths and weaknesses, so you can choose the one that best fits your application needs.
+
+To export the final video, simply call the `export()` function, which will return a Blob URL for the final video.
 
 ```typescript
 const result = await Engine.getInstance().getTimeline().export();
 ```
 
-### Export segments of the video
+### Export Segments of the Video
 
-Besides exporting the complete video, you can also exports segments of the video. To do so, simply specify the `from` and `to` parameters in seconds.
+In addition to exporting the complete video, you can also export specific segments. To do this, specify the `from` and `to` parameters in seconds.
 
 ```typescript
 const result = await Engine.getInstance().getTimeline().export({
@@ -18,9 +19,11 @@ const result = await Engine.getInstance().getTimeline().export({
 });
 ```
 
-### Export specific tracks
+### Export Specific Tracks
 
-You can also specify which tracks to export, by setting the `type` parameter to `video_only` or `audio_only`.
+You can specify which tracks to export by setting the `type` parameter to either `video_only` or `audio_only`.
+
+To export only the video track:
 
 ```typescript
 const result = await Engine.getInstance().getTimeline().export({
@@ -28,7 +31,7 @@ const result = await Engine.getInstance().getTimeline().export({
 });
 ```
 
-Or
+To export only the audio track:
 
 ```typescript
 const result = await Engine.getInstance().getTimeline().export({
@@ -36,12 +39,12 @@ const result = await Engine.getInstance().getTimeline().export({
 });
 ```
 
-If the rendering succeeded, the `result` variable will contain a the final blob of the video, as well as the extension of the file.
+If the rendering is successful, the `result` variable will contain the final Blob of the video, along with the file extension.
 
 ::: info
-To learn more about on device rendering and best practices, check out this [guide](/getting-started/render-on-device.md)
+To learn more about on-device rendering and best practices, check out this [guide](/getting-started/render-on-device.md).
 :::
 
 ::: info
-To learn more about server rendering and best practices, check out this [guide](/getting-started/render-on-device.md)
+To learn more about server rendering and best practices, check out this [guide](/getting-started/render-on-device.md).
 :::

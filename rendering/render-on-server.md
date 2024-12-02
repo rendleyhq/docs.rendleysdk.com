@@ -1,26 +1,26 @@
-# Render on server
+# Render on Server
 
-The server approach is using the exact same SDK that is being used on the client side, however, it is running in a controlled environment where you have control over the rendering process and resources. It launches a headless chromium browser and does the rendering there.
+The server approach utilizes the same SDK that is used on the client side; however, it operates in a controlled environment where you have greater control over the rendering process and resources. This method launches a headless Chromium browser to handle the rendering.
 
 You can find the repository for the server rendering [here](https://github.com/rendleyhq/video-rendering-server).
 
 ## Requirements
 
 - GPU hardware for the WebGL context
-- Minimum 4 CPU cores
+- A minimum of 4 CPU cores
 
 ## Chunking
 
-Compared to the client rendering approach, the server rendering approach is able to chunk a large video into smaller parts and render them in parallel, then combine the parts into a single video file.
+Compared to the client rendering approach, the server rendering method can chunk a large video into smaller parts and render them in parallel. These parts are then combined into a single video file.
 
-You can have as many chunks as CPU cores available as each chunk happens in a different process. Currently, the server does chunking by default and it is configured to use all the cores.
+The number of chunks can equal the number of CPU cores available, as each chunk is processed in a separate process. Currently, the server performs chunking by default and is configured to utilize all available cores.
 
 <hr />
 
 ::: tip
-When rendering more videos in parallel than GPU cores available, switching the rendering configurations to software encoding and decoding will improve the performance since it can process the data more efficiently.
+When rendering more videos in parallel than the number of GPU cores available, switching the rendering configuration to software encoding and decoding can improve performance, as it allows for more efficient data processing.
 :::
 
 ## Infrastructure
 
-Currently, we only provide the rendering server as a Docker container and do not handle the overall infrastructure and the scalling part.
+At present, we provide the rendering server as a Docker container. We do not manage the overall infrastructure or scaling.

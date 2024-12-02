@@ -1,8 +1,10 @@
 # Effects
 
-Because we are using WebGL, we can use the GLSL shaders to create advanced effects that will be computed directly in the GPU leading to high performance. An effect can be something like making the clip move in waves or even be blured. You can also apply the effects on any of the clips added to the composition.
+With WebGL, we can utilize GLSL shaders to create advanced effects that are computed directly on the GPU, ensuring high performance. An effect can range from making the clip move in waves to applying a blur. You can apply these effects to any clips added to the composition.
 
 ## Example: Glow Effect
+
+Here’s an example of a GLSL shader for a glow effect:
 
 ```glsl
 precision highp float;
@@ -15,8 +17,7 @@ const bool uGrayScale = false;
 
 uniform vec4 inputSize;
 
-float pattern()
-{
+float pattern() {
     float s = sin(uAngle), c = cos(uAngle);
     vec2 tex = vTextureCoord * inputSize.xy;
     vec2 point = vec2(
@@ -26,13 +27,11 @@ float pattern()
     return (sin(point.x) * sin(point.y)) * 4.0;
 }
 
-void main()
-{
+void main() {
     vec4 color = texture2D(uSampler, vTextureCoord);
     vec3 colorRGB = vec3(color);
 
-    if (uGrayScale)
-    {
+    if (uGrayScale) {
         colorRGB = vec3(color.r + color.g + color.b) / 3.0;
     }
 
@@ -42,33 +41,35 @@ void main()
 
 ## Adding Effects
 
-To create an effect, you have to give it an id and several other parameters.
+To create an effect, provide an ID and several parameters:
 
-- The sourceId is used to identify the filter later on.
-- The fragmentSrc represents the GLSL code for the effect, similar to the one shown in the example above.
-- textureWidth and textureHeight are the width and height of the clip's underlying texture.
-- frameWidth and frameHeight are the width and height of the clip's frame, more specifically, of the element you see drawn in the canvas.
-- uniforms is a dictionary of uniforms that can be used in the fragment shader.
+- **sourceId**: A unique identifier for the effect.
+- **fragmentSrc**: The GLSL code for the effect (similar to the example above).
+- **textureWidth** and **textureHeight**: The width and height of the clip's underlying texture.
+- **frameWidth** and **frameHeight**: The dimensions of the clip's frame, specifically the element drawn on the canvas.
+- **uniforms**: A dictionary of uniforms that can be used in the fragment shader.
+
+Here’s how to add an effect:
 
 ```typescript
 import { Effect } from "@rendley/sdk";
 
 clip.addEffect(
   new Effect({
-    sourceId: "randomId",
-    fragmentSrc: fragmentSrc,
-    textureWidth: clip.sprite.texture.width,
-    textureHeight: clip.sprite.texture.height,
-    frameWidth: clip.sprite.width / clip.sprite.scale.x,
-    frameHeight: clip.sprite.height / clip.sprite.scale.y,
-    uniforms: {},
+    sourceId: "randomId", // Unique identifier for the effect
+    fragmentSrc: fragmentSrc, // GLSL code for the effect
+    textureWidth: clip.sprite.texture.width, // Width of the underlying texture
+    textureHeight: clip.sprite.texture.height, // Height of the underlying texture
+    frameWidth: clip.sprite.width / clip.sprite.scale.x, // Width of the clip's frame
+    frameHeight: clip.sprite.height / clip.sprite.scale.y, // Height of the clip's frame
+    uniforms: {}, // Dictionary of uniforms
   })
 );
 ```
 
 ## Removing Effects
 
-To remove an effect, you have to call the `removeEffect` method with the id of the effect you want to remove
+To remove an effect, call the `removeEffect` method with the ID of the effect you wish to remove:
 
 ```typescript
 clip.removeEffect("randomId");
@@ -76,9 +77,9 @@ clip.removeEffect("randomId");
 
 ## Built-in Uniforms
 
-We expose several built-in uniforms that you can leverage in your effects, including:
+You can leverage several built-in uniforms in your effects, including:
 
 ```glsl
-uniform float uTime; // current time in seconds
-uniform vec2 uDimensions; // clip's frame width and height
+uniform float uTime; // Current time in seconds
+uniform vec2 uDimensions; // Clip's frame width and height
 ```

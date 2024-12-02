@@ -1,10 +1,10 @@
 # Layer
 
-The Layer is where all the clips and transitions are being placed. Each layer has an incremental zIndex which enables you to create compositions that overlap each other.
+The Layer is where all clips and transitions are placed. Each layer has an incremental zIndex that enables you to create compositions that overlap each other.
 
-There is no restriction regarding what kind of clips you can add to the layer. You can add text, images, videos, audio, custom HTML elements, etc, all on the same layer.
+There are no restrictions regarding what kind of clips you can add to a layer. You can add text, images, videos, audio, custom HTML elements, etc., all on the same layer.
 
-## Creating a layer
+## Creating a Layer
 
 To create a layer, you can use the following:
 
@@ -18,11 +18,11 @@ If you want to insert a layer at a specific position, you can provide an index p
 const layer = Engine.getInstance().getTimeline().createLayer({ index: 2 });
 ```
 
-This is useful when you need to create a new layer in between existing ones.
+This is useful when you need to create a new layer between existing ones.
 
-## Removing a layer
+## Removing a Layer
 
-Removing a layer, will remove all the associated resources associated with it, like clips and transitions. To remove a layer, you can use the following:
+Removing a layer will also remove all associated resources, such as clips and transitions. To remove a layer, you can use the following:
 
 ```typescript
 Engine.getInstance().getTimeline().removeLayer(layer.id);
