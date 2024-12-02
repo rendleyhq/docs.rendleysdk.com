@@ -28,7 +28,7 @@ Each asset in the Library is represented by a `MediaData` class. This class cont
 
 ## Timeline
 
-The [Timeline](/api-reference/classes/Timeline.html) is where the composition takes shape. This is where you control playback (start, pause, or seek), add layers, and interact with clips.
+The [Timeline](https://rendley.com/docs/api-reference/classes/Timeline.html) is where the composition takes shape. This is where you control playback (start, pause, or seek), add layers, and interact with clips.
 
 ### Clip
 

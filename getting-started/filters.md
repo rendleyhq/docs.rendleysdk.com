@@ -1,6 +1,6 @@
 # Filters
 
-Our [filters](/api-reference/classes/Filter.html) utilize LUTs, giving you high control over the color grading process. LUTs are widely used in the cinematic industry and can be exported from tools like Adobe Photoshop.
+Our [filters](https://rendley.com/docs/api-reference/classes/Filter.html) utilize LUTs, giving you high control over the color grading process. LUTs are widely used in the cinematic industry and can be exported from tools like Adobe Photoshop.
 
 ## Adding Filters
 

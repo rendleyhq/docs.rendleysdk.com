@@ -6,10 +6,10 @@ We utilize the [WebCodecs API](https://developer.mozilla.org/en-US/docs/Web/API/
 
 ### Export Video
 
-To export the final video, simply call the [`export()`](/api-reference/classes/Engine.html#export) function, which will return a blob URL for the completed video.
+To export the final video, simply call the [`export()`](https://rendley.com/docs/api-reference/classes/Engine.html#export) function, which will return a blob URL for the completed video.
 
 ```typescript
 const result = await Engine.getInstance().getTimeline().export();
 ```
 
-If the rendering is successful, the [`result`](/api-reference/interfaces/ExportResult.html) variable will contain the final blob of the video, along with the file extension.
+If the rendering is successful, the [`result`](https://rendley.com/docs/api-reference/interfaces/ExportResult.html) variable will contain the final blob of the video, along with the file extension.

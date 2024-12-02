@@ -1,6 +1,6 @@
 # Effects
 
-With WebGL, we can utilize GLSL shaders to create advanced [effects](/api-reference/classes/Effect.html) that are computed directly on the GPU, ensuring high performance. An effect can range from making the clip move in waves to applying a blur. You can apply these effects to any clips added to the composition.
+With WebGL, we can utilize GLSL shaders to create advanced [effects](https://rendley.com/docs/api-reference/classes/Effect.html) that are computed directly on the GPU, ensuring high performance. An effect can range from making the clip move in waves to applying a blur. You can apply these effects to any clips added to the composition.
 
 ::: details Example: Glow Effect
 
@@ -58,10 +58,10 @@ clip.addEffect(
   new Effect({
     sourceId: "randomId", // Unique identifier for the effect
     fragmentSrc: fragmentSrc, // GLSL code for the effect
-    textureWidth: clip.sprite.texture.width, // Width of the underlying texture
-    textureHeight: clip.sprite.texture.height, // Height of the underlying texture
-    frameWidth: clip.sprite.width / clip.sprite.scale.x, // Width of the clip's frame
-    frameHeight: clip.sprite.height / clip.sprite.scale.y, // Height of the clip's frame
+    textureWidth: clip.style.getRawWidth(), // Width of the underlying texture
+    textureHeight: clip.style.getRawHeight(), // Height of the underlying texture
+    frameWidth: clip.style.getRawWidth(), // Width of the clip's frame
+    frameHeight: clip.style.getRawHeight(), // Height of the clip's frame
     uniforms: {}, // Dictionary of uniforms
   })
 );

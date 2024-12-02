@@ -1,10 +1,10 @@
 # Subtitles / Captions
 
-The [Subtitles](/api-reference/classes/SubtitlesClip) clip is responsible for displaying and syncing subtitles or captions with your video content.
+The [Subtitles](https://rendley.com/docs/api-reference/classes/SubtitlesClip) clip is responsible for displaying and syncing subtitles or captions with your video content.
 
 ## Adding Subtitles Manually
 
-To add subtitles manually, you need to define a [Subtitles](/api-reference/classes/Subtitles.html) object that contains a list of text blocks. Each text block specifies the text content, the start time, and the duration, all measured in seconds.
+To add subtitles manually, you need to define a [Subtitles](https://rendley.com/docs/api-reference/classes/Subtitles.html) object that contains a list of text blocks. Each text block specifies the text content, the start time, and the duration, all measured in seconds.
 
 ```typescript
 import { Engine, Subtitles, SubtitlesClip } from "@rendley/sdk";
@@ -76,12 +76,13 @@ You may want the subtitles to be directly attached to a specific clip so that th
 ```typescript
 // Store subtitles in the library
 const subtitlesId = Engine.getInstance().getLibrary().addSubtitles(subtitles);
+const offset = 0;
 
 // Attach subtitles to a clip
-clip.setSubtitles(subtitlesId);
+clip.setSubtitles(subtitlesId, offset);
 ```
 
-To delay the appearance of subtitles, use the [`setSubtitlesOffset`](/api-reference/classes/SubtitlesClip.html#setSubtitlesOffset) method, passing the offset value in seconds.
+To delay the appearance of subtitles, use the [`setSubtitlesOffset`](https://rendley.com/docs/api-reference/classes/SubtitlesClip.html#setSubtitlesOffset) method, passing the offset value in seconds.
 
 ```typescript
 clip.setSubtitlesOffset(value);
@@ -93,7 +94,7 @@ You have full control over the styling of subtitles, including both the main tex
 
 ### Main Text Styling
 
-To set the style for the underlying subtitle text, use the [`setMainTextStyle`](/api-reference/classes/SubtitlesManager.html#setMainTextStyle) method:
+To set the style for the underlying subtitle text, use the [`setMainTextStyle`](https://rendley.com/docs/api-reference/classes/SubtitlesManager.html#setMainTextStyle) method:
 
 ```typescript
 Engine.getInstance().getSubtitlesManager().setMainTextStyle({
@@ -104,7 +105,7 @@ Engine.getInstance().getSubtitlesManager().setMainTextStyle({
 
 ### Highlighted Word Styling
 
-To customize the appearance of highlighted words, such as making them bold or changing their color, use the [`setHighlightedTextStyle`](/api-reference/classes/SubtitlesManager.html#setHighlightedTextStyle) method:
+To customize the appearance of highlighted words, such as making them bold or changing their color, use the [`setHighlightedTextStyle`](https://rendley.com/docs/api-reference/classes/SubtitlesManager.html#setHighlightedTextStyle) method:
 
 ```typescript
 Engine.getInstance().getSubtitlesManager().setHighlightedTextStyle({
@@ -126,7 +127,7 @@ Available modes include `"full"` (to show the complete text) and `"partial"` (to
 
 ## Animations
 
-You can also use animations to control the appearance of subtitles. For example, you can use the [`setHighlightAnimation`](/api-reference/classes/SubtitlesManager.html#setHighlightAnimation) method to make the highlighted word wiggle:
+You can also use animations to control the appearance of subtitles. For example, you can use the [`setHighlightAnimation`](https://rendley.com/docs/api-reference/classes/SubtitlesManager.html#setHighlightAnimation) method to make the highlighted word wiggle:
 
 ```typescript
 const speed = 0.6;
@@ -136,6 +137,6 @@ Engine.getInstance()
   .setHighlightAnimation("wiggle", speed);
 ```
 
-Some of the supported animations are: `"pop"`, `"pop_rotate"`, `"wiggle"`. The full list can be found [here](/api-reference/enums/HighlightAnimationEnum.html).
+Some of the supported animations are: `"pop"`, `"pop_rotate"`, `"wiggle"`. The full list can be found [here](https://rendley.com/docs/api-reference/enums/HighlightAnimationEnum.html).
 
 The `speed` property controls the animation playback speed.
