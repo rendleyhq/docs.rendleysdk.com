@@ -157,7 +157,7 @@ export default defineConfig({
     nav: [
       {
         text: "API Reference",
-        link: "/api-reference/index.html",
+        link: "https://docs.rendley.com/api-reference/index.html",
       },
     ],
 
@@ -276,7 +276,7 @@ export default defineConfig({
         items: [
           {
             text: "API Reference",
-            link: "/api-reference/index.html",
+            link: "https://docs.rendley.com/api-reference/index.html",
           },
           { text: "Playground", link: "https://playground.rendley.com" },
           { text: "Blog", link: "https://blog.rendley.com" },
