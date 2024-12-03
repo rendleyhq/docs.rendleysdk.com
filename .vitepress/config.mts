@@ -19,24 +19,24 @@ export default defineConfig({
       "link",
       {
         rel: "icon",
-        href: "/docs/favicon.svg",
+        href: "/favicon.svg",
         size: "any",
         type: "image/svg+xml",
       },
     ],
 
     // Canonical URL
-    ["link", { rel: "canonical", href: "https://rendley.com/docs" }],
+    ["link", { rel: "canonical", href: "https://docs.rendley.com" }],
 
     // Open Graph Meta Tags
     ["meta", { property: "og:type", content: "website" }],
-    ["meta", { property: "og:url", content: "https://rendley.com/docs" }],
+    ["meta", { property: "og:url", content: "https://docs.rendley.com" }],
     [
       "meta",
       {
         property: "og:title",
         content:
-          "Rendley SDK Documentation - Learn about our powerful video editing SDK",
+          "Rendley SDK Documentation - Learn how to create and render videos directly in the browser",
       },
     ],
     [
@@ -44,12 +44,12 @@ export default defineConfig({
       {
         property: "og:description",
         content:
-          "Rendley provides a powerful SDK that handles all the complexities of video editing. Get the details in our documentation.",
+          "Rendley is a Video Editing SDK that works in any browser and performs rendering client-side, without the need for a server.",
       },
     ],
     [
       "meta",
-      { property: "og:image", content: "https://rendley.com/docs/og.jpg" },
+      { property: "og:image", content: "https://docs.rendley.com/og.jpg" },
     ],
     ["meta", { property: "og:image:width", content: "1200" }],
     ["meta", { property: "og:image:height", content: "630" }],
@@ -57,7 +57,8 @@ export default defineConfig({
       "meta",
       {
         property: "og:image:alt",
-        content: "Rendley SDK - Javascript Video Editing SDK",
+        content:
+          "Rendley is a Video Editing SDK that works in any browser and performs rendering client-side, without the need for a server.",
       },
     ],
     [
@@ -82,12 +83,12 @@ export default defineConfig({
       {
         name: "twitter:description",
         content:
-          "Rendley provides a powerful SDK that handles all the complexities of video editing. Get the details in our documentation.",
+          "Rendley is a Video Editing SDK that works in any browser and performs rendering client-side, without the need for a server.",
       },
     ],
     [
       "meta",
-      { name: "twitter:image", content: "https://rendley.com/docs/og.jpg" },
+      { name: "twitter:image", content: "https://docs.rendley.com/og.jpg" },
     ],
 
     // Google Analytics
@@ -128,7 +129,7 @@ export default defineConfig({
   ],
 
   sitemap: {
-    hostname: "https://rendley.com/docs/",
+    hostname: "https://docs.rendley.com/",
   },
 
   markdown: {

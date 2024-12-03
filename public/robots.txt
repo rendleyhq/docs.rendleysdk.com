@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://docs.rendley.com
+
+# Sitemaps
+Sitemap: https://docs.rendley.com/sitemap.xml
