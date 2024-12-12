@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.6.0] - 2024-12-05
+
+### Added
+
+- Added support for undo/redo (disabled by default)
+- Added support for stroke color and stroke thickness
+- Store lottie property values in the serialized JSON
+- Added the option to specify custom WASM path for FFmpeg
+
+## [1.5.3] - 2024-12-04
+
+### Added
+
+- Exposed ShapeStyle class
+
+### Fixed
+
+- Fixed issue with deserializing subtitles
+
 ## [1.5.2] - 2024-11-26
 
 ### Fixed
