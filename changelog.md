@@ -1,5 +1,42 @@
 # Changelog
 
+## [1.7.2] - 2024-12-26
+
+### Fixed
+
+- Fixed `HTMLTextClip` initial render
+
+## [1.7.1] - 2024-12-26
+
+### Fixed
+
+- Fixed `HTMLTextClip` serialization schema
+
+## [1.7.0] - 2024-12-23
+
+### Added
+
+- Improved log reporting
+- Improved resource usage during rendering
+- Added handling for missing audio and video streams
+- Introduced animation property for text color
+- Added support for masking (supported: videos, images, GIFs, HTML text, Lottie)
+- Added rounding direction for `Timeline.alignTime`
+- Added text padding
+- Added `setVisible` property for clips
+
+### Changed
+
+- Updated the filter and effects deserialization mechanism
+
+### Fixed
+
+- Resolved an issue where the texture was updated while the frame was closed
+- Fixed time alignment for durations in the timeline
+- Prevented `0` from being set as a duration
+- Fixed an issue where word wrapping was not applied
+- Corrected a typo from `warp` to `wrap`
+
 ## [1.6.0] - 2024-12-05
 
 ### Added
