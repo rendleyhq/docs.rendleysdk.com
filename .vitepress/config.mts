@@ -110,21 +110,15 @@ export default defineConfig({
       `,
     ],
 
-    // Tawk.to Chat Integration
+    // hubspot chat
     [
       "script",
-      {},
-      `
-        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-        (function(){
-          var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-          s1.async=true;
-          s1.setAttribute('crossorigin','*');
-          s1.src='https://embed.tawk.to/6622132d1ec1082f04e483cf/1hrqhlqj4';
-          s1.charset='UTF-8';
-          s0.parentNode.insertBefore(s1,s0);
-        })();
-      `,
+      {
+        src: "//js-eu1.hs-scripts.com/144148959.js",
+        defer: "true",
+        async: "true",
+        id: "hs-script-loader",
+      },
     ],
   ],
 
