@@ -1,5 +1,82 @@
 # Changelog
 
+## [1.9.0] - 2025-01-27
+
+### Added
+
+- Improved rendering speed by processing multiple frames
+- Added settings for max queue of frames when rendering and throttle factor to avoid memory increase
+
+### Fixed
+
+- Changed `showRenderPreview` to `renderShowPreview` for consistency also updated getters and setters
+
+## [1.8.4] - 2025-01-20
+
+### Added
+
+- Added support for changing subtitle's position and scale.
+- Added new events for subtitles (transform, style update, animation update, and more).
+- Added an option in settings to adjust the composition's clips when the resolution changes (`setViewAutoLayoutOnResize`).
+- Added an option to automatically wrap subtitles when the resolution changes (`setSubtitlesAutoWrapOnResize`).
+- Added an option to automatically scale subtitles down/up when the resolution changes (`setSubtitlesScaleOnResize`).
+- Added a new property to the serialized schema for storing the creation date (`createdAt`).
+
+### Fixed
+
+- Fixed subtitles mask for full mode.
+- Fixed subtitle scaling on view resize.
+
+## [1.8.3] - 2025-01-10
+
+### Added
+
+- Added support for retreiving the license key remotely
+
+### Fixed
+
+- Fixed issue with VideoFrame missing format on some video formats
+- Fixed the decoding for videos with start times different than 0
+- Fixed error reporting in `VideoClip` class
+
+### Changed
+
+## [1.8.2] - 2025-01-02
+
+### Fixed
+
+- Fixed the dying WebGL context on iOS Safari
+
+## [1.8.1] - 2024-12-30
+
+### Fixed
+
+- Fixed the packet decoding for videos that have start times different than 0
+- Fixed subtitles text stroke color
+- Fixed audio mix, now ignores failed audios
+- Fixed timeline render call during export not waiting for processing
+- Fixed playback for video/audio when media is missing
+- Fixed double decoder init issue when the timeline was at a different than 0 time (prerender seek was causing first update on that time, then on time 0 then when it was getting to the same time back to reinit)
+- Fixed Promise.all issues, now it uses Promise.allSettle for independent promises
+- Fixed transitions rendering and playback
+
+## [1.8.0] - 2024-12-30
+
+### Added
+
+- Introduced the `adjustLayout` option for adding clips to layouts, allowing the disabling of the `alignTime` functionality
+- Added support for overwriting the encoder RFC codec string
+
+### Changed
+
+- Enhanced error messages to provide more detailed information when an error occurs
+- Improved handling of missing video or image media by failing silently to prevent crashes
+
+### Fixed
+
+- Resolved an issue with the stroke color of subtitles text
+- Fixed transition issues for both the player and rendering processes
+
 ## [1.7.2] - 2024-12-26
 
 ### Fixed
