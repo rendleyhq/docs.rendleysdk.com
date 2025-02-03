@@ -25,6 +25,14 @@ export default defineConfig({
       },
     ],
 
+    [
+      "link",
+      {
+        rel: "stylesheet",
+        href: "/styles.css",
+      },
+    ],
+
     // Canonical URL
     ["link", { rel: "canonical", href: "https://docs.rendley.com" }],
 
