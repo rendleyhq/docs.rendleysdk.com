@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.9.2] - 2025-02-10
+
+### Added
+
+- Added VideoEncoder failed configuration detection and now the export exists earlier
+- Added `setProjectId` method to Engine that handles project id changes
+
+### Changed
+
+- Improved compatibility detection on VideoEncoder, now it also swaps the bitrateMode on top of hardware acceleration
+- Improved LottieClip loader + preparation for next update Font rendering
+
+### Fixed
+
+- Fixed text color animation
+- Fixed `StorageIndexDB` storage provider
+
+## [1.9.1] - 2025-01-28
+
+### Fixed
+
+- Fixed rendering offset issue
+
 ## [1.9.0] - 2025-01-27
 
 ### Added

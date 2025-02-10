@@ -1,5 +1,73 @@
 # Changelog
 
+## [1.6.1] - 2025-02-10
+
+### Added
+
+- Added pan functionality (control/command + click)
+- Added zoom functionality (control/command + scroll)
+- Added reset view functionality (control/command + double click)
+
+### Changed
+
+- Updated `@rendley/sdk` to version 1.9.2
+
+## [1.6.0] - 2025-01-20
+
+### Added
+
+- Added controls for customizing subtitles, including the main text and highlighted text.
+- Added support for dragging and resizing subtitles.
+- Added support for wrapping subtitles.
+- Automatically resize clips when the composition resolution changes.
+
+### Changed
+
+- Subtitles clip will now be automatically deleted when the last subtitle section is removed.
+- Updated `@rendley/sdk` to version 1.8.4.
+
+### Fixed
+
+- Video resolution changes will now automatically update the resize handlers.
+
+## [1.5.0] - 2024-12-30
+
+### Added
+
+- Added custom clip fallback support
+
+### Changed
+
+- Updated `@rendley/sdk` to 1.8.0
+- Updated the transition interface to follow the new `@rendley/sdk` interface
+
+### Fixed
+
+- Fixed text wrap resize
+
+## [1.4.1] - 2024-12-10
+
+### Added
+
+- Added support for editing border color
+- Added support for editing border thickness
+- Added support for editing border radius
+
+## [1.4.0] - 2024-12-03
+
+### Added
+
+- Added support for undo/redo functionality
+- Added shortcuts for undo/redo
+
+### Changed
+
+- Updated `@rendley/sdk` to version 1.6.0
+
+### Fixed
+
+- Fixed file uploader not getting rendered with ref id in some cases
+
 ## [1.3.3] - 2024-11-26
 
 ### Changed
