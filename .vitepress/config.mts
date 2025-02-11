@@ -264,10 +264,10 @@ export default defineConfig({
         text: "Examples",
         items: [
           { text: "Slideshow Video", link: "/examples/slideshow-video" },
-          // {
-          //   text: "Remove green background",
-          //   link: "/examples/remove-green-background",
-          // },
+          {
+            text: "Background Removal",
+            link: "/examples/background-removal.md",
+          },
           // {
           //   text: "Waveform animated by audio",
           //   link: "/waveform-animated-by-audio",
