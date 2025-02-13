@@ -61,8 +61,8 @@ rendleyTemplateElement.addEventListener("onReady", async () => {
   const Engine = await rendleyTemplateElement.getEngine();
 
   // Example event handling
-  Engine.getInstance().events.on("gallery:added", (gallery) => {
-    // Handle gallery added event
+  Engine.getInstance().events.on("library:added", (mediaDataId) => {
+    // Handle library added event
   });
 });
 ```
