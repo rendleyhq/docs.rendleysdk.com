@@ -1,5 +1,6 @@
 import { defineConfig } from "vitepress";
 import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
+import markdownTaskListPlugin from "markdown-it-task-lists";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -14,6 +15,7 @@ export default defineConfig({
       host: "0.0.0.0",
     },
   },
+
   head: [
     [
       "link",
@@ -137,6 +139,7 @@ export default defineConfig({
   markdown: {
     config(md) {
       md.use(tabsMarkdownPlugin);
+      md.use(markdownTaskListPlugin);
     },
   },
 
@@ -173,6 +176,7 @@ export default defineConfig({
           { text: "Best practices", link: "/best-practices" },
           { text: "Troubleshooting", link: "/troubleshooting" },
           { text: "FAQ", link: "/faq" },
+          { text: "Roadmap", link: "/roadmap" },
           {
             text: "Changelog",
             link: "/changelog",
@@ -254,6 +258,7 @@ export default defineConfig({
         items: [
           { text: "Overview", link: "/video-editor-ui/overview" },
           { text: "Installation", link: "/video-editor-ui/installation" },
+          { text: "Roadmap", link: "/video-editor-ui/roadmap" },
           { text: "Changelog", link: "/video-editor-ui/changelog" },
           // { text: "Self-hosting", link: "/in-progress#" },
           // { text: "Integration with Frameworks", link: "/in-progress#" },
