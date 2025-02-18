@@ -61,7 +61,3 @@
 #### Support for dotLottie
 
 > Enable uploading dotLottie files containing all required assets for a composition.
-
-#### HTML Clip
-
-> Improve support for HTML clips.
