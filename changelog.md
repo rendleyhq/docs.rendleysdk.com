@@ -1,5 +1,87 @@
 # Changelog
 
+## [1.10.0] - 2025-03-24
+
+### Added
+
+- **BREAKING-CHANGE:** Improved Lottie clip properties
+- Added fill color property for LottieClip SetProperty.
+- Added background rendering
+- Added reset functionality for Engine
+- Added setter/getter for wrap mode (not available for all clips)
+- Added loop wrap mode for Lottie clips
+- Added automigration for existing lottie properties to the new v3 property format
+- Worker based audio mixing is now default and doesn't use additional memory for each clip
+
+### Fixed
+
+- Fixed lottie font loader to work in Safari
+- Fixed lottie color replacement not using the full path for nested compositions
+- Fixed TextClip returning only the first character for getFontFamily()
+
+## [1.9.8] - 2025-03-14
+
+### Added
+
+- Added new shapes to `ShapeClip` (star, rounded rect)
+- Added new parameters to the `ShapeClip` (strokeAlignment, rectRadius, nrPoints, innerRadius, outerRadius)
+
+### Fixed
+
+- Fixed shape clip
+- Fixed audio delay on Safari
+
+## [1.9.5] - 2025-02-22
+
+### Added
+
+- Added parallel audio mixing, improves rendering time
+
+  > By default it's disabled to maintain compatibility
+  >
+  > Use engine.getSettings().setRenderAudioUseWorker(true) to turn it on
+  >
+  > It might double the tab memory usage during the rendering. Use at own discretio. Please test it with your worst case scenario.
+  >
+  > Not recommended for projects with big videos (>1GB+), good for relatively small projects with complex layering or multiple chunks
+  >
+  > The memory requirements for this might disappear in the future updates so stay tuned...
+
+### Fixed
+
+- Fixed audio error on seeking
+- Optimized seeking on projects with multiple chunks of video/audio clips
+
+## [1.9.4] - 2025-02-20
+
+### Added
+
+- Transcode interface to add your own transcoder (local or server based)
+- Added SetProjectId method to Engine
+- Added guard for multiple deserialize calls + warnings
+- Added font rendering support for lottie
+
+### Changed
+
+- Improved compatibility detection on VideoEncoder, now it also swaps the bitrateMode on top of hardware acceleration
+- Added VideoEncoder failed configuration detection and now the export exists earlier
+- Improved LottieClip loader
+- Increased keyframe interval (gop) on encoder
+- Improved subtitles rendering
+
+### Fixed
+
+- Fixed IndexedDB storage provider
+- Added new wasm frame interface for better output
+- Fixed Subtitle manager highlight late response on setPosition/setScale
+- Added subtitles reset on deserialization
+
+## [1.9.3] - 2025-02-19
+
+### Fixed
+
+- Fixed fast deserialization without await, now it queues the request
+
 ## [1.9.2] - 2025-02-10
 
 ### Added
@@ -167,7 +249,7 @@
 
 ### Added
 
-- [!] Made engine export return null in case of nothing rendered
+- **BREAKING-CHANGE:** Made engine export return null in case of nothing rendered
 - Added bitrate and crf settings to encoder
 - Made clips trims be clamped
 

@@ -18,8 +18,8 @@ To create a transition, you need to provide the following parameters:
 
 - **startClipId**: The ID of the clip on the left side of the transition.
 - **endClipId**: The ID of the clip on the right side of the transition.
-- **inDuration**: The duration (in milliseconds) for how long the transition should take when it's inside the `startClip`. For example, a value of `1000` means the transition takes 1 second to complete.
-- **outDuration**: The duration (in milliseconds) for how long the transition should take when it's inside the `endClip`.
+- **inDuration**: The duration (in seconds) for how long the transition should take when it's inside the `startClip`. For example, a value of `1` means the transition takes 1 second to complete.
+- **outDuration**: The duration (in seconds) for how long the transition should take when it's inside the `endClip`.
 - **transitionSrc**: The GLSL code that defines the transition effect, which, in this case, will be the cross fade example shown above.
 
 Here’s how to add a transition:
@@ -31,8 +31,8 @@ const crossFadeTransition = new Transition({
   name: "Cross Fade", // Name of the transition
   startClipId, // ID of the starting clip
   endClipId, // ID of the ending clip
-  inDuration: 1000, // Duration of the transition in the start clip
-  outDuration: 1000, // Duration of the transition in the end clip
+  inDuration: 1, // Duration of the transition in the start clip
+  outDuration: 1, // Duration of the transition in the end clip
   transitionSrc: crossFadeShaderSrc, // GLSL code for the transition
 });
 

@@ -1,5 +1,37 @@
 # Changelog
 
+## [1.6.4] - 2025-03-24
+
+### Changed
+
+- Updated `@rendley/sdk` to version 1.10.0
+- Migrated titles to v3
+
+### Fixed
+
+- Added try catch to font loading, to avoid filters not getting loaded
+
+## [1.6.3] - 2025-02-21
+
+### Added
+
+- Add properties for setting `isSublicense` and `enableRemoteValidation`
+
+### Changed
+
+- Updated `@rendley/sdk` to version 1.9.6
+
+## [1.6.2] - 2025-02-20
+
+### Added
+
+- Exposed all the methods and interfaces from `@rendley/sdk` through a new method called `getRendleySDK`.
+
+### Changed
+
+- Switch to font based lottie titles
+- Updated `@rendley/sdk` to version 1.9.4
+
 ## [1.6.1] - 2025-02-10
 
 ### Added

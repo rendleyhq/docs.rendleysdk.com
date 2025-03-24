@@ -56,3 +56,13 @@ mediaData.setCustomData("MY_KEY", "MY_VALUE");
 ```
 
 The `setCustomData` method accepts an optional third parameter, which determines whether the existing data should be overwritten if the key already exists.
+
+## Get custom metadata from assets
+
+The extra information can be retrieved using the following method:
+
+```typescript{3}
+const mediaData = Engine.getInstance().getLibrary().getMediaById(mediaId);
+
+const myValue = mediaData.getCustomData("MY_KEY");
+```
