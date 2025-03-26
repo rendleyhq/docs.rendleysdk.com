@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.10.2] - 2025-03-26
+
+### Added
+
+- Added automatic duration for animation in case it is not set
+- Added missing Lottie getGroups()
+
+### Changed
+
+- Reverted default wrap mode for lottie to clamp
+
+### Fixed
+
+- Fixed lottie clip scale/size being overwritten on init
+- Fixed lottie clip not identifying layers correctly after obfuscation
+- Fixed animation extending when only `in` is set
+
 ## [1.10.1] - 2025-03-24
 
 ### Added
