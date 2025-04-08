@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.10.3] - 2025-04-08
+
+### Added
+
+- Added support for setting and getting the intensity of filters
+- Added support for text padding
+
+### Fixed
+
+- Fixed alpha issues for filters
+- Fixed Lottie internal state being propagated from text
+
 ## [1.10.2] - 2025-03-26
 
 ### Added

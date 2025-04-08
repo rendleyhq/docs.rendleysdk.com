@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.7.0] - 2025-04-08
+
+### Added
+
+- Duplicate functionality for clips
+- Preview when seeking
+- Padding settings for text clips
+- Controls sidebar on the right side of the video editor
+- Property component for displaying properties dynamically
+- Intensity settings for filters
+
+### Changed
+
+- When a clip is first added to the timeline, it is selected automatically
+- The timeline scrolls vertically by default; users can hold Shift to scroll horizontally
+- Improved clip snapping
+
 ## [1.6.4] - 2025-03-24
 
 ### Changed
