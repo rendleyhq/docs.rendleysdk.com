@@ -5,7 +5,7 @@ The Rendley SDK allows you to export the final video using both [client-side](/r
 To export the final video, simply call the [`export()`](https://docs.rendley.com/api-reference/classes/Engine.html#export) function, which will return a Blob URL for the final video.
 
 ```typescript
-const result = await Engine.getInstance().getTimeline().export();
+const result = await Engine.getInstance().export();
 ```
 
 ### Export Segments of the Video
@@ -13,7 +13,7 @@ const result = await Engine.getInstance().getTimeline().export();
 In addition to exporting the complete video, you can also export specific segments. To do this, specify the `from` and `to` parameters in seconds.
 
 ```typescript
-const result = await Engine.getInstance().getTimeline().export({
+const result = await Engine.getInstance().export({
   from: 1.02,
   to: 5.33,
 });
@@ -26,7 +26,7 @@ You can specify which tracks to export by setting the `type` parameter to either
 To export only the video track:
 
 ```typescript
-const result = await Engine.getInstance().getTimeline().export({
+const result = await Engine.getInstance().export({
   type: "video_only",
 });
 ```
@@ -34,7 +34,7 @@ const result = await Engine.getInstance().getTimeline().export({
 To export only the audio track:
 
 ```typescript
-const result = await Engine.getInstance().getTimeline().export({
+const result = await Engine.getInstance().export({
   type: "audio_only",
 });
 ```
