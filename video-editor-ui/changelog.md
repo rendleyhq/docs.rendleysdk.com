@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.7.2] - 2025-04-21
+
+### Added
+
+- Added a new section for built-in effects
+
+### Changed
+
+- Updated `@rendley/sdk` to version 1.11.0
+- Updated the filters,effects,transitions implementation to follow the new SDK approach
+
+### Fixed
+
+- Fixed playback stopping one frame later
+- Pause undo when filter intensity changes
+- Fix for DragResizeRotateContainer to take in consideration text padding
+
+## [1.7.1] - 2025-04-11
+
+### Fixed
+
+- Fixed issue with transparent colors causing issues
+
 ## [1.7.0] - 2025-04-08
 
 ### Added
@@ -17,11 +40,13 @@
 - The timeline scrolls vertically by default; users can hold Shift to scroll horizontally
 - Improved clip snapping
 
+### Fixed
+
 ## [1.6.4] - 2025-03-24
 
 ### Changed
 
-- Updated `@rendley/sdk` to version 1.10.0
+- Updated `@rendley/sdk` to version 1.10.1
 - Migrated titles to v3
 
 ### Fixed

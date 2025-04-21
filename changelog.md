@@ -1,5 +1,54 @@
 # Changelog
 
+## [1.11.0] - 2025-04-21
+
+### Added
+
+- Added integration with native filters _(only Blur is available for now, more to come soon)_
+- Added procedural properties and texture inputs to effects _(undos/redos are not handled at the moment)_
+- Added procedural properties and texture inputs to transitions _(undos/redos are not handled at the moment)_
+- Added built in effects
+- Added support for changing Lottie's shape/text stroke color
+- Added support for changing Lottie's shape/text stroke width
+- Added check for incorrect duration added in the project json for videos causing weird behaviour, like looping...
+- Added new events: LIBRARY_FILTER_ADDED, LIBRARY_FILTER_REMOVED, LIBRARY_EFFECT_ADDED, LIBRARY_EFFECT_REMOVED, LIBRARY_TRANSITION_ADDED, LIBRARY_TRANSITION_REMOVED, EFFECT_PROPERTY_CHANGED, TRANSITION_PROPERTY_CHANGED
+- Added ability to provide your own PIXI.Filter effect, in case you need special passes _(can't be serialized!)_
+- Added optional serialization flag for Effects, Transitions and Filters in the library _(in case the host always provides them, to avoid shipping them with the project JSON)_
+- Added undo/redo for Filter intensity
+- Added helpers for builtin effects
+- Added project upgrader module that will remap old project JSONs to the new structure
+- Added Timeline reset
+- Added Timeline getFrameDuration
+- Added Timeline loadSerializedData for partial loading of the timeline content
+- Added support for transparent WebM rendering
+- Added to ClipStyle: setWidth, setHeight, setSize, getSize(), getRawSize() _(keep in mind that all setters only affect scale and will trigger a scale event, the weight and height is dictated by the media)_
+- Added library methods to deal with unused assets
+- Added onSetupLibrary callback to deal with missing assets (filters, effects, transitions) that were not serialized during project deserialization
+
+### Changed
+
+- **BREAKING-CHANGE:** Rewrote the effect to be part of library now + improvements _(compatibility with old serialized projects are handled internally by an upgrader)_
+- **BREAKING-CHANGE:** Rewrote the filter to be part of library now + improvements _(compatibility with old serialized projects are handled internally by an upgrader)_
+- **BREAKING-CHANGE:** Rewrote the transition to be part of library now + improvements _(compatibility with old serialized projects are handled internally by an upgrader)_
+- Removed processUpdate call from Clip class as it was duplicating the update functionality
+- Removed transition shader fixes that transformed uniforms into const, now they're properly used as properties when configured at library addition
+
+### Fixed
+
+- Fixed lottie leaking properties from text to other components (like stroke color/width)
+- Added missing FFmpeg exports
+- Improved text padding
+- The video now doesn't loop in preview as we don't support yet video looping, so in was misleading before, as on rendering it was not looping
+- Fixed multiple big videos being added to the timeline crashing on MacOS
+- Fixed uTime uniform on effects not getting updated + made it relative to the clip startTime
+- Fixed transition flickering when seeking
+- Fixed a bug (at least on Windows/Opera) where adding multiple files at once caused an asyncify error when transcoding
+- Added a new way to detect unsupported videos
+- Fixed progress reporting
+- Fixed a decoder error for some media files that required initial packets for metadata in preview
+- Fixed background rendering on return throwing an error
+- Fixed deserialization not using the initial Engine init options
+
 ## [1.10.3] - 2025-04-08
 
 ### Added
