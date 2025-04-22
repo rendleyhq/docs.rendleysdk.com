@@ -14,30 +14,36 @@ vec4 transition(vec2 uv) {
 
 ## Adding a Transition
 
-To create a transition, you need to provide the following parameters:
-
-- **startClipId**: The ID of the clip on the left side of the transition.
-- **endClipId**: The ID of the clip on the right side of the transition.
-- **inDuration**: The duration (in seconds) for how long the transition should take when it's inside the `startClip`. For example, a value of `1` means the transition takes 1 second to complete.
-- **outDuration**: The duration (in seconds) for how long the transition should take when it's inside the `endClip`.
-- **transitionSrc**: The GLSL code that defines the transition effect, which, in this case, will be the cross fade example shown above.
-
-Here’s how to add a transition:
+Before applying a transition to clips, you must first load it into the Library:
 
 ```typescript
-import { Transition } from "@rendley/sdk";
+import { Engine } from "@rendley/sdk";
 
-const crossFadeTransition = new Transition({
-  name: "Cross Fade", // Name of the transition
-  startClipId, // ID of the starting clip
-  endClipId, // ID of the ending clip
-  inDuration: 1, // Duration of the transition in the start clip
-  outDuration: 1, // Duration of the transition in the end clip
-  transitionSrc: crossFadeShaderSrc, // GLSL code for the transition
+const libraryTransitionId = await Engine.getInstance().getLibrary().addEffect({
+  id: "randomId",
+  name: "Random Effect",
+  transitionSrc: shaderSrc, // GLSL code for the transition
+  serializable: true,
+  properties: {}, //  A dictionary of uniforms that can be used in the fragment shader.
 });
+```
 
-// Add the transition to the layer
-layer.addTransition(crossFadeTransition);
+::: info
+The `serializable` property determines whether the transition will be included in the serialized state of the project. If set to false, you'll need to re-load the transition using the [`onSetupLibrary`](/getting-started/library.md#handling-missing-assets) callback during project initialization.
+:::
+
+Once the transition is added to the Library, you can apply it to a layer:
+
+```typescript
+const layer = Engine.getInstance().getTimeline().getLayerById(layerId);
+
+layer.addTransition({
+  startClipId: "clipA",
+  endClipId: "clipB",
+  inDuration: 1.0, // Duration in seconds within the start clip
+  outDuration: 1.0, // Duration in seconds within the end clip
+  transitionId: libraryTransitionId,
+});
 ```
 
 ## Removing a Transition
@@ -45,5 +51,5 @@ layer.addTransition(crossFadeTransition);
 To remove a transition, call the `removeTransition` method with the ID of the transition you want to remove:
 
 ```typescript
-layer.removeTransition(crossFadeTransition.id);
+layer.removeTransition("randomId");
 ```

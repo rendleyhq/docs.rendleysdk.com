@@ -41,30 +41,36 @@ void main() {
 
 ## Adding Effects
 
-To create an effect, provide an ID and several parameters:
-
-- **sourceId**: A unique identifier for the effect.
-- **fragmentSrc**: The GLSL code for the effect (similar to the example above).
-- **textureWidth** and **textureHeight**: The width and height of the clip's underlying texture.
-- **frameWidth** and **frameHeight**: The dimensions of the clip's frame, specifically the element drawn on the canvas.
-- **uniforms**: A dictionary of uniforms that can be used in the fragment shader.
-
-Here’s how to add an effect:
+Before applying an effect to a clip, you must first add it to the Library:
 
 ```typescript
-import { Effect } from "@rendley/sdk";
+import { Engine } from "@rendley/sdk";
 
-clip.addEffect(
-  new Effect({
-    sourceId: "randomId", // Unique identifier for the effect
-    fragmentSrc: fragmentSrc, // GLSL code for the effect
-    textureWidth: clip.style.getRawWidth(), // Width of the underlying texture
-    textureHeight: clip.style.getRawHeight(), // Height of the underlying texture
-    frameWidth: clip.style.getRawWidth(), // Width of the clip's frame
-    frameHeight: clip.style.getRawHeight(), // Height of the clip's frame
-    uniforms: {}, // Dictionary of uniforms
-  })
-);
+const libraryEffectId = await Engine.getInstance().getLibrary().addEffect({
+  id: "randomId",
+  name: "Random Effect",
+  fragmentSrc, // // GLSL shader code
+  serializable: true,
+  properties: {}, //  A dictionary of uniforms that can be used in the fragment shader.
+});
+```
+
+::: info
+The `serializable` property determines whether the effect will be included in the serialized state of the project. If set to false, you'll need to re-load the effect using the [`onSetupLibrary`](/getting-started/library.md#handling-missing-assets) callback during project initialization.
+:::
+
+Once added to the Library, you can apply the effect to a clip:
+
+```typescript
+clip.addEffect(libraryEffectId);
+```
+
+You can also pass initial values for uniforms when applying the effect:
+
+```typescript
+clip.addEffect(libraryEffectId, {
+  uAngle: 5.0,
+});
 ```
 
 ## Removing Effects
@@ -79,7 +85,14 @@ clip.removeEffect("randomId");
 
 You can leverage several built-in uniforms in your effects, including:
 
-```glsl
-uniform float uTime; // Current time in seconds
-uniform vec2 uDimensions; // Clip's frame width and height
-```
+| **Uniform**   | **Type**    | **Description**                                                               |
+| ------------- | ----------- | ----------------------------------------------------------------------------- |
+| `uTime`       | `float`     | Time in seconds since the clip's startTime                                    |
+| `uSampler`    | `sampler2D` | The source texture to which the effect is being applied.                      |
+| `outputFrame` | `vec4`      | The output frame's x, y, width, and height in pixels.                         |
+| `inputSize`   | `vec4`      | Dimensions of the input texture: `(width, height, 1/width, 1/height)`.        |
+| `resolution`  | `vec2`      | The resolution is the ratio of screen (CSS) pixels to real pixels.            |
+| `inputPixel`  | `vec4`      | Pixel size of the input: `(1/width, 1/height, width, height)`.                |
+| `inputClamp`  | `vec4`      | Clamping boundaries for the input texture to prevent sampling outside bounds. |
+
+You can learn more about these uniforms [here](https://pixijs.download/v6.0.1/docs/PIXI.Filter.html).
