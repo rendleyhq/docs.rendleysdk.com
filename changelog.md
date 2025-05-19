@@ -1,5 +1,44 @@
 # Changelog
 
+## [1.11.4] - 2025-05-19
+
+### Added
+
+- Support for undo/redo functionality in animations
+
+### Fixed
+
+- Fixed hvc1.1.6.L120.b0 on Safari
+- Fixed issue where flushing was not being properly awaited
+- Minor fix related to render closure handling
+- Improved compatibility with certain HEVC codecs on Chrome (macOS)
+
+## [1.11.3] - 2025-05-13
+
+## Fixed
+
+- Fixed some codecs not being able to seek on render
+
+## [1.11.2] - 2025-05-01
+
+### Added
+
+- Added settings to disable WebCodecs based rendering
+
+### Fixed
+
+- Fixed animation properties not getting reset on removal
+- Added forced update to animation when setting/removing animation properties
+- Fixed transition end clip flipping on rendering
+- Fixed clip selection during transition
+
+## [1.11.1] - 2025-04-23
+
+### Fixed
+
+- Removed test code that was disabling the transparency rendering
+- Reverted seek fix that was causing the newly added media to not render a preview
+
 ## [1.11.0] - 2025-04-21
 
 ### Added

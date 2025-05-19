@@ -1,5 +1,34 @@
 # Changelog
 
+## [1.8.0] - 2025-05-19
+
+### Added
+
+- Guidelines for aligning clips on the canvas
+- Animation presets for clips
+- Controls to change audio volume for video and audio clips
+- Display all the buit-in effects
+
+### Changed
+
+- Updated `@rendley/sdk` to version 1.11.4
+- Updated `@stencil/core` to version 4.31.0
+- Updated `@stencil/sass` to version 3.2.1
+
+### Fixed
+
+- Fixed Hot Module Replacement
+
+## [1.7.3] - 2025-05-05
+
+### Changed
+
+- Updated `@rendley/sdk` to version 1.11.2
+
+### Fixed
+
+- Fixed loading native filters, effects and transitions
+
 ## [1.7.2] - 2025-04-21
 
 ### Added
