@@ -47,7 +47,7 @@ await layer.addClip({
 });
 ```
 
-::: details List of Supported Formats
+::: details List of Supported Formats {open}
 | Format | Support |
 | ------ | :-----: |
 | JPEG | ✅ |
@@ -73,7 +73,7 @@ await layer.addClip({
 The duration of the video clip is inferred from the media data. If you want to modify it, you can use trimming.
 :::
 
-::: details List of Supported Formats
+::: details List of Supported Formats {open}
 | Format | Support |
 | ------ | :-----: |
 | MP4 | ✅ |
@@ -99,7 +99,7 @@ await layer.addClip({
 The duration of the audio clip is inferred from the media data. If you want to modify it, you can use trimming.
 :::
 
-::: details List of Supported Formats
+::: details List of Supported Formats {open}
 | Format | Support |
 | ------ | :-----: |
 | MP3 | ✅ |
@@ -140,7 +140,7 @@ await layer.addClip({
 });
 ```
 
-::: details List of Supported Shapes
+::: details List of Supported Shapes {open}
 | Shape | Support |
 | ------ | :-----: |
 | Rectangle | ✅ |
@@ -231,7 +231,7 @@ await layer.addClip(lottieClip);
 
 If you want to configure the composition, you can use the built-in system for working with properties. It requires a JSON file storing the properties of the composition.
 
-::: details Example `properties.json` file
+::: details Example `properties.json` file {open}
 
 ```json
 [

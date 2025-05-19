@@ -30,7 +30,7 @@ The SDK leverages methods from the Storage Provider when uploading assets and lo
 
 To implement your own custom storage solution, extend the [`StorageProviderBase`](https://docs.rendley.com/api-reference/classes/StorageProviderBase.html) class. Below is an example demonstrating how to create a custom storage solution:
 
-::: details Example Implementation
+::: details Example Implementation {open}
 
 ```typescript
 import {

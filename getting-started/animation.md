@@ -98,7 +98,7 @@ The animation controller prioritizes the In, Out, and Loop animations in that or
 
 ## Example Animation
 
-::: details Example
+::: details Example {open}
 
 ```typescript
 import {

@@ -2,7 +2,7 @@
 
 With WebGL, we can utilize GLSL shaders to create advanced [effects](https://docs.rendley.com/api-reference/classes/Effect.html) that are computed directly on the GPU, ensuring high performance. An effect can range from making the clip move in waves to applying a blur. You can apply these effects to any clips added to the composition.
 
-::: details Example: Glow Effect
+::: details Example: Glow Effect {open}
 
 ```glsl
 precision highp float;

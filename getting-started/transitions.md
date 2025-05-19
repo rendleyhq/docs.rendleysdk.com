@@ -2,7 +2,7 @@
 
 Utilizing WebGL, we can create advanced transitions using GLSL shaders that are computed directly on the GPU, ensuring high performance. [Transitions](https://docs.rendley.com/api-reference/classes/Transition.html) are typically applied at the layer level, as they affect clips that reside on the same layer.
 
-::: details Example: Cross Fade Transition
+::: details Example: Cross Fade Transition {open}
 
 ```glsl
 vec4 transition(vec2 uv) {
