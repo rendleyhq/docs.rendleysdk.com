@@ -1,5 +1,42 @@
 # Changelog
 
+## [1.11.5] - 2025-06-08
+
+### Added
+
+- Added the following built-in effects:
+  - Adjustment
+  - Advanced Bloom
+  - Ascii
+  - Bevel
+  - Bloom
+  - Blur
+  - Bulge Pinch
+  - Color Overlay
+  - Color Replacement
+  - Cross Hatch
+  - Crt
+  - Dot
+  - Drop Shadow
+  - Emboss
+  - Godray
+  - HSL Adjustment
+  - Motion Blur
+  - Old Film
+  - Outline
+  - Pixelate
+  - Radial Blur
+  - Reflection
+  - RGB Split
+  - Shockwave
+  - Tilt Shift
+  - Twist
+  - Zoom Blur
+
+### Fixed
+
+- Fixed rendering rotated filters
+
 ## [1.11.4] - 2025-05-19
 
 ### Added

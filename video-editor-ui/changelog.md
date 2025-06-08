@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.8.1] - 2025-06-08
+
+### Added
+
+- Added support for effects controls
+- Displayed all built-in effects
+
+### Changed
+
+- Updated `@rendley/sdk` to version 1.11.5
+
+### Fixed
+
+- Added throttle when changing color in color picker
+- Removed the input validation from inside the `onChange` event
+- Fixed guidelines breaking when dragging subtitles
+
 ## [1.8.0] - 2025-05-19
 
 ### Added
