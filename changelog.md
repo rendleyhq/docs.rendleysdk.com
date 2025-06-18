@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.11.6] - 2025-06-18
+
+### Added
+
+- Added optimized Glow and Chroma Key effect
+
+## Fixed
+
+- Fixed audio and video sometimes not getting reset to the correct position when seeking
+- Fixed animation incorrect loop time when a in/out animation was applied and removed
+- Fixed bulge default radius
+- Fixed Filter antialiasing
+- Multiple fixes for processing lock flag on Audio and Video clip that sometimes was causing a lock to happen making playback and rendering impossible
+- The remote validation is enabled by default now!
+
 ## [1.11.5] - 2025-06-08
 
 ### Added

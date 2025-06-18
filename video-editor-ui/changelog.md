@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.8.3] - 2025-06-15
+
+### Added
+
+- Added labels when hovering over transitions, effects, filters, animations
+
+### Changed
+
+- Render filmstrip in timeline when possible
+- Pause playback when there are changes in the SDK
+- Updated `@rendley/sdk` to version 1.11.6
+
+### Fixed
+
+- Syncing transitions in timeline after zoom changes
+- Do not display transition placeholder between audio clips
+
+## [1.8.2] - 2025-06-12
+
+### Fixed
+
+- Fixed audio panel crashing for non audio clips
+
 ## [1.8.1] - 2025-06-08
 
 ### Added
