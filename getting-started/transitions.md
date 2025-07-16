@@ -19,13 +19,15 @@ Before applying a transition to clips, you must first load it into the Library:
 ```typescript
 import { Engine } from "@rendley/sdk";
 
-const libraryTransitionId = await Engine.getInstance().getLibrary().addEffect({
-  id: "randomId",
-  name: "Random Effect",
-  transitionSrc: shaderSrc, // GLSL code for the transition
-  serializable: true,
-  properties: {}, //  A dictionary of uniforms that can be used in the fragment shader.
-});
+const libraryTransitionId = await Engine.getInstance()
+  .getLibrary()
+  .addTransition({
+    id: "randomId",
+    name: "Random Transition",
+    transitionSrc: shaderSrc, // GLSL code for the transition
+    serializable: true,
+    properties: {}, //  A dictionary of uniforms that can be used in the fragment shader.
+  });
 ```
 
 ::: info
