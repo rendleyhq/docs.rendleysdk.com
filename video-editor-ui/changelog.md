@@ -1,6 +1,45 @@
 # Changelog
 
-## [1.8.3] - 2025-06-15
+## [1.8.8] - 2025-07-22
+
+### Added
+
+- Added the ability to click on clips that overlap selected clips
+
+### Changed
+
+- Closed the rendering modal when rendering is cancelled
+- Updated `@rendley/sdk` to version 1.11.12
+
+### Fixed
+
+- Fixed automatic loading of animations
+
+## [1.8.7] - 2025-07-08
+
+### Fixed
+
+- Fixed timeline getting paused on playback when subtitles change text
+
+## [1.8.6] - 2025-06-27
+
+### Fixed
+
+- Fixed animation serialization
+
+## [1.8.5] - 2025-06-19
+
+### Changed
+
+- Updated `@rendley/sdk` to version 1.11.8
+
+## [1.8.4] - 2025-06-18
+
+### Changed
+
+- Updated `@rendley/sdk` to version 1.11.7
+
+## [1.8.3] - 2025-06-18
 
 ### Added
 

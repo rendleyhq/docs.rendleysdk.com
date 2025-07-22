@@ -1,5 +1,47 @@
 # Changelog
 
+## [1.11.12] - 2025-07-19
+
+## Added
+
+- Added renderCancelFailTimeout settings to set the timeout for the failsafe of the cancelExport method
+
+## [1.11.11] - 2025-07-19
+
+## Added
+
+- Ability to cancel render with Engine::cancelExport()
+
+- Improved adjustment filter to include vibrance and hue
+
+## [1.11.10] - 2025-07-14
+
+## Fixed
+
+- Fixed loadSerializedData in Timeline to proper init the layers/clips and inform the UI of the changes
+
+### Added
+
+- Exposed createMediaHash function
+
+## [1.11.9] - 2025-06-19
+
+## Fixed
+
+- Fixed Media removal not removing all dependent clips
+
+## [1.11.8] - 2025-06-19
+
+## Fixed
+
+- Fixed removal of audio/video clips not stopping the playback (usually during timeline play)
+
+## [1.11.7] - 2025-06-18
+
+## Fixed
+
+- Fixed never resolving seek issue for audio and video clips
+
 ## [1.11.6] - 2025-06-18
 
 ### Added
