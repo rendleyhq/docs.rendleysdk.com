@@ -1,6 +1,6 @@
 # Settings
 
-You can configure global [settings](https://docs.rendley.com/api-reference/classes/Settings.html) for the Rendley SDK, including output format, bitrate, decoding acceleration, and more.
+You can configure global [settings](https://docs.rendleysdk.com/api-reference/classes/Settings.html) for the Rendley SDK, including output format, bitrate, decoding acceleration, and more.
 
 ## Show Rendering Preview
 

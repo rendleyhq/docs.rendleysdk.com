@@ -1,6 +1,6 @@
 # Library
 
-The [Library](https://docs.rendley.com/api-reference/classes/Library.html) is where all uploaded assets, such as: media, filters, effects, transitions, and subtitles are stored and managed. All assets must be uploaded to the Library before they can be referenced in compositions.
+The [Library](https://docs.rendleysdk.com/api-reference/classes/Library.html) is where all uploaded assets, such as: media, filters, effects, transitions, and subtitles are stored and managed. All assets must be uploaded to the Library before they can be referenced in compositions.
 
 ::: info
 Uploading assets to the Library only loads them into memory. They are not saved to persistent storage or included in the serialized project unless explicitly stored.
@@ -57,7 +57,7 @@ await Engine.getInstance().getLibrary().storeAllMedia();
 ```
 
 ::: info
-[`storeAllMedia`](https://docs.rendley.com/api-reference/classes/Library.html#storeallmedia) stores only those assets that have not already been uploaded. Learn how to configure storage [here](/getting-started/storage.md).
+[`storeAllMedia`](https://docs.rendleysdk.com/api-reference/classes/Library.html#storeallmedia) stores only those assets that have not already been uploaded. Learn how to configure storage [here](/getting-started/storage.md).
 :::
 
 ## Set Custom Metadata for Assets
@@ -69,7 +69,7 @@ const mediaData = Engine.getInstance().getLibrary().getMediaById(mediaId);
 mediaData.setCustomData("MY_KEY", "MY_VALUE");
 ```
 
-The [`setCustomData`](https://docs.rendley.com/api-reference/classes/MediaData.html#setcustomdata) method accepts an optional third parameter to determine whether to overwrite the existing data if the key already exists.
+The [`setCustomData`](https://docs.rendleysdk.com/api-reference/classes/MediaData.html#setcustomdata) method accepts an optional third parameter to determine whether to overwrite the existing data if the key already exists.
 
 ## Get Custom Metadata from Assets
 
@@ -213,7 +213,7 @@ const transitionId = await Engine.getInstance()
 
 ### Handling Missing Assets
 
-When deserializing the project, use the [`onSetupLibrary`](https://docs.rendley.com/api-reference/interfaces/EngineOptions.html#onsetuplibrary) callback during engine initialization. This callback provides the list of missing assets so they can be programmatically reloaded into the Library:
+When deserializing the project, use the [`onSetupLibrary`](https://docs.rendleysdk.com/api-reference/interfaces/EngineOptions.html#onsetuplibrary) callback during engine initialization. This callback provides the list of missing assets so they can be programmatically reloaded into the Library:
 
 ```typescript
 import { Engine } from "@rendley/sdk";

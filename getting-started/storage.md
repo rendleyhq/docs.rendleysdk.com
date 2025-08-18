@@ -28,7 +28,7 @@ The SDK leverages methods from the Storage Provider when uploading assets and lo
 
 ### Creating a Storage Provider
 
-To implement your own custom storage solution, extend the [`StorageProviderBase`](https://docs.rendley.com/api-reference/classes/StorageProviderBase.html) class. Below is an example demonstrating how to create a custom storage solution:
+To implement your own custom storage solution, extend the [`StorageProviderBase`](https://docs.rendleysdk.com/api-reference/classes/StorageProviderBase.html) class. Below is an example demonstrating how to create a custom storage solution:
 
 ::: details Example Implementation {open}
 
@@ -119,11 +119,11 @@ await Engine.getInstance().init({
 });
 ```
 
-The order of the storage providers is crucial, as it dictates the sequence in which assets are uploaded and loaded. In the example above, the file will first be uploaded to IndexedDB, followed by the `MyCustomStorageSolution`. When loading assets into the project, the SDK attempts to resolve each source in order, starting with [`StorageIndexedDB`](https://docs.rendley.com/api-reference/classes/StorageIndexedDB.html).
+The order of the storage providers is crucial, as it dictates the sequence in which assets are uploaded and loaded. In the example above, the file will first be uploaded to IndexedDB, followed by the `MyCustomStorageSolution`. When loading assets into the project, the SDK attempts to resolve each source in order, starting with [`StorageIndexedDB`](https://docs.rendleysdk.com/api-reference/classes/StorageIndexedDB.html).
 
 ### Uploading Assets
 
-To upload an asset to the library, use the [`mediaData.store()`](https://docs.rendley.com/api-reference/classes/MediaData.html#store) function. This triggers the upload workflow, handling the storage process according to your configured storage solution(s). Additionally, you can use the [`mediaData.restore()`](https://docs.rendley.com/api-reference/classes/MediaData.html#restore) method to reload or recover assets when needed.
+To upload an asset to the library, use the [`mediaData.store()`](https://docs.rendleysdk.com/api-reference/classes/MediaData.html#store) function. This triggers the upload workflow, handling the storage process according to your configured storage solution(s). Additionally, you can use the [`mediaData.restore()`](https://docs.rendleysdk.com/api-reference/classes/MediaData.html#restore) method to reload or recover assets when needed.
 
 ```typescript
 import { Engine } from "@rendley/sdk";

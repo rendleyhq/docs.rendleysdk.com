@@ -25,7 +25,7 @@ pnpm add @rendley/sdk
 
 ## Get a License
 
-To use the SDK, you need a license. You can obtain one by visiting [our website](https://app.rendley.com/).
+To use the SDK, you need a license. You can obtain one by visiting [our website](https://app.rendleysdk.com/).
 
 ## Initialize the Engine
 

@@ -36,11 +36,11 @@ export default defineConfig({
     ],
 
     // Canonical URL
-    ["link", { rel: "canonical", href: "https://docs.rendley.com" }],
+    ["link", { rel: "canonical", href: "https://docs.rendleysdk.com" }],
 
     // Open Graph Meta Tags
     ["meta", { property: "og:type", content: "website" }],
-    ["meta", { property: "og:url", content: "https://docs.rendley.com" }],
+    ["meta", { property: "og:url", content: "https://docs.rendleysdk.com" }],
     [
       "meta",
       {
@@ -59,7 +59,7 @@ export default defineConfig({
     ],
     [
       "meta",
-      { property: "og:image", content: "https://docs.rendley.com/og.jpg" },
+      { property: "og:image", content: "https://docs.rendleysdk.com/og.jpg" },
     ],
     ["meta", { property: "og:image:width", content: "1200" }],
     ["meta", { property: "og:image:height", content: "630" }],
@@ -98,7 +98,7 @@ export default defineConfig({
     ],
     [
       "meta",
-      { name: "twitter:image", content: "https://docs.rendley.com/og.jpg" },
+      { name: "twitter:image", content: "https://docs.rendleysdk.com/og.jpg" },
     ],
 
     // Google Analytics
@@ -133,7 +133,7 @@ export default defineConfig({
   ],
 
   sitemap: {
-    hostname: "https://docs.rendley.com/",
+    hostname: "https://docs.rendleysdk.com/",
   },
 
   markdown: {
@@ -163,7 +163,7 @@ export default defineConfig({
     nav: [
       {
         text: "API Reference",
-        link: "https://docs.rendley.com/api-reference/index.html",
+        link: "https://docs.rendleysdk.com/api-reference/index.html",
       },
     ],
 
@@ -284,10 +284,10 @@ export default defineConfig({
         items: [
           {
             text: "API Reference",
-            link: "https://docs.rendley.com/api-reference/index.html",
+            link: "https://docs.rendleysdk.com/api-reference/index.html",
           },
-          { text: "Playground", link: "https://playground.rendley.com" },
-          { text: "Blog", link: "https://blog.rendley.com" },
+          { text: "Playground", link: "https://playground.rendleysdk.com" },
+          { text: "Blog", link: "https://blog.rendleysdk.com" },
           { text: "Discord", link: "https://discord.gg/BwdeFFEVXR" },
           {
             text: "Report issues",

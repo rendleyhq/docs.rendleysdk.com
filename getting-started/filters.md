@@ -1,6 +1,6 @@
 # Filters
 
-Our [filters](https://docs.rendley.com/api-reference/classes/Filter.html) utilize **Lookup Tables (LUTs)**, offering precise control over the color grading process. LUTs are widely used in the cinematic industry and can be exported from tools like Adobe Photoshop.
+Our [filters](https://docs.rendleysdk.com/api-reference/classes/Filter.html) utilize **Lookup Tables (LUTs)**, offering precise control over the color grading process. LUTs are widely used in the cinematic industry and can be exported from tools like Adobe Photoshop.
 
 ## Adding Filters
 
@@ -35,7 +35,7 @@ clip.removeFilter(filterId);
 
 ## Adjust Filter Intensity
 
-To adjust the strength of the applied filter, use the [`setIntensity`](https://docs.rendley.com/api-reference/classes/Filter.html#setintensity) method:
+To adjust the strength of the applied filter, use the [`setIntensity`](https://docs.rendleysdk.com/api-reference/classes/Filter.html#setintensity) method:
 
 ```typescript
 const filter = clip.getFilters()[0];

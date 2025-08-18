@@ -3,7 +3,7 @@
 Refer to the list below for potential issues you might encounter with the SDK. If you have a different issue, please open an issue on [GitHub](https://github.com/rendleyhq/rendley-sdk-issues/issues).
 
 ::: details You need to have a valid license to use this function
-This message indicates that your license has expired, and you need to obtain a new one to continue using the SDK. You can get a new license for free on [our website](https://app.rendley.com/).
+This message indicates that your license has expired, and you need to obtain a new one to continue using the SDK. You can get a new license for free on [our website](https://app.rendleysdk.com/).
 :::
 
 ::: details Engine is already initialized. Use Engine.isInitialized() to check if the instance was already created

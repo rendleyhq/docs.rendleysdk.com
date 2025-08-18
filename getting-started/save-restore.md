@@ -1,6 +1,6 @@
 # Save & Restore the Project
 
-The SDK supports [serialization](https://docs.rendley.com/api-reference/classes/Engine.html#serialize) and [deserialization](https://docs.rendley.com/api-reference/classes/Engine.html#deserialize), enabling you to store the composition in a database and retrieve it later.
+The SDK supports [serialization](https://docs.rendleysdk.com/api-reference/classes/Engine.html#serialize) and [deserialization](https://docs.rendleysdk.com/api-reference/classes/Engine.html#deserialize), enabling you to store the composition in a database and retrieve it later.
 
 ## Serialization
 

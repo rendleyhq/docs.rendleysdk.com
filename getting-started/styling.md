@@ -1,8 +1,8 @@
 # Styling
 
-When styling a clip, you can modify various properties such as position, size, rotation, border radius, and more. Most clips share similar [styling](https://docs.rendley.com/api-reference/classes/ClipStyle.html) attributes, however, some clips, like text clips, have additional properties that can be adjusted, including font size, color, alignment, and others.
+When styling a clip, you can modify various properties such as position, size, rotation, border radius, and more. Most clips share similar [styling](https://docs.rendleysdk.com/api-reference/classes/ClipStyle.html) attributes, however, some clips, like text clips, have additional properties that can be adjusted, including font size, color, alignment, and others.
 
-The clips with more than the default styling properties are the [**Text**](https://docs.rendley.com/api-reference/classes/TextStyle.html) and [**Shape**](https://docs.rendley.com/api-reference/classes/ShapeStyle.html) clips.
+The clips with more than the default styling properties are the [**Text**](https://docs.rendleysdk.com/api-reference/classes/TextStyle.html) and [**Shape**](https://docs.rendleysdk.com/api-reference/classes/ShapeStyle.html) clips.
 
 ## Example
 

@@ -36,7 +36,7 @@ After installing the dependencies, open the `index.html` file in your IDE and co
 
 ### Get a Free License
 
-You can obtain a license by visiting [our website](https://app.rendley.com/). Replace `YOUR_LICENSE_NAME` and `YOUR_LICENSE_KEY` with your actual license information.
+You can obtain a license by visiting [our website](https://app.rendleysdk.com/). Replace `YOUR_LICENSE_NAME` and `YOUR_LICENSE_KEY` with your actual license information.
 
 ### Get a Pexels API Key
 

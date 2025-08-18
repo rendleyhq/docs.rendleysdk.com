@@ -1,12 +1,12 @@
 # Engine
 
-The [Engine](https://docs.rendley.com/api-reference/classes/Engine.html) is the main entry point for our SDK. It is a singleton instance, ensuring that only one instance of the Engine exists at any given time.
+The [Engine](https://docs.rendleysdk.com/api-reference/classes/Engine.html) is the main entry point for our SDK. It is a singleton instance, ensuring that only one instance of the Engine exists at any given time.
 
 It is responsible for initializing the SDK, serializing the project's output, loading new projects, and providing getters for easy access to other parts of the system.
 
 ## Initialization
 
-To initialize the Engine, you need to provide a license and a display configuration. You can obtain a license by visiting [our website](https://app.rendley.com/).
+To initialize the Engine, you need to provide a license and a display configuration. You can obtain a license by visiting [our website](https://app.rendleysdk.com/).
 
 ```typescript{5-6}
 import { Engine } from "@rendley/sdk";
@@ -91,5 +91,5 @@ const engine = Engine.getInstance().init({
 ```
 
 ::: info
-If you need to support multiple subdomains, please contact us at support@rendley.com for assistance in setting it up.
+If you need to support multiple subdomains, please contact us at support@rendleysdk.com for assistance in setting it up.
 :::

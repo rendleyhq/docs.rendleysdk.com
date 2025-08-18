@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://docs.rendley.com
+Host: https://docs.rendleysdk.com
 
 # Sitemaps
-Sitemap: https://docs.rendley.com/sitemap.xml
+Sitemap: https://docs.rendleysdk.com/sitemap.xml

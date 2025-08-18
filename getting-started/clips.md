@@ -1,6 +1,6 @@
 # Clips
 
-A [clip](https://docs.rendley.com/api-reference/classes/Clip.html) represents the smallest unit of a composition. It can be a text, image, video, audio, or even a custom HTML element.
+A [clip](https://docs.rendleysdk.com/api-reference/classes/Clip.html) represents the smallest unit of a composition. It can be a text, image, video, audio, or even a custom HTML element.
 
 ## Create a Clip
 
@@ -37,7 +37,7 @@ const mediaId = await Engine.getInstance()
 
 ## Image
 
-The [Image](https://docs.rendley.com/api-reference/classes/ImageClip.html) clip is responsible for loading and displaying images.
+The [Image](https://docs.rendleysdk.com/api-reference/classes/ImageClip.html) clip is responsible for loading and displaying images.
 
 ```typescript
 await layer.addClip({
@@ -60,7 +60,7 @@ await layer.addClip({
 
 ## Video
 
-The [Video](https://docs.rendley.com/api-reference/classes/VideoClip.html) clip is responsible for loading and displaying videos.
+The [Video](https://docs.rendleysdk.com/api-reference/classes/VideoClip.html) clip is responsible for loading and displaying videos.
 
 ```typescript
 await layer.addClip({
@@ -86,7 +86,7 @@ The duration of the video clip is inferred from the media data. If you want to m
 
 ## Audio
 
-The [Audio](https://docs.rendley.com/api-reference/classes/AudioClip.html) clip is responsible for loading and playing audio.
+The [Audio](https://docs.rendleysdk.com/api-reference/classes/AudioClip.html) clip is responsible for loading and playing audio.
 
 ```typescript
 await layer.addClip({
@@ -111,7 +111,7 @@ The duration of the audio clip is inferred from the media data. If you want to m
 
 ## GIF
 
-The [Gif](https://docs.rendley.com/api-reference/classes/GifClip.html) clip is responsible for rendering GIFs. It can also be used for rendering stickers, as it supports transparency.
+The [Gif](https://docs.rendleysdk.com/api-reference/classes/GifClip.html) clip is responsible for rendering GIFs. It can also be used for rendering stickers, as it supports transparency.
 
 ```typescript
 await layer.addClip({
@@ -122,7 +122,7 @@ await layer.addClip({
 
 ## Shape
 
-The [Shape](https://docs.rendley.com/api-reference/classes/ShapeClip.html) clip is responsible for rendering various shapes such as rectangles, circles, triangles, and ellipses. If you need a shape in your composition, it is better to use this clip instead of using an image.
+The [Shape](https://docs.rendleysdk.com/api-reference/classes/ShapeClip.html) clip is responsible for rendering various shapes such as rectangles, circles, triangles, and ellipses. If you need a shape in your composition, it is better to use this clip instead of using an image.
 
 ```typescript
 await layer.addClip({
@@ -151,7 +151,7 @@ await layer.addClip({
 
 ## Text
 
-The [Text](https://docs.rendley.com/api-reference/classes/TextClip.html) clip is responsible for creating and displaying text elements.
+The [Text](https://docs.rendleysdk.com/api-reference/classes/TextClip.html) clip is responsible for creating and displaying text elements.
 
 ```typescript
 const textClip = await layer.addClip({
@@ -187,7 +187,7 @@ const myText = textClip.getText();
 
 ## HTML Text
 
-If you have a custom HTML text element, you can use the [HtmlText](https://docs.rendley.com/api-reference/classes/HtmlTextClip.html) clip. Everything will be rendered inside a span element, allowing for additional styling.
+If you have a custom HTML text element, you can use the [HtmlText](https://docs.rendleysdk.com/api-reference/classes/HtmlTextClip.html) clip. Everything will be rendered inside a span element, allowing for additional styling.
 
 ```typescript
 await layer.addClip({
@@ -213,7 +213,7 @@ You can also include divs and other HTML elements.
 
 ## Lottie
 
-A [Lottie](https://docs.rendley.com/api-reference/classes/LottieClip.html) clip is a special type that allows loading Adobe After Effects compositions. Besides loading the composition, it includes a system for modifying its elements. The assets URL can be inferred from the data of the composition or provided manually via the `assetsUrl` property.
+A [Lottie](https://docs.rendleysdk.com/api-reference/classes/LottieClip.html) clip is a special type that allows loading Adobe After Effects compositions. Besides loading the composition, it includes a system for modifying its elements. The assets URL can be inferred from the data of the composition or provided manually via the `assetsUrl` property.
 
 ```typescript
 import { LottieClip } from "@rendley/sdk";
@@ -286,7 +286,7 @@ If you want to learn how to export an After Effects composition, check out this 
 
 ## Custom
 
-Each of the clips above is an extension of a [base clip class](https://docs.rendley.com/api-reference/classes/Clip.html). We have [exposed](https://docs.rendley.com/api-reference/classes/CustomClip.html) it for you to create your own implementations. A good example of a custom clip could be a Waveform clip that animates based on audio.
+Each of the clips above is an extension of a [base clip class](https://docs.rendleysdk.com/api-reference/classes/Clip.html). We have [exposed](https://docs.rendleysdk.com/api-reference/classes/CustomClip.html) it for you to create your own implementations. A good example of a custom clip could be a Waveform clip that animates based on audio.
 
 ::: info
 If you want to learn how to create a custom clip, check out this [guide](/in-progress.md).
