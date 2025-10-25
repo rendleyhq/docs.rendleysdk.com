@@ -1,5 +1,358 @@
 # Changelog
 
+## [1.12.10] - 2025-10-25
+
+## Added
+
+- Added probeMedia method to Library
+
+- Updated `LottieClip` to support Gradient Fill colors and image properties
+
+- Added setPlaybackSpeed to `LottieClip`
+
+- Added ping-pong wrap mode for `LottieClip`
+
+## Fixed
+
+- Fixed texture not getting updated on lottie image replace
+
+- Fixed incorrect audio silence in some cases on audio mix
+
+- Fixed `VideoClip` and `AudioClip` setPlaybackSpeed preserve trimmed duration
+
+- Fixed `AudioClip` pushing the clip on setPlaybackSpeed adjustLayout
+
+## Changed
+
+- Updated audio mix to sync better and avoid popping or gaps
+
+## [1.12.9] - 2025-10-18
+
+## Added
+
+- Added noise effect (**Important**: Who uses self hosted cdn, update the `sdk/assets/effects_v2` folder!)
+
+## Fixed
+
+- Fixed adjustLayout stopping too early
+
+## [1.12.8] - 2025-10-17
+
+## Added
+
+- Added UndoManager serialize/deserialize methods
+
+## Fixed
+
+- Fixed audio split getting an error when generating a new id
+
+- Fixed adjustment clip causing setVisible events and making host react to it, like pausing etc...
+
+## [1.12.7] - 2025-10-11
+
+## Added
+
+- Added name to Layer
+
+- Added Layer property update event
+
+- Improved chroma key, added luminosity influence
+
+- Added undo/redo to effects properties
+
+- Added support for subtitles precise timings (see: `TextBlock::wordTimings`, only taken into consideration if words length matches timings length, otherwise the old word size interpolation method is used)
+
+- Added VideoClip freeze time (see: `VideoClip::setFreezeTime`)
+
+- Added `VideoClip::extractFrameAsBase64Image`
+
+## Fixed
+
+- Fixed adjustClipsLayout undo/redo
+
+- Removed init undo records
+
+- Fixed clip id not getting changed in the dependencies
+
+- Fixed syncAllMedia to check the difference per controller but not as an union
+
+- Fixed layer removal undo index
+
+- Fixed missing events for Layer Update
+
+- Fixed createLayer initialization
+
+- Fixed SubtitlesManager convertSrt not working on other float locales
+
+- Improved indexed DB error handling
+
+- Improved storage controller error handling
+
+- Fixed warning on deserialization
+
+- Fixed filmstrip not getting generated on undo/redo
+
+- Fixed error when replacing media before filmstrip finished
+
+- Added missing events from Clip, AudioClip and VideoClip setters
+
+- Exported Engine schema
+
+- Fixed LottieClip undo order
+
+- Added cloned return values to Effect to avoid mutation
+
+- Made recorded data in UndoManager cloned to avoid mutation
+
+## Changed
+
+- Changed Undo/Redo performed events to send the actual undo group not just the name
+
+## [1.12.6] - 2025-09-29
+
+## Added
+
+- Added unsafe bypass for pixi
+
+## [1.12.5] - 2025-09-29
+
+## Added
+
+- Added `SvgClip`, svg images automatically spawn now svg clips, make sure to parse them in your editor (type: SvgClip) or integrate the latest Rendley UI changes. Can be resized without loosing details up to 4096x4096.
+
+- Added zip support (check ZipArchive class)
+
+- Added fileExists/dirExists ffmpeg methods
+
+- Updated extractAudio to support creating a new audio media data
+
+## Fixed
+
+- Fixed `TextClip` constructor/init order causing styles to be cached to early
+
+- Fixed crop on media replacement
+
+- Fixed Engine.reset
+
+- Added Firefox fix for rotated videos
+
+- Updated media data to not overwrite type with none on missing media
+
+## Changed
+
+- Migrated endpoints to rendleysdk.com
+
+## [1.12.4] - 2025-09-16
+
+## Added
+
+- Added Timeline volume
+- Added custom data to fonts in `FontRegistry` (internal)
+
+- Added missing font information to the `Engine::onSetupLibrary` callback (currently supports Text and HtmlText missing fonts)
+
+- Added media internal `metadata` to `MediaData::metadata`, (metaception: We need to go deeper!)
+
+## Changed
+
+- Changed `Library::extractAudioFromMedia` to support track number
+
+## [1.12.3] - 2025-09-12
+
+## Fixed
+
+- Fixed some audio channel formats fail to mix
+
+## [1.12.2] - 2025-09-09
+
+## Added
+
+- Added new settings for rendering control:
+  - `RenderVideoUseDirectFrames` - A different frame grab method that might decrease the rendering time a lot (on most devices except Mac, probably only M series are affected). Test it well before pushing to production, in our tests it could gain almost x2 speed in some cases! The backpressure can be controlled with `Settings::renderThrottleFactor`. `Settings::renderMaxQueueSize` is not used here atm
+  - `DecoderUseSeparateWorke`r` - Decode videos with individual workers (might help when the compositions have a lot of videos on multiple layers, but doesn't usually speed a lot, might actually make the rendering slower most common cases because of worker's creation/destruction friction). Don't use it if you don't see any improvements
+  - `DecoderUseSubImage` - While video frames likes more new textures, this is an option that can be set to just fill the old texture instead of creating a new one, benchmark your own case scenario and see if it might improve the rendering. Don't use it if you don't see any improvelements
+
+## Fixed
+
+- Fixed crop during rendering
+
+## [1.12.1] - 2025-09-08
+
+## Fixed
+
+- Fixed audio fade in/out if audio stream had a different duration than the video
+
+- Fixed audio mixing on different audio stream lengths
+
+- Fixed incorrect duration when replacing the AudioVideo clips
+
+- Fixed audio fade out duration on preview
+
+## [1.12.0] - 2025-09-06
+
+## Added
+
+- Added alternative hash function for MediaData (see: `Engine::init` -> dataHashFunction)
+
+- Added missing animation events
+
+- Added optional id to animations
+
+- Added Adjustment Clip (see: `ClipTypeEnum.ADJUSTMENT`). Transforms (Position, Scale, Rotation) are supported, but their behaviour might be a subject of change
+
+- Added `Timeline::getFrameNumberFromTime` to get the frame from specific timestamp
+
+- Added a clip postrender callback that can be used to do cleanups or state changes after rendering
+
+- Added volume fade and fade curve to `VideoClip` and `AudioClip` (see: `setVolumeFadeInDuration`, `setVolumeFadeInCurve`)`setVolumeFadeOutDuration`, `setVolumeFadeOutCurve`.
+
+- Added subtitles text block events
+
+- Added crop functionality (only video, image and gif)
+
+- Added `extractAudioClip` method to VideoClip
+
+- Added clip speed and pitch adjustments (for video and audio) (see: `setPlaybackSpeed`, `setPerservePitch`)
+  Keep in mind that setPlaybackSpeed will mutate the clip duration and startTime! Use the property flags to adjust the behaviour and call `Timeline::adjustClipsLayout` after the value is confirmed.
+  Limited to [0.25, 4] range, [0.25, 2] on Safari for now. (Safari has a buggy implementation > 2)
+
+- Added undos to volume and mute
+
+- Added volume events
+
+## Fixed
+
+- Fixed video/audio ending incorrect detection, now should be better and most of rare loops issues should disappear
+
+- Fixed Transition removal not resetting the clips visibility
+
+- Fixed filters and other clip attachements not being applied after replacing a video clip
+
+- Improved filename detection from urls
+
+- Improved transcoding log
+- Small fix to the background timer
+
+- Fixed video replacement when resolution doesn't match
+
+- Fixed a rare case of WebM videos getting errors when decoding in preview (global fix), might affect some old scenarios with a lot of small clips!
+
+- Made videos not block the playback if they're in decode error state
+
+- Improved start sync on play
+
+## Changed
+
+- Better time test alignment with frame precision
+
+- Switched to semi-manual rendering pipeline
+
+## [1.11.18] - 2025-08-20
+
+## Added
+
+- Added optional antialias on `Engine::init`, supported types: NONE, MSAA (default, as before), FXAA
+
+- Added `clipAudioMonoMixType` to the `Settings`, this sets the mono mix type to average, max, min...
+
+- Added `clipAudioMonoChannelsWeight` to the `Settings`, this sets the channels mask on mono mix (defaults to maximum stereo: [1, 1])
+
+## [1.11.17] - 2025-08-18
+
+## Added
+
+- Added optional filmstrip extraction from video files (see: `Settings::setClipVideoStoreFilmstrip`, `Settings::setClipVideoFilmstrip***`, `MediaData::getFilmstripState`, `MediaData::getFilmstripData`, `MediaData::getFilmstripDataRange`, also proxies on VideoClip::getFilmstrip\*\*\*)
+
+- Added `name` field to MediaData and Clip for non related to file, standalone name (see: `Clip/MediaData::setName`, `Clip/MediaData::getName`, `Clip::hasName`)
+  MediaData name defaults to filename on load
+
+- Added new events: `LIBRARY_MEDIA_SAMPLES_UPDATED` and `LIBRARY_MEDIA_FILMSTRIP_UPDATE`
+
+- Added `name` to `StorageMediaData` interface
+
+- Added `Library::extractAudioFromMedia` to fully extract audio track from a video as an independent media data
+
+## Fixed
+
+- Added guard on Engine destroy to wait for init to finish to avoid resources using post callbacks internals after destruction
+
+- Fixed Engine cases where projectId is ""
+
+- Fixed serialization error when animation sets the clip style to scale (0, 0)
+
+- Fixed rendering audio mix was failing if one of the media was not loaded also added multiple new guards for fail prevention
+
+## Changed
+
+- `getAudioSamples` now has an optional duration, if not set will get all the samples till the end
+
+## [1.11.16] - 2025-08-12
+
+## Fixed
+
+- Audio mix now checks for missing or incorrectly loaded media files and skips them instead of failing
+
+## [1.11.15] - 2025-08-08
+
+## Added
+
+- Added forced settings to the Engine init, this will overwrite any settings on deserialization
+
+- Added ability to store and sample audio data (see: `MediaData::getAudioSamples`, proxy `AudioClip::getAudioSamples` and `VideoClip::getAudioSamples`, `Settings::clipAudioStoreSamples`, `Settings::clipAudioSampleRate`, `Settings::clipAudioSampleForceMono`, `Settings::clipVideoStoreSamples`)
+
+## Fixed
+
+- Fixed 0 animation scale serialization NaN bug
+
+## Changed
+
+- Made `Layer::addTransition` to return the new transition id
+
+## [1.11.14] - 2025-08-05
+
+## Added
+
+- Added `Library::isProcessing` to check if the Library does any internal processing that might change it's state, like loading media, transcoding, ...
+
+- Added `Engine::isSafeToSerialize` that return true if serializing the project would not cause any issues because of some internal process (checks for `Engine::isReady` and `Library::isProcessing`)
+
+- Added setting for encoding keyframe interval `Settings::setEncoderKeyframeInterval`
+
+## Fixed
+
+- Added more failure checks to `MediaData`
+
+- Added missing event for Filter update: `CLIP_FILTER_UPDATED`
+
+- Added missing event for Lottie property update: `CLIP_LOTTIE_PROPERTY_UPDATED`
+
+## Changed
+
+## [1.11.13] - 2025-07-29
+
+## Added
+
+- Added ready state to the engine to avoid using it while it's loading/deserializing
+
+- Added basic GL blending modes to clip (see: `BlendModeEnum`)
+
+- Added `PlaceholderClip` that will be replaced with a media file after it was loaded to the library (see: `MediaData::addPlaceholderClip`)
+
+- Added `getMediaHashList` to the `StorageController`
+
+- Added `Library::syncAllMedia` that will remove or add any media that's missing from the storage providers (as a whole)
+  For example:
+  Two storage providers: StoreA and StoreB, StoreA has media A and B, and StoreB has media C.
+  If the Library has medias A, C, D, it will request media B to be removed and D to be added
+
+## Fixed
+
+- Fixed deserialization was adding new storage controllers
+
+## Changed
+
+- Deprecated `Library::storeAllMedia` in favor of `Library::syncAllMedia`
+
 ## [1.11.12] - 2025-07-19
 
 ## Added
@@ -10,7 +363,7 @@
 
 ## Added
 
-- Ability to cancel render with Engine::cancelExport()
+- Ability to cancel render with `Engine::cancelExport()`
 
 - Improved adjustment filter to include vibrance and hue
 

@@ -1,5 +1,84 @@
 # Changelog
 
+## [1.8.14] - 2025-10-25
+
+### Fixed
+
+- Fixed Lottie Panel error throwing when property is not supported
+
+## [1.8.13] - 2025-10-20
+
+### Fixed
+
+- Fix for rgba() not working because it can't operate on rgb hex value. (Author: @selfsimilar)
+- Fix for allowing custom project resolutions to be set via config JSON (Author: @selfsimilar)
+- Fix for media and effect cards' hard-coded height for non-2 column layouts (Author: @selfsimilar)
+- Fix for movable selection not removing focus from editable elements, causing undo to be paused
+- Fixed undo/redo on deserialization
+
+## [1.8.12] - 2025-10-12
+
+### Changed
+
+- Updated `@rendley/sdk` to version 1.12.7
+
+### Added
+
+- More flexible system for hiding/showing UI elements (Author: @selfsimilar)
+- High contrast option (Author: @selfsimilar)
+
+### Fixed
+
+- Fix for modal backdrop; add suppot for slots (Author: @selfsimilar)
+- Fix for panel scrollbar only visible when hovering on scrollbar area (Author: @selfsimilar)
+- Fix for light theme "surface" color (Author: @selfsimilar)
+
+## [1.8.11] - 2025-09-10
+
+### Changed
+
+- Updated `@rendley/sdk` to version 1.12.2
+
+### Fixed
+
+- Fixed the interactivity with input elements from sidebars
+
+## [1.8.10] - 2025-09-07
+
+### Added
+
+- Crop functionality
+- Fade in/out functionality
+- Audio detachment (thanks to @selfsimilar for the contribution)
+- Support for adjustment clips
+
+### Fixed
+
+- Playhead dragging offset issue
+- Clicking outside a selected element now correctly deselects it
+- Switching between configuration panels now properly triggers updates
+
+## [1.8.9] - 2025-08-05
+
+### Added
+
+- Toggled play/pause with the spacebar
+- Connected titles to undo/redo functionality
+
+### Changed
+
+- Disabled autoplay for animations
+- Updated `@rendley/sdk` to version 1.11.14
+
+### Fixed
+
+- Fixed deserialization issues causing incorrect parsing
+- Fixed panning that moved the composition unexpectedly
+- Fixed filters/effects not responding correctly after undo
+- Fixed incorrect page scrolling
+- Fixed sidebar incorrectly reacting to panel changes after undo
+- Renamed the highlighted tab in the subtitles panel
+
 ## [1.8.8] - 2025-07-22
 
 ### Added

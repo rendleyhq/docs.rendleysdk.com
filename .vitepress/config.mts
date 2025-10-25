@@ -133,7 +133,7 @@ export default defineConfig({
   ],
 
   sitemap: {
-    hostname: "https://docs.rendleysdk.com/",
+    hostname: "https://docs.rendleysdk.com",
   },
 
   markdown: {
