@@ -1,5 +1,294 @@
 # Changelog
 
+## [1.14.0] - 2026-03-05
+
+## Changed
+
+- **BREAKING-CHANGE:** Migrated the `MediaData` and `StorageProvider` workflow to blobs! Update your code to use blobs in case you have a custom provider or access MediaData data directly. Simplest migration would be data = new Uint8Array(await mediaData.mediaSource.arrayBuffer()). But this will not work on big files (>2GB+). Also if you're using `Settings::clipAudioStoreSamples` generation it will fail on big files (will be improved in the future).
+
+- Upgraded `OutputChunkHelper::readMergedChunksAsBlob` to directly construct the blob from the worker chunks (theoretically should support big files as url downloads, still OPFS flow is preferred)
+
+## Added
+
+- Added support for big files on input (doesn't work with old sha256 hash, migrate to xxhash128 or xxhash64 if needed, also some flows are not supported like internal transcoding. Everything non supported is only for big files, smaller files should work as before)
+
+- Improved memory usage
+
+- Improved SVG detection for unnamed files
+
+## Fixed
+
+- Multiple fixes for errors including during transcoding, VideoClip, AudioClip and other annoying error throws, that might disrupt your workflow
+
+- Fixed audio desync on long projects
+
+- Fixed `AdjustmentClip` issues, including rendering first frame as non processed
+
+- Fixed clip/subtitles visibility and hitTest issues when layers are hidden
+
+- Added VideoClip recover in case of crash
+
+- Fixed media probing while the browser is in the background crashing, also added a failsafe timeout
+
+- Made wasm worker getting destroyed too on Engine full destroy
+
+- Fixed layer visibility on deserialization
+
+## [1.13.0] - 2026-02-13
+
+## Changed
+
+- **BREAKING-CHANGE:** `ExportResult.blob` is now optional as in the case of multi chunk output the results might be in `ExportResult.outputChunkHelper`
+
+- `Settings::setRenderVideoUseDirectFrames` is now set to true by default (faster rendering)
+  *In case of render issues set it to false in your Engine.init `forcedSettings`*
+
+## Added
+
+- Added support for >2GB output files (chunked rendering)
+  *If you turn on this option export result will return `outputChunkHelper` that can be used to extract chunks or even save it as a whole to the disk*
+  *Avoid using the merge methods of `outputChunkHelper` as they're bounded to browser's max allocation size (ex: Chrome: 2GB) stream the chunks to the desired destination (to disk, network or any other storage)*
+
+- Added `Settings::setRenderUseChunkedOutput` and `Settings::setRenderChunkedOutputMaxSize`
+
+## Fixes
+
+- Fixed render errors sometimes not signaling the failure for the host to react
+
+## [1.12.26] - 2025-01-26
+
+## Added
+
+- Added `polygon` shape to ShapeClip (use null to separate multiple shapes)
+
+- Added `bezier` shape to ShapeClip (use null to separate multiple shapes)
+
+- Added customData to `Engine`, `Library`, `Timeline`
+
+## Fixed
+
+- Fixed AnimationClass exposure (now autocomplete should work)
+
+
+## [1.12.25] - 2025-12-29
+
+## Fixed
+
+- Fixed initial background color not being set
+
+## [1.12.24] - 2025-12-29
+
+## Fixed
+
+- Fixed `Engine::getFrameAsBase64Image` rendering, skipping some clip updates.
+
+## [1.12.23] - 2025-12-12
+
+## Added
+
+- Added crop offset animation parameter: `cropOffsetX`, `cropOffsetY`
+
+## Fixed
+
+- Fixed rare case where first frame becoming black on render
+
+- Improved error reporting and fixed some concurrency issues that might appear for the video decoder
+
+- Fix for zoom cache
+  
+- Added pixi filter properties to effectdata: `autoFit`, `noTransform`, `blendMode`, `padding`
+
+## [1.12.22] - 2025-12-05
+
+## Added
+
+- Added zoom property for animation inside crop
+
+## Fixed
+
+- Added a fix for hvc1.1.6.L120.90 codec on Firefox on Mac
+
+- Fixed crop rounding errors
+
+- Fixed spawn clip from media library inherits previous crop
+
+- ShapeClip Circle and Star only having proportional scaling
+
+## [1.12.21] - 2025-12-02
+
+## Fixed
+
+- Fixed clone referencing the same Texture object (affecting crop)
+
+## [1.12.20] - 2025-11-28
+
+## Added
+
+- Added read animation properties uncropRawWidth and uncropRawHeight
+
+## [1.12.19] - 2025-11-28
+
+## Added
+
+- Added xxHash128 support (opt in through Settings::setMediaHashAlgorithm)
+
+- Added crop and local position animation support
+
+- Added ADDITIVE_MULTIPLICATIVE_TO_RELATIVE animation keyframe space (yes confusing name but basically it does PropertyValue + RelativeValue * KeyframeValue, as it wasn't possible before and it's useful for crop animations to compensate position)
+
+- Added the next properties 
+  to read: localPositionX, localPositionY, cropLeft, cropTop, cropRight, cropBottom, width, height, rawWidth, rawHeight, uncropWidth, uncropHeight
+  to write: localPositionX, localPositionY, cropLeft, cropTop, cropRight, cropBottom
+
+## Fixed
+
+- Fixed license validation error for local network
+
+- Fixed overlapped Transitions and other issues related to Transitions
+
+- Fixed interlaced video to render with videoDecoder (also improved wasm interlaced detection)
+
+## Changed
+
+- Made name property of AnimationData optional...
+
+
+## [1.12.18] - 2025-11-22
+
+## Added
+
+- Added `getFrameNumberFromTimeValues` (useful when you want to convert multiple time values to frames)
+
+- Added wrap mode empty for `LottieClip`
+
+- Added lineHeight to `TextClip` style
+
+- Added letterSpacing to `TextClip` style
+
+- Added status property to both `LIBRARY_MEDIA_FILMSTRIP_UPDATED` and `LIBRARY_MEDIA_SAMPLES_UPDATED` events
+
+## Fixed
+
+- Fixed adjustment layer when layer is hidden
+
+- Converted some time comparison to frames to avoid any floating errors
+
+- Made fit duration take into account layer visibility
+
+- Fixed missing Sample extraction update
+
+## Changed
+
+- Changed FilmstripStatusEnum to MediaProcessStatusEnum
+
+## [1.12.17] - 2025-11-17
+
+## Added
+
+- Added Audio and Video seek threshold settings
+
+## Fixed
+
+- Fixed Audio seek error
+
+- Reverted/updated unknown formats rejection. Now it's accepted again but with an unknown type + thumbnail
+
+- Fixed timeline stopping being deserialized if an Effect/Filter is missing
+
+## [1.12.16] - 2025-11-15
+
+## Added
+
+- Added `LottieClip` `GRADIENT_STROKE_COLOR` property
+
+- Added `LottieClip::getAnimationData` and `LottieClip::replaceAnimationData` to update the data manually (doesn't get serialized, use customData if needed)
+
+- Added drop shadow support for `TextClip`
+
+## Fixed
+
+- Fixed setPlaybackSpeed left bound drifting at some settings
+
+## [1.12.15] - 2025-11-12
+
+## Added
+
+- Added no simd support
+
+- Added new event LIBRARY_MEDIA_READY, after Media loaded successful
+
+- Added new resize method on replace (FitStyle.MATCH_SIZE), useful for downresing and replacing media
+
+## [1.12.14] - 2025-11-09
+
+## Added
+
+- Added transition id to clips
+
+- Added undo support for Transition duration
+
+- Added layerId to Clip
+
+- Interlaced video support
+
+## Fixed
+
+- Fixed subtitles manager still displaying text after undo adding
+
+- Added error handling for missing transition textures
+
+- Fixed effects + rounded corners
+
+- Fixed storage controller storing media in all providers if one of them is missing it
+
+- Fixed thumbnail and rendering of video with rotation at -180deg
+
+- Better transition error handling
+
+- Better error handling on media load
+
+- Fixed crop on rendering when the input video had metadata rotation
+
+## Changed
+
+- Transitions in/out duration are automatically trimmed to clip trimmed duration
+
+## [1.12.13] - 2025-11-03
+
+## Fixed
+
+- Fixed media replace on audio calling sprite methods
+
+## [1.12.12] - 2025-11-03
+
+## Added
+
+- Added support for export resolution scaling (see `Engine.export` options)
+
+- Added fit options on media replace
+
+## Fixed
+
+- Improved subtitles masking
+
+- Added empty padding for audio stream to match the video stream duration
+
+- Fixed empty frame sometimes being added on video stream
+
+- Fixed StorageIndexedDB error
+
+- Fixed animation initial state
+
+- Fixed undo/redo on media replacement
+
+- Fixed crop calculations on media replacement
+
+## [1.12.11] - 2025-10-27
+
+## Fixed
+
+- Fixed `AudioClip` not clamping time to the boundings
+
 ## [1.12.10] - 2025-10-25
 
 ## Added
