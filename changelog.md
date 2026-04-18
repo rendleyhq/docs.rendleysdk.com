@@ -1,5 +1,157 @@
 # Changelog
 
+## [1.15.5] - 2026-04-18
+
+## Changed
+
+- Migrated to sample based mixing (for better syncing, versus time based). Should be fine... 🤞
+
+## Added
+
+- Added audio range mix backround rendering (with support for clip mask \[include/exclude\], see `Engine:: exportAudioRange`)
+
+- Added optimization for PropertyAnimator set (because 'reactivity' is slow but is extensively used everywhere, emiting too many property updates might cause slow down in some hosts, now the value is cached if it's not changed)
+
+- Added multiple audio output formats for `Engine::exportAudioRange` and `Engine::export` `audio_only` (ogg, mp3, wav, aac, m4a), defaults to aac for backwards compatiblity
+  !Important: aac, m4a (aac under the hood) have frame padding as part of their encoding, if you plan to join the exported chunks use other formats to avoid gaps or remove the padding manually.
+
+## Fixed
+
+- Fixed editor state reset after rendering audio only
+
+- Fixed rendering canceling issue
+
+- Fixed `audio_only` rendering range
+
+- Fixed partial audio fading split (might still sound weird for extreme curves)
+
+- Fixed transition not getting removed when clip was moved to another layer
+
+- Fixed freeze framed video getting it's audio rendered
+
+## [1.15.4] - 2026-04-13
+
+## Added
+
+- Added optional dynamic video load/unload for projects with many video chunks (browser has available a limited amount of video decoders). See `Settings::clipVideoDynamicLoad` (enable/disable) and `Settings::clipVideoDynamicLoadTime` (preloading range in seconds). Enable only if you need it (~128+ videos in the timeline at once) because it might introduce flicker on seeking (dynamic loading), doesn't affect rendering.
+
+- Added intial value for Keyframed property animation (to perserve original property when keyframes are added/removed)
+
+## Fixed
+
+- Fixed media replacement crop warning issue
+
+
+## [1.15.3] - 2026-04-08
+
+## Added
+
+- Added drop shadow options for `Subtitles`
+
+- Added option to disable highlighted word animation for `Subtitles`
+
+- Added letter spacing for `Subtitles`
+
+## Fixed
+
+- Fixed `Subtitles` background not getting fit to the text
+
+- Fixed `Subtitles` edge cut artifacts
+
+- Changed the rendering approach for highlighted line and highlighted word
+
+## [1.15.2] - 2026-04-03
+
+## Fixed
+
+- Fixed clip moving to another layer will not update it's mute state/volume based on the layer setting
+
+- Fixed shape size changing incorrectly also now the initial width/height are dominant (if set) even if the points are out of bounds
+
+- Better Adjustment filter, added Temperature and Tint with creative temp at -0.7 to -1
+
+## [1.15.1] - 2026-03-31
+
+## Added
+
+- Added latest lottie improvements from 5.13.0
+
+## Fixed
+
+- Fixed lottie cache issues causing shapes to not render correctly
+
+- Fixed CustomClip deserialization loosing properties
+
+- Fixed CustomClip not calling super update
+
+## [1.15.0] - 2026-03-31
+
+## Added
+
+- Added new animation system for keyframed property animation
+  * Local time based keyframed destructive animation
+  * Track based (per property)
+  * See `PropertyAnimator` class (lives on `Clip::propertyAnimator`)
+  * Override or write `registerAnimatableProperties` to add your own animatable properties in custom clips, or add your own register point
+  * Get/Set custom properties
+  * Compounts or Component based (ex: scale vs scaleX, scaleY) with linking between them, also join (lossy) and split ability
+  * Lives along the old layered animation (`Clip::animationController`)
+  * AEF/Lottie like interpolation handles (normalized [0-1] time/value bezier handles)
+  * Number/RGB/RGBA/Vector2/3/4 + hold interpolation. Also supports text property
+  * Time based query for keyframes
+  * Custom data per track
+  * Defaults (handles/hold) for track keyframes
+  * Supports filter/effects keyframes (uses `prefix:id:property` format, ex: `filter:12345:opacity`)
+
+- Added `UndoManager` pause stack clearing methods `getPauseStack`, `clearPauseStack`
+
+## Changed
+
+- Layered crop, cropOffset and zoom are now shader based (non destructive, behaves differently as it doesn't affect the handles (size) now)
+
+## [1.14.4] - 2026-03-25
+
+## Fixed
+
+- Fixed build obfuscation causing issues with Lottie expressions
+
+- Fixed Lottie incorrect output when using time in expressions (causes a double update for this cases, 2nd update is faster, needs a 2 pass because of the way time references work)
+
+- Improved rendering performance on Lottie by using offline canvas if supported
+
+- Improved Lottie CPU usage (if you use some unsupported features other than setProperty, make sure to invalidate the cache by setting clip.lastUpdatedFrame to Number.Min to reflect the changes, unconventional features need unconventional approaches ))
+
+## [1.14.3] - 2026-03-23
+
+## Fixed
+
+- Improved audio sample extraction speed also moved the post processing in separated thread
+
+
+## [1.14.2] - 2026-03-06
+
+## Fixed
+
+- Fix for videoclip playback getting stuck in some cases
+
+- Made auth non blocking, faster loading on deserialization
+
+- Isolated audio sample extraction in it's own thread
+
+## [1.14.1] - 2026-03-06
+
+## Added
+
+- Added support for big files on audio samples extaction
+
+- Added safety measures for worker parallel requests
+
+## Fixed
+
+- Transcode various fixes
+
+- Fixed audio extraction paths
+
 ## [1.14.0] - 2026-03-05
 
 ## Changed
