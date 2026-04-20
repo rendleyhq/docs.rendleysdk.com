@@ -41,6 +41,7 @@
 
 - Fixed media replacement crop warning issue
 
+
 ## [1.15.3] - 2026-04-08
 
 ## Added
@@ -88,19 +89,19 @@
 ## Added
 
 - Added new animation system for keyframed property animation
-  - Local time based keyframed destructive animation
-  - Track based (per property)
-  - See `PropertyAnimator` class (lives on `Clip::propertyAnimator`)
-  - Override or write `registerAnimatableProperties` to add your own animatable properties in custom clips, or add your own register point
-  - Get/Set custom properties
-  - Compounts or Component based (ex: scale vs scaleX, scaleY) with linking between them, also join (lossy) and split ability
-  - Lives along the old layered animation (`Clip::animationController`)
-  - AEF/Lottie like interpolation handles (normalized [0-1] time/value bezier handles)
-  - Number/RGB/RGBA/Vector2/3/4 + hold interpolation. Also supports text property
-  - Time based query for keyframes
-  - Custom data per track
-  - Defaults (handles/hold) for track keyframes
-  - Supports filter/effects keyframes (uses `prefix:id:property` format, ex: `filter:12345:opacity`)
+  * Local time based keyframed destructive animation
+  * Track based (per property)
+  * See `PropertyAnimator` class (lives on `Clip::propertyAnimator`)
+  * Override or write `registerAnimatableProperties` to add your own animatable properties in custom clips, or add your own register point
+  * Get/Set custom properties
+  * Compounts or Component based (ex: scale vs scaleX, scaleY) with linking between them, also join (lossy) and split ability
+  * Lives along the old layered animation (`Clip::animationController`)
+  * AEF/Lottie like interpolation handles (normalized [0-1] time/value bezier handles)
+  * Number/RGB/RGBA/Vector2/3/4 + hold interpolation. Also supports text property
+  * Time based query for keyframes
+  * Custom data per track
+  * Defaults (handles/hold) for track keyframes
+  * Supports filter/effects keyframes (uses `prefix:id:property` format, ex: `filter:12345:opacity`)
 
 - Added `UndoManager` pause stack clearing methods `getPauseStack`, `clearPauseStack`
 
@@ -125,6 +126,7 @@
 ## Fixed
 
 - Improved audio sample extraction speed also moved the post processing in separated thread
+
 
 ## [1.14.2] - 2026-03-06
 
@@ -191,13 +193,13 @@
 - **BREAKING-CHANGE:** `ExportResult.blob` is now optional as in the case of multi chunk output the results might be in `ExportResult.outputChunkHelper`
 
 - `Settings::setRenderVideoUseDirectFrames` is now set to true by default (faster rendering)
-  _In case of render issues set it to false in your Engine.init `forcedSettings`_
+  *In case of render issues set it to false in your Engine.init `forcedSettings`*
 
 ## Added
 
 - Added support for >2GB output files (chunked rendering)
-  _If you turn on this option export result will return `outputChunkHelper` that can be used to extract chunks or even save it as a whole to the disk_
-  _Avoid using the merge methods of `outputChunkHelper` as they're bounded to browser's max allocation size (ex: Chrome: 2GB) stream the chunks to the desired destination (to disk, network or any other storage)_
+  *If you turn on this option export result will return `outputChunkHelper` that can be used to extract chunks or even save it as a whole to the disk*
+  *Avoid using the merge methods of `outputChunkHelper` as they're bounded to browser's max allocation size (ex: Chrome: 2GB) stream the chunks to the desired destination (to disk, network or any other storage)*
 
 - Added `Settings::setRenderUseChunkedOutput` and `Settings::setRenderChunkedOutputMaxSize`
 
@@ -218,6 +220,7 @@
 ## Fixed
 
 - Fixed AnimationClass exposure (now autocomplete should work)
+
 
 ## [1.12.25] - 2025-12-29
 
@@ -244,6 +247,7 @@
 - Improved error reporting and fixed some concurrency issues that might appear for the video decoder
 
 - Fix for zoom cache
+  
 - Added pixi filter properties to effectdata: `autoFit`, `noTransform`, `blendMode`, `padding`
 
 ## [1.12.22] - 2025-12-05
@@ -282,9 +286,9 @@
 
 - Added crop and local position animation support
 
-- Added ADDITIVE_MULTIPLICATIVE_TO_RELATIVE animation keyframe space (yes confusing name but basically it does PropertyValue + RelativeValue \* KeyframeValue, as it wasn't possible before and it's useful for crop animations to compensate position)
+- Added ADDITIVE_MULTIPLICATIVE_TO_RELATIVE animation keyframe space (yes confusing name but basically it does PropertyValue + RelativeValue * KeyframeValue, as it wasn't possible before and it's useful for crop animations to compensate position)
 
-- Added the next properties
+- Added the next properties 
   to read: localPositionX, localPositionY, cropLeft, cropTop, cropRight, cropBottom, width, height, rawWidth, rawHeight, uncropWidth, uncropHeight
   to write: localPositionX, localPositionY, cropLeft, cropTop, cropRight, cropBottom
 
@@ -299,6 +303,7 @@
 ## Changed
 
 - Made name property of AnimationData optional...
+
 
 ## [1.12.18] - 2025-11-22
 
