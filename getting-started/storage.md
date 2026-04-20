@@ -24,7 +24,7 @@ mediaData.setPermanentUrl("https://example.com/image.jpg");
 
 A storage provider represents a custom implementation for how assets should be uploaded and retrieved. This can include uploading to your own server, AWS S3, or any other service.
 
-The SDK leverages methods from the Storage Provider when uploading assets and loading projects, ensuring that assets are retrieved from the correct source. The SDK computes unique hashes based on the content of each file, preventing duplicated resources in your project.
+The SDK calls the Storage Provider's methods when uploading assets and loading projects, so assets are retrieved from the right source. The SDK computes a unique content hash for every file, which prevents duplicated uploads.
 
 ### Creating a Storage Provider
 
@@ -56,7 +56,7 @@ export class MyCustomStorageSolution extends StorageProviderBase {
   }
 
   async storeMedia(
-    storageData: StorageMediaData
+    storageData: StorageMediaData,
   ): Promise<StorageStoreResults> {
     const { hash, data, mediaId } = storageData;
 
@@ -106,16 +106,16 @@ To connect your storage solution to the SDK, initialize the Engine with your sto
 import { Engine, StorageIndexedDB } from "@rendley/sdk";
 
 await Engine.getInstance().init({
-  storages: [new StorageIndexedDB(), new MyCustomStorageSolution()],
-  license: {
-    licenseName: "YOUR_LICENSE_NAME",
-    licenseKey: "YOUR_LICENSE_KEY",
-  },
-  display: {
-    width: 1920,
-    height: 1080,
-    backgroundColor: "#000000",
-  },
+ storages: [new StorageIndexedDB(), new MyCustomStorageSolution()],
+ license: {
+ licenseName: "YOUR_LICENSE_NAME",
+ licenseKey: "YOUR_LICENSE_KEY",
+ },
+ display: {
+ width: 1920,
+ height: 1080,
+ backgroundColor: "#000000",
+ },
 });
 ```
 
@@ -134,10 +134,39 @@ const mediaData = Engine.getLibrary().getMediaById(mediaId);
 await mediaData.store();
 ```
 
-<!--
-### Handling Failures
+### Syncing All Assets at Once
 
-_In progress... 🚧_ -->
+To ensure that all storage providers contain exactly the assets referenced by the Library (and remove orphan assets), call [`syncAllMedia`](https://docs.rendleysdk.com/api-reference/classes/Library.html#syncallmedia):
+
+```typescript
+await Engine.getInstance().getLibrary().syncAllMedia();
+```
+
+Unlike the previous `storeAllMedia` method (still available but deprecated), `syncAllMedia` also removes assets that are no longer needed. For example, if the Library contains media A and C, and a provider stores A, B, and D, `syncAllMedia` will request B and D to be removed and C to be uploaded.
+
+### Big Files
+
+Starting with 1.14.0, the SDK works with files larger than 2GB on input and output. Large files require the newer hash algorithms (`xxhash128` or `xxhash64`). Change the hashing algorithm in the [Settings](/getting-started/settings.md#media-hash-algorithm):
+
+```typescript
+import { HashAlgorithmEnum } from "@rendley/sdk";
+
+Engine.getInstance()
+  .getSettings()
+  .setMediaHashAlgorithm(HashAlgorithmEnum.XX_HASH_128);
+```
+
+::: warning
+Some flows, such as internal transcoding, do not support big files. Smaller files continue to work as before.
+:::
+
+If your `StorageProvider` accesses the buffer directly, migrate it to work with blobs:
+
+```typescript
+const data = new Uint8Array(await mediaData.mediaSource.arrayBuffer());
+```
+
+For files larger than 2GB, prefer streaming to OPFS or disk instead of reading the full buffer into memory.
 
 ### Available Storage Providers
 

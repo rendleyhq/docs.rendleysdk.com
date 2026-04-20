@@ -1,8 +1,8 @@
 # Render on Device
 
-The advantage of this approach is that you can leverage the device's CPU and GPU for rendering, significantly reducing costs by avoiding the need to send all the assets of the composition. This rendering method works on both web browsers and mobile devices.
+The advantage of this approach is that you can use the device's CPU and GPU for rendering, significantly reducing costs by avoiding the need to send all the assets of the composition. This rendering method works on both web browsers and mobile devices.
 
-We utilize the [WebCodecs API](https://developer.mozilla.org/en-US/docs/Web/API/WebCodecs_API) for hardware-accelerated encoding and decoding. If your browser does not support the WebCodecs API, we fall back to a WASM-based approach, which is widely supported but slightly slower.
+We use the [WebCodecs API](https://developer.mozilla.org/en-US/docs/Web/API/WebCodecs_API) for hardware-accelerated encoding and decoding. If your browser does not support the WebCodecs API, we fall back to a WASM-based approach, which is widely supported but slightly slower.
 
 ### Export Video
 

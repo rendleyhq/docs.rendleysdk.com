@@ -1,76 +1,130 @@
 # Create Your First Video
 
-## Get a License
+This page walks through the minimum code to render something on screen: initialize the Engine, upload an image, add it to the timeline, and play. Run the example below to see it live, then read the breakdown under each step.
 
-To use the SDK, you need a license. You can obtain one by visiting [our website](https://app.rendleysdk.com/).
-
-## Initialize the Engine
+<LiveRun standalone>
 
 ```typescript
 import { Engine } from "@rendley/sdk";
 
-const engine = Engine.getInstance().init({
+// 1. Initialize the Engine
+await Engine.getInstance().init({
   license: {
     licenseName: "YOUR_LICENSE_NAME",
     licenseKey: "YOUR_LICENSE_KEY",
   },
   display: {
-    width: 1080,
-    height: 1920,
+    width: 1920,
+    height: 1080,
     backgroundColor: "#000000",
-    view: document.getElementById("myCanvas"),
+    view: document.getElementById("rendley-canvas") as HTMLCanvasElement,
+  },
+});
+
+// 2. Upload media to the Library
+const mediaId = await Engine.getInstance()
+  .getLibrary()
+  .addMedia(
+    "https://images.pexels.com/photos/24253539/pexels-photo-24253539/free-photo-of-a-bridge-over-a-river-with-a-city-in-the-background.jpeg?auto=compress&cs=tinysrgb&w=1600",
+  );
+
+// 3. Put it on the timeline
+const layer = Engine.getInstance().getTimeline().createLayer();
+const clip = await layer.addClip({
+  mediaDataId: mediaId,
+  startTime: 0,
+  duration: 5,
+});
+clip.style.setPosition(960, 540);
+
+// 4. Play
+await Engine.getInstance().getTimeline().play();
+```
+
+</LiveRun>
+
+## 1. Get a License
+
+The SDK requires a valid license. Grab one for free at [app.rendleysdk.com](https://app.rendleysdk.com/).
+
+## 2. Initialize the Engine
+
+The [Engine](/getting-started/engine.md) is a singleton. Call `init` once, passing your license and a canvas element to draw into. The canvas dimensions below (1920×1080) set the composition resolution, which can differ from the DOM size of the canvas, scaling is automatic.
+
+```typescript
+import { Engine } from "@rendley/sdk";
+
+await Engine.getInstance().init({
+  license: {
+    licenseName: "YOUR_LICENSE_NAME",
+    licenseKey: "YOUR_LICENSE_KEY",
+  },
+  display: {
+    width: 1920,
+    height: 1080,
+    backgroundColor: "#000000",
+    view: document.getElementById("myCanvas") as HTMLCanvasElement,
   },
 });
 ```
 
-First, replace `YOUR_LICENSE_NAME` and `YOUR_LICENSE_KEY` with your actual license details. Also, ensure that you set the correct canvas element in the `view` property.
+::: warning
+The Engine throws if you try to initialize it twice without destroying the previous instance. See [Engine destruction](/getting-started/engine.md#destroying) if you need to reset.
+:::
 
-If the Engine is initialized correctly, the canvas should turn black and have dimensions of 1080x1920. If not, verify that the canvas element is referenced correctly.
+## 3. Upload Media
 
-## Upload an Asset
+Every asset (video, image, audio, GIF, SVG) lives in the [Library](/getting-started/library.md). `addMedia` returns an id you'll use to reference the asset later.
 
 ```typescript
 const mediaId = await Engine.getInstance()
   .getLibrary()
-  .addMedia(
-    "https://images.pexels.com/photos/24253539/pexels-photo-24253539/free-photo-of-a-bridge-over-a-river-with-a-city-in-the-background.jpeg?auto=compress&cs=tinysrgb&w=500"
-  );
+  .addMedia("https://example.com/photo.jpg");
 ```
 
-We have uploaded an image directly from Pexels into our Library. The Library returns a unique identifier for the file, which we can use later to display the image on the canvas.
+`addMedia` accepts a URL, a browser `File`, or a `Uint8Array`.
 
-## Create a Layer
+## 4. Create a Layer and Add a Clip
 
-You may not see the image displayed on the canvas yet, which is expected because we haven't attached it to anything. A clip is part of a layer, so let's create one first.
+Clips live on [layers](/getting-started/layer.md) that stack top-to-bottom. Each layer keeps its own stream of clips. Two clips can't overlap on the same layer, so use multiple layers for overlapping content.
 
 ```typescript
 const layer = Engine.getInstance().getTimeline().createLayer();
-```
 
-## Add a Clip
-
-Now that we have a layer, let's create a clip containing the image we just uploaded and add it to the layer. We will also make the clip last for 5 seconds.
-
-```typescript
 await layer.addClip({
-  mediaDataId: mediaId,
+  mediaDataId,
   startTime: 0,
   duration: 5,
 });
 ```
 
-## Play the Composition
+For video and audio clips you can omit `duration`, the SDK reads it from the media data.
 
-To play the composition, simply call the `play()` function.
-
-```typescript
-Engine.getInstance().getTimeline().play();
-```
-
-## Export the Final Video
-
-To export the final video, call the `export()` function, which will return a blob URL for the final video.
+## 5. Play
 
 ```typescript
-const finalVideo = await Engine.getInstance().export();
+await Engine.getInstance().getTimeline().play();
 ```
+
+Other transport controls: `pause()`, `stop()`, `seek(time)`.
+
+## 6. Export (Optional)
+
+When you're ready to produce the final video:
+
+```typescript
+const result = await Engine.getInstance().export();
+if (result?.blob) {
+  downloadBlob(result.blob, "video." + result.extension);
+}
+```
+
+See [Export](/getting-started/export.md) for encoding options, progress tracking, and chunked output for large files.
+
+## Next Steps
+
+- [Clips](/getting-started/clips.md): catalog of every clip type (text, video, shape, lottie, subtitles, and more).
+- [Timeline](/getting-started/timeline.md): playback, seeking, and frame alignment.
+- [Styling](/getting-started/styling.md): position, scale, rotation, corner radius, alpha.
+- [Animation](/getting-started/animation.md): keyframe-based motion.
+- [Save & Restore](/getting-started/save-restore.md): serialize and load projects.
