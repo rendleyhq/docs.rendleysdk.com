@@ -244,7 +244,6 @@
 - Improved error reporting and fixed some concurrency issues that might appear for the video decoder
 
 - Fix for zoom cache
-
 - Added pixi filter properties to effectdata: `autoFit`, `noTransform`, `blendMode`, `padding`
 
 ## [1.12.22] - 2025-12-05
@@ -605,9 +604,9 @@
 ## Added
 
 - Added new settings for rendering control:
-- `RenderVideoUseDirectFrames` - A different frame grab method that might decrease the rendering time a lot (on most devices except Mac, probably only M series are affected). Test it well before pushing to production, in our tests it could gain almost x2 speed in some cases! The backpressure can be controlled with `Settings::renderThrottleFactor`. `Settings::renderMaxQueueSize` is not used here atm
-- `DecoderUseSeparateWorke`r` - Decode videos with individual workers (might help when the compositions have a lot of videos on multiple layers, but doesn't usually speed a lot, might actually make the rendering slower most common cases because of worker's creation/destruction friction). Don't use it if you don't see any improvements
-- `DecoderUseSubImage` - While video frames likes more new textures, this is an option that can be set to just fill the old texture instead of creating a new one, benchmark your own case scenario and see if it might improve the rendering. Don't use it if you don't see any improvelements
+  - `RenderVideoUseDirectFrames` - A different frame grab method that might decrease the rendering time a lot (on most devices except Mac, probably only M series are affected). Test it well before pushing to production, in our tests it could gain almost x2 speed in some cases! The backpressure can be controlled with `Settings::renderThrottleFactor`. `Settings::renderMaxQueueSize` is not used here atm
+  - `DecoderUseSeparateWorke`r` - Decode videos with individual workers (might help when the compositions have a lot of videos on multiple layers, but doesn't usually speed a lot, might actually make the rendering slower most common cases because of worker's creation/destruction friction). Don't use it if you don't see any improvements
+  - `DecoderUseSubImage` - While video frames likes more new textures, this is an option that can be set to just fill the old texture instead of creating a new one, benchmark your own case scenario and see if it might improve the rendering. Don't use it if you don't see any improvelements
 
 ## Fixed
 
@@ -852,33 +851,33 @@
 ### Added
 
 - Added the following built-in effects:
-- Adjustment
-- Advanced Bloom
-- Ascii
-- Bevel
-- Bloom
-- Blur
-- Bulge Pinch
-- Color Overlay
-- Color Replacement
-- Cross Hatch
-- Crt
-- Dot
-- Drop Shadow
-- Emboss
-- Godray
-- HSL Adjustment
-- Motion Blur
-- Old Film
-- Outline
-- Pixelate
-- Radial Blur
-- Reflection
-- RGB Split
-- Shockwave
-- Tilt Shift
-- Twist
-- Zoom Blur
+  - Adjustment
+  - Advanced Bloom
+  - Ascii
+  - Bevel
+  - Bloom
+  - Blur
+  - Bulge Pinch
+  - Color Overlay
+  - Color Replacement
+  - Cross Hatch
+  - Crt
+  - Dot
+  - Drop Shadow
+  - Emboss
+  - Godray
+  - HSL Adjustment
+  - Motion Blur
+  - Old Film
+  - Outline
+  - Pixelate
+  - Radial Blur
+  - Reflection
+  - RGB Split
+  - Shockwave
+  - Tilt Shift
+  - Twist
+  - Zoom Blur
 
 ### Fixed
 
@@ -1038,15 +1037,15 @@
 
 - Added parallel audio mixing, improves rendering time
 
-> By default it's disabled to maintain compatibility
->
-> Use engine.getSettings().setRenderAudioUseWorker(true) to turn it on
->
-> It might double the tab memory usage during the rendering. Use at own discretio. Please test it with your worst case scenario.
->
-> Not recommended for projects with big videos (>1GB+), good for relatively small projects with complex layering or multiple chunks
->
-> The memory requirements for this might disappear in the future updates so stay tuned...
+  > By default it's disabled to maintain compatibility
+  >
+  > Use engine.getSettings().setRenderAudioUseWorker(true) to turn it on
+  >
+  > It might double the tab memory usage during the rendering. Use at own discretio. Please test it with your worst case scenario.
+  >
+  > Not recommended for projects with big videos (>1GB+), good for relatively small projects with complex layering or multiple chunks
+  >
+  > The memory requirements for this might disappear in the future updates so stay tuned...
 
 ### Fixed
 
