@@ -10,32 +10,54 @@ Uploading assets to the Library only loads them into memory. They are not saved 
 
 ### Add Media to the Library
 
-You can add media from a `string` URL, a `File`, or a `Uint8Array` buffer:
+You can add media from a `string` URL, a `File`, or a `Uint8Array` buffer. `addMedia` returns an id you'll pass to `addClip` when placing the asset on the timeline.
+
+<LiveRun>
 
 ```typescript
 const mediaId = await Engine.getInstance()
   .getLibrary()
-  .addMedia("https://example.com/image.jpg");
+  .addMedia(
+    "https://images.pexels.com/photos/24253539/pexels-photo-24253539/free-photo-of-a-bridge-over-a-river-with-a-city-in-the-background.jpeg?auto=compress&cs=tinysrgb&w=1600",
+  );
+
+const clip = await layer.addClip({
+  mediaDataId: mediaId,
+  startTime: 0,
+  duration: 5,
+});
+clip.style.setPosition(960, 540);
+clip.style.setScale(0.6, 0.6);
 ```
 
-You can also specify the MIME type explicitly:
+</LiveRun>
+
+You can also specify the MIME type and filename explicitly when the source URL doesn't make them clear:
 
 ```typescript
 const mediaId = await Engine.getInstance()
   .getLibrary()
-  .addMedia(MY_FILE, "image/jpeg");
+  .addMedia(MY_FILE, "image/jpeg", "my-image.jpg");
 ```
 
 ::: info
 Without storing the asset, it will not be included in the serialized state. Refer to the [Storage](/getting-started/storage.md) section to learn how to store assets.
 :::
 
+### Probe Media
+
+If you want to inspect a media file before adding it to the Library, you can use [`probeMediaData`](https://docs.rendleysdk.com/api-reference/classes/Library.html#probemediadata). It returns metadata such as resolution, codec, duration, and stream information without keeping the file loaded:
+
+```typescript
+const info = await Engine.getInstance().getLibrary().probeMediaData(file);
+```
+
 ### Remove Media from the Library
 
 This method deletes a media asset and also removes all associated clips from the timeline:
 
 ```typescript
-await Engine.getInstance().getLibrary().removeMedia(mediaId);
+await Engine.getInstance().getLibrary().deleteMedia(mediaId);
 ```
 
 ### Replace Existing Media
@@ -46,19 +68,82 @@ To replace a media asset while preserving its references in the timeline:
 await Engine.getInstance().getLibrary().replaceMedia(mediaId, MY_FILE);
 ```
 
-You can use the same data types as with the `addMedia` method: `string`, `File`, and `Uint8Array`. The method also accepts an optional third parameter for the MIME type.
-
-### Store All Media to Persistent Storage
-
-If a Storage Provider is configured, you can use the `storeAllMedia` method to store all media assets persistently:
+You can use the same data types as with the `addMedia` method: `string`, `File`, and `Uint8Array`. The method also accepts an optional third parameter with replacement options:
 
 ```typescript
-await Engine.getInstance().getLibrary().storeAllMedia();
+import { FitStyleEnum } from "@rendley/sdk";
+
+await Engine.getInstance().getLibrary().replaceMedia(mediaId, MY_FILE, {
+  mimeType: "video/mp4",
+  fit: FitStyleEnum.MATCH_SIZE,
+});
+```
+
+The [`fit`](https://docs.rendleysdk.com/api-reference/enums/FitStyleEnum.html) option controls how the new media should adapt to the previous size:
+
+- `ORIGINAL`: Do not inherit the previous source size.
+- `MATCH_SCALE`: Keep the scale of the clip.
+- `OUTSIDE`: Cover the previous frame, cropping if needed.
+- `INSIDE`: Fit inside the previous frame, leaving empty space if needed.
+- `MATCH_SIZE`: Inherit the previous size by adjusting scale. Useful when downsizing media.
+
+#### From a File Input
+
+A typical UI wiring, the user picks a file, the clip's media is swapped, and the timeline keeps the clip's position and duration:
+
+```typescript
+import { FitStyleEnum } from "@rendley/sdk";
+
+async function onFileChosen(mediaId: string, file: File) {
+  const ok = await Engine.getInstance()
+    .getLibrary()
+    .replaceMedia(mediaId, file, {
+      fit: FitStyleEnum.MATCH_SIZE,
+    });
+
+  if (!ok) {
+    console.warn(
+      "Replace failed, the new file's type may differ from the original",
+    );
+  }
+}
+```
+
+The media id stays the same, so every clip that referenced the old asset now shows the new one. Trim, transforms, effects, filters, and animations all carry over.
+
+### Extract Audio from a Video
+
+You can extract the audio stream from a video file as an independent media data entry. This is useful when you want to edit the audio separately, generate a waveform, or reuse the audio without re-downloading it:
+
+```typescript
+const audioMediaId = await Engine.getInstance()
+  .getLibrary()
+  .extractAudioFromMedia(videoMediaId);
+```
+
+If the video has multiple audio tracks, you can pass the track index as a second parameter.
+
+### Sync All Media to Persistent Storage
+
+If one or more Storage Providers are configured, you can use [`syncAllMedia`](https://docs.rendleysdk.com/api-reference/classes/Library.html#syncallmedia) to ensure all providers contain the assets currently referenced by the Library, and to remove orphan assets that the Library no longer uses:
+
+```typescript
+await Engine.getInstance().getLibrary().syncAllMedia();
 ```
 
 ::: info
-[`storeAllMedia`](https://docs.rendleysdk.com/api-reference/classes/Library.html#storeallmedia) stores only those assets that have not already been uploaded. Learn how to configure storage [here](/getting-started/storage.md).
+`syncAllMedia` replaces the older [`storeAllMedia`](https://docs.rendleysdk.com/api-reference/classes/Library.html#storeallmedia) method. The old method still exists for backward compatibility.
 :::
+
+### Check if the Library is Processing
+
+Some operations, like loading, transcoding, or generating filmstrips, happen asynchronously. Before serializing the project you might want to verify the Library is idle:
+
+```typescript
+const isProcessing = Engine.getInstance().getLibrary().isProcessing();
+```
+
+For a stronger check that also takes the Engine state into account, use [`Engine.isSafeToSerialize()`](https://docs.rendleysdk.com/api-reference/classes/Engine.html#issafetoserialize).
 
 ## Set Custom Metadata for Assets
 
@@ -79,6 +164,8 @@ To retrieve previously stored custom metadata:
 const mediaData = Engine.getInstance().getLibrary().getMediaById(mediaId);
 const myValue = mediaData.getCustomData("MY_KEY");
 ```
+
+Custom data is also available on [Engine](https://docs.rendleysdk.com/api-reference/classes/Engine.html), [Library](https://docs.rendleysdk.com/api-reference/classes/Library.html), [Timeline](https://docs.rendleysdk.com/api-reference/classes/Timeline.html), [Layer](https://docs.rendleysdk.com/api-reference/classes/Layer.html), and every [Clip](https://docs.rendleysdk.com/api-reference/classes/Clip.html) through the same `setCustomData`, `getCustomData`, `hasCustomData`, `getAllCustomData`, `clearAllCustomData`, and `setAllCustomData` methods.
 
 ## Manage Effects
 
@@ -124,6 +211,8 @@ const registeredEffectIds = Engine.getInstance()
 ```typescript
 const allEffectIds = Engine.getInstance().getLibrary().getAllEffectIds();
 ```
+
+For the complete list of effects that ship with the SDK, see [Built-in Effects](/getting-started/effects.md#built-in-effects).
 
 ## Manage Filters
 
@@ -202,8 +291,8 @@ To handle this, add assets to the Library with the `serializable: false` flag.
 
 ```typescript{7}
 const transitionId = await Engine.getInstance()
-  .getLibrary()
-  .addTransition({
+.getLibrary()
+.addTransition({
     id: "my-transition",
     name: "Custom Transition",
     transitionSrc: "...",
@@ -218,32 +307,37 @@ When deserializing the project, use the [`onSetupLibrary`](https://docs.rendleys
 ```typescript
 import { Engine } from "@rendley/sdk";
 
+
 await Engine.getInstance().init({
-  ...
-  onSetupLibrary: async (data) => {
-    const { missingEffects, missingFilters, missingTransitions } = data;
+    ...
+    onSetupLibrary: async (data) => {
+      const { missingEffects, missingFilters, missingTransitions, missingFonts } = data;
 
-    for (const missingEffect of missingEffects) {
-      const effect = await getEffectByIdFromMyStorage(missingEffect.id, missingEffect.provider);
 
-      await Engine.getInstance().getLibrary().addEffect({
-        id: effect.id,
-        name: effect.name,
-        fragmentSrc: effect.fragmentSrc,
-        properties: effect.properties,
-      });
+      for (const missingEffect of missingEffects) {
+        const effect = await getEffectByIdFromMyStorage(missingEffect.id, missingEffect.provider);
+
+
+        await Engine.getInstance().getLibrary().addEffect({
+            id: effect.id,
+            name: effect.name,
+            fragmentSrc: effect.fragmentSrc,
+            properties: effect.properties,
+          });
+      }
     }
-  }
-});
+  });
 ```
 
 Each missing asset object may include a `provider` field to help determine where to retrieve the asset from (e.g., your own storage solution or an external CDN).
 
 ```typescript{5}
 const filterId = await Engine.getInstance().getLibrary().addFilter({
-  id: "my-filter",
-  name: "Custom Filter",
-  lutUrl: "...",
-  provider: "custom-provider",
-});
+    id: "my-filter",
+    name: "Custom Filter",
+    lutUrl: "...",
+    provider: "custom-provider",
+  });
 ```
+
+The `missingFonts` array reports fonts referenced by [Text](/getting-started/clips/text.md) and [HTML Text](/getting-started/clips/html-text.md) clips that are not currently registered in the [FontRegistry](/getting-started/fonts.md). You can load them back the same way before the timeline starts rendering.

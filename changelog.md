@@ -1,5 +1,126 @@
 # Changelog
 
+## [1.15.4] - 2026-04-13
+
+## Added
+
+- Added optional dynamic video load/unload for projects with many video chunks (browsers expose a limited number of video decoders). See `Settings::clipVideoDynamicLoad` (enable/disable) and `Settings::clipVideoDynamicLoadTime` (preloading range in seconds). Enable only when you need it (around 128+ videos in the timeline at once), because it might introduce flicker on seeking during dynamic loading. It does not affect rendering.
+
+- Added initial value for Keyframed property animation (to preserve the original property when keyframes are added or removed).
+
+## Fixed
+
+- Fixed media replacement crop warning issue.
+
+## [1.15.3] - 2026-04-08
+
+## Added
+
+- Added drop shadow options for `Subtitles`.
+
+- Added option to disable highlighted word animation for `Subtitles`.
+
+- Added letter spacing for `Subtitles`.
+
+## Fixed
+
+- Fixed `Subtitles` background not getting fit to the text.
+
+- Fixed `Subtitles` edge cut artifacts.
+
+- Changed the rendering approach for highlighted line and highlighted word.
+
+## [1.15.2] - 2026-04-03
+
+## Fixed
+
+- Fixed clip moving to another layer not updating its mute state and volume based on the layer setting.
+
+- Fixed shape size changing incorrectly. The initial width/height are now dominant (if set), even if the points are out of bounds.
+
+- Better Adjustment filter. Added Temperature and Tint (creative range at `-0.7` to `-1`).
+
+## [1.15.1] - 2026-03-31
+
+## Added
+
+- Added latest Lottie improvements from 5.13.0.
+
+## Fixed
+
+- Fixed Lottie cache issues that caused shapes not to render correctly.
+
+- Fixed `CustomClip` deserialization losing properties.
+
+- Fixed `CustomClip` not calling the super update.
+
+## [1.15.0] - 2026-03-31
+
+## Added
+
+- Added new animation system for keyframed property animation. See [PropertyAnimator](/getting-started/property-animator.md). Lives on `Clip::propertyAnimator`.
+
+* Local time based keyframed destructive animation
+* Track based (per property)
+* Override or write `registerAnimatableProperties` to add your own animatable properties in custom clips
+* Get/Set custom properties
+* Compound or component-based properties (e.g. `scale` vs `scaleX`, `scaleY`) with linking, join, and split
+* Lives alongside the old layered animation (`Clip::animationController`)
+* AEF/Lottie-like interpolation handles (normalized `[0, 1]` time/value bezier handles)
+* Number / RGB / RGBA / Vector2/3/4 + hold interpolation. Also supports text property.
+* Time based query for keyframes
+* Custom data per track
+* Defaults (handles/hold) for track keyframes
+* Supports filter and effect keyframes (uses `prefix:id:property` format, e.g. `filter:12345:opacity`)
+
+- Added `UndoManager` pause stack clearing methods `getPauseStack`, `clearPauseStack`.
+
+## Changed
+
+- Layered crop, cropOffset and zoom are now shader based (non-destructive). They behave differently because they do not affect the handles (size) anymore.
+
+## [1.14.4] - 2026-03-25
+
+## Fixed
+
+- Fixed build obfuscation causing issues with Lottie expressions.
+
+- Fixed Lottie incorrect output when using time in expressions (caused a double update in this case; the second update is faster. A 2-pass is needed because of the way time references work).
+
+- Improved rendering performance on Lottie by using offscreen canvas when supported.
+
+- Improved Lottie CPU usage. If you use unsupported features other than `setProperty`, make sure to invalidate the cache by setting `clip.lastUpdatedFrame` to `Number.MIN_VALUE` to reflect the changes.
+
+## [1.14.3] - 2026-03-23
+
+## Fixed
+
+- Improved audio sample extraction speed. Moved the post processing to a separate thread.
+
+## [1.14.2] - 2026-03-06
+
+## Fixed
+
+- Fix for video clip playback getting stuck in some cases.
+
+- Made auth non blocking. Faster loading on deserialization.
+
+- Isolated audio sample extraction into its own thread.
+
+## [1.14.1] - 2026-03-06
+
+## Added
+
+- Added support for big files on audio samples extraction.
+
+- Added safety measures for worker parallel requests.
+
+## Fixed
+
+- Transcode various fixes.
+
+- Fixed audio extraction paths.
+
 ## [1.14.0] - 2026-03-05
 
 ## Changed
@@ -41,13 +162,13 @@
 - **BREAKING-CHANGE:** `ExportResult.blob` is now optional as in the case of multi chunk output the results might be in `ExportResult.outputChunkHelper`
 
 - `Settings::setRenderVideoUseDirectFrames` is now set to true by default (faster rendering)
-  *In case of render issues set it to false in your Engine.init `forcedSettings`*
+  _In case of render issues set it to false in your Engine.init `forcedSettings`_
 
 ## Added
 
 - Added support for >2GB output files (chunked rendering)
-  *If you turn on this option export result will return `outputChunkHelper` that can be used to extract chunks or even save it as a whole to the disk*
-  *Avoid using the merge methods of `outputChunkHelper` as they're bounded to browser's max allocation size (ex: Chrome: 2GB) stream the chunks to the desired destination (to disk, network or any other storage)*
+  _If you turn on this option export result will return `outputChunkHelper` that can be used to extract chunks or even save it as a whole to the disk_
+  _Avoid using the merge methods of `outputChunkHelper` as they're bounded to browser's max allocation size (ex: Chrome: 2GB) stream the chunks to the desired destination (to disk, network or any other storage)_
 
 - Added `Settings::setRenderUseChunkedOutput` and `Settings::setRenderChunkedOutputMaxSize`
 
@@ -68,7 +189,6 @@
 ## Fixed
 
 - Fixed AnimationClass exposure (now autocomplete should work)
-
 
 ## [1.12.25] - 2025-12-29
 
@@ -95,7 +215,7 @@
 - Improved error reporting and fixed some concurrency issues that might appear for the video decoder
 
 - Fix for zoom cache
-  
+
 - Added pixi filter properties to effectdata: `autoFit`, `noTransform`, `blendMode`, `padding`
 
 ## [1.12.22] - 2025-12-05
@@ -134,9 +254,9 @@
 
 - Added crop and local position animation support
 
-- Added ADDITIVE_MULTIPLICATIVE_TO_RELATIVE animation keyframe space (yes confusing name but basically it does PropertyValue + RelativeValue * KeyframeValue, as it wasn't possible before and it's useful for crop animations to compensate position)
+- Added ADDITIVE_MULTIPLICATIVE_TO_RELATIVE animation keyframe space (yes confusing name but basically it does PropertyValue + RelativeValue \* KeyframeValue, as it wasn't possible before and it's useful for crop animations to compensate position)
 
-- Added the next properties 
+- Added the next properties
   to read: localPositionX, localPositionY, cropLeft, cropTop, cropRight, cropBottom, width, height, rawWidth, rawHeight, uncropWidth, uncropHeight
   to write: localPositionX, localPositionY, cropLeft, cropTop, cropRight, cropBottom
 
@@ -151,7 +271,6 @@
 ## Changed
 
 - Made name property of AnimationData optional...
-
 
 ## [1.12.18] - 2025-11-22
 
@@ -457,9 +576,9 @@
 ## Added
 
 - Added new settings for rendering control:
-  - `RenderVideoUseDirectFrames` - A different frame grab method that might decrease the rendering time a lot (on most devices except Mac, probably only M series are affected). Test it well before pushing to production, in our tests it could gain almost x2 speed in some cases! The backpressure can be controlled with `Settings::renderThrottleFactor`. `Settings::renderMaxQueueSize` is not used here atm
-  - `DecoderUseSeparateWorke`r` - Decode videos with individual workers (might help when the compositions have a lot of videos on multiple layers, but doesn't usually speed a lot, might actually make the rendering slower most common cases because of worker's creation/destruction friction). Don't use it if you don't see any improvements
-  - `DecoderUseSubImage` - While video frames likes more new textures, this is an option that can be set to just fill the old texture instead of creating a new one, benchmark your own case scenario and see if it might improve the rendering. Don't use it if you don't see any improvelements
+- `RenderVideoUseDirectFrames` - A different frame grab method that might decrease the rendering time a lot (on most devices except Mac, probably only M series are affected). Test it well before pushing to production, in our tests it could gain almost x2 speed in some cases! The backpressure can be controlled with `Settings::renderThrottleFactor`. `Settings::renderMaxQueueSize` is not used here atm
+- `DecoderUseSeparateWorke`r` - Decode videos with individual workers (might help when the compositions have a lot of videos on multiple layers, but doesn't usually speed a lot, might actually make the rendering slower most common cases because of worker's creation/destruction friction). Don't use it if you don't see any improvements
+- `DecoderUseSubImage` - While video frames likes more new textures, this is an option that can be set to just fill the old texture instead of creating a new one, benchmark your own case scenario and see if it might improve the rendering. Don't use it if you don't see any improvelements
 
 ## Fixed
 
@@ -704,33 +823,33 @@
 ### Added
 
 - Added the following built-in effects:
-  - Adjustment
-  - Advanced Bloom
-  - Ascii
-  - Bevel
-  - Bloom
-  - Blur
-  - Bulge Pinch
-  - Color Overlay
-  - Color Replacement
-  - Cross Hatch
-  - Crt
-  - Dot
-  - Drop Shadow
-  - Emboss
-  - Godray
-  - HSL Adjustment
-  - Motion Blur
-  - Old Film
-  - Outline
-  - Pixelate
-  - Radial Blur
-  - Reflection
-  - RGB Split
-  - Shockwave
-  - Tilt Shift
-  - Twist
-  - Zoom Blur
+- Adjustment
+- Advanced Bloom
+- Ascii
+- Bevel
+- Bloom
+- Blur
+- Bulge Pinch
+- Color Overlay
+- Color Replacement
+- Cross Hatch
+- Crt
+- Dot
+- Drop Shadow
+- Emboss
+- Godray
+- HSL Adjustment
+- Motion Blur
+- Old Film
+- Outline
+- Pixelate
+- Radial Blur
+- Reflection
+- RGB Split
+- Shockwave
+- Tilt Shift
+- Twist
+- Zoom Blur
 
 ### Fixed
 
@@ -890,15 +1009,15 @@
 
 - Added parallel audio mixing, improves rendering time
 
-  > By default it's disabled to maintain compatibility
-  >
-  > Use engine.getSettings().setRenderAudioUseWorker(true) to turn it on
-  >
-  > It might double the tab memory usage during the rendering. Use at own discretio. Please test it with your worst case scenario.
-  >
-  > Not recommended for projects with big videos (>1GB+), good for relatively small projects with complex layering or multiple chunks
-  >
-  > The memory requirements for this might disappear in the future updates so stay tuned...
+> By default it's disabled to maintain compatibility
+>
+> Use engine.getSettings().setRenderAudioUseWorker(true) to turn it on
+>
+> It might double the tab memory usage during the rendering. Use at own discretio. Please test it with your worst case scenario.
+>
+> Not recommended for projects with big videos (>1GB+), good for relatively small projects with complex layering or multiple chunks
+>
+> The memory requirements for this might disappear in the future updates so stay tuned...
 
 ### Fixed
 

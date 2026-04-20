@@ -10,13 +10,34 @@ Once the font is loaded through the registry, it will be available in the DOM fo
 
 You can import a font by specifying the URL to the font face or providing a CSS entry point with all the styles set up. Here's an example:
 
-```typescript{3}
-const fontCssUrl = "https://fonts.googleapis.com/css2?family=Roboto:ital,wght@;1,100;1,300;1,400;1,500;1,700;1,900&display=swap";
+<LiveRun>
 
-await Engine.getInstance().getFontRegistry().loadFromCssUrl("Roboto", fontCssUrl);
+```typescript
+// Load Bebas Neue from Google Fonts and apply it to a text clip.
+const fontCssUrl =
+  "https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap";
+
+await Engine.getInstance()
+  .getFontRegistry()
+  .loadFromCssUrl("Bebas Neue", fontCssUrl);
+
+const title = await layer.addClip({
+  type: "text",
+  text: "BEBAS NEUE",
+  startTime: 0,
+  duration: 5,
+  style: {
+    fontFamily: "Bebas Neue",
+    fontSize: 260,
+    color: "#FFFFFF",
+  },
+});
+title.style.setPosition(960, 540);
 ```
 
-This will parse the CSS and load all the font faces defined in the file.
+</LiveRun>
+
+This parses the CSS and loads every font face defined in the file. After `loadFromCssUrl` resolves, any clip can reference the font family by name.
 
 ## Import from Font Files
 
