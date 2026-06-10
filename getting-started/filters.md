@@ -85,13 +85,3 @@ filter.setIntensity(0.5);
 ```
 
 Filter intensity is animatable through the [Property Animator](/getting-started/property-animator.md#animating-effects-and-filters) using the `filter:{instanceId}:intensity` track key.
-
-## Built-in Native Filters
-
-The SDK exposes a small set of native filters backed by built-in Pixi filters. They do not require a LUT. The first one available is [BuiltInBlurEffect](https://docs.rendleysdk.com/api-reference/classes/BuiltInBlurEffect.html), a Gaussian blur:
-
-```typescript
-clip.addEffect("builtin-blur", { blur: 8 });
-```
-
-More native filters are available in the [built-in effects list](/getting-started/effects.md#built-in-effects).

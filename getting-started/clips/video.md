@@ -1,6 +1,6 @@
 # Video Clip
 
-The [VideoClip](https://docs.rendleysdk.com/api-reference/classes/VideoClip.html) loads a video file, decodes it through WebCodecs (or a WASM fallback), and renders it on the canvas. It supports trimming, freeze frames, playback speed, and audio extraction.
+The [VideoClip](https://docs.rendleysdk.com/api-reference/classes/VideoClip.html) loads a video file and renders it on the canvas. It supports trimming, freeze frames, playback speed, and audio extraction.
 
 ## Create a Video Clip
 

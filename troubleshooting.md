@@ -46,27 +46,12 @@ That's the expected behavior. Faster playback makes the clip shorter, which can 
 
 ## Rendering
 
-::: details Rendering is slow on macOS
-Direct frame rendering (`RenderVideoUseDirectFrames`) is enabled by default and can be slower on Apple Silicon for some projects. Disable it through `forcedSettings` on `Engine.init`:
-
-```typescript
-await Engine.getInstance().init({
-  forcedSettings: { renderVideoUseDirectFrames: false },
-  // ...license, display
-});
-```
-:::
-
 ::: details Export fails on a large file because of browser memory limits
 The single-blob allocation limit is around 2 GB on Chrome. Enable [chunked output](/getting-started/export.md#large-files-and-chunked-output) in the Settings and stream the chunks to disk, OPFS, or a network endpoint. The `readMergedChunks*` helpers on `OutputChunkHelper` also hit this limit, so avoid them for big outputs.
 :::
 
 ::: details WebM export has no transparency
 Transparent WebM requires the WASM encoder, not WebCodecs. Set `setEncoderUseWebCodecs(false)`, `setEncoderUseAlpha(true)`, and `setEncoderCodec("vp8")` (or `"vp9"`) before exporting.
-:::
-
-::: details `render:error` fires but the message is empty or generic
-Listen to the Engine's `log` event and capture entries with level `ERROR` from the console. Common culprits: a missing dependency for a custom effect, a media file that failed to load, or a codec that WebCodecs couldn't negotiate. Checking `Engine.isSafeToSerialize()` before exporting also catches cases where media is still being processed.
 :::
 
 ## State & Serialization

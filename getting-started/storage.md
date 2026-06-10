@@ -9,7 +9,7 @@ There are two primary methods for storing your assets:
 
 ## Permanent URLs
 
-A permanent URL is a static link that points to the location of your asset. To set it, you need to upload the asset to the library and then access its `MediaData` object.
+A permanent URL is a static link that points to the location of your asset. To set it, you need to upload the asset to the library and then access its `MediaData` object. Permanent URL is automatically set when adding a media from an URL.
 
 ```typescript
 import { Engine } from "@rendley/sdk";

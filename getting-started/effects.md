@@ -106,16 +106,16 @@ Low values produce chunky pixels; high values flatten the image.
 <LiveRun>
 
 ```typescript
-const shape = await layer.addClip({
-  type: "shape",
-  shape: "rectangle",
+const mediaId = await Engine.getInstance().getLibrary().addMedia("https://images.pexels.com/photos/24253539/pexels-photo-24253539/free-photo-of-a-bridge-over-a-river-with-a-city-in-the-background.jpeg?auto=compress&cs=tinysrgb&w=1600");
+const clip = await layer.addClip({
+  mediaDataId: mediaId,
   startTime: 0,
   duration: 5,
-  style: { fillColor: "#6d6ff2", width: 600, height: 300 },
 });
-shape.style.setPosition(960, 540);
+clip.style.setPosition(960, 540);
+clip.style.setScale(0.6, 0.6);
 
-shape.addEffect("builtin-pixelate", { size: [24, 24] });
+clip.addEffect("builtin-pixelate", { size: [24, 24] });
 ```
 
 </LiveRun>
@@ -137,7 +137,7 @@ const shape = await layer.addClip({
 shape.style.setPosition(960, 540);
 
 shape.addEffect("builtin-drop-shadow", {
-  color: [0, 0, 0],
+  color: [1, 0, 0],
   alpha: 0.6,
   blur: 8,
   offset: [10, 10],
@@ -150,9 +150,10 @@ shape.addEffect("builtin-drop-shadow", {
 
 Color-correct on the fly: brightness, contrast, saturation, vibrance, temperature, tint. Every field defaults to its neutral value (`1` for multipliers, `0` for additive controls), so only override what you care about.
 
-<LiveRun setup='const mediaId = await Engine.getInstance().getLibrary().addMedia("https://images.pexels.com/photos/24253539/pexels-photo-24253539/free-photo-of-a-bridge-over-a-river-with-a-city-in-the-background.jpeg?auto=compress&cs=tinysrgb&w=1600");'>
+<LiveRun>
 
 ```typescript
+const mediaId = await Engine.getInstance().getLibrary().addMedia("https://images.pexels.com/photos/24253539/pexels-photo-24253539/free-photo-of-a-bridge-over-a-river-with-a-city-in-the-background.jpeg?auto=compress&cs=tinysrgb&w=1600");
 const clip = await layer.addClip({
   mediaDataId: mediaId,
   startTime: 0,
@@ -270,27 +271,6 @@ To remove an effect, call the `removeEffect` method with the ID of the effect in
 clip.removeEffect(effectInstanceId);
 ```
 
-## Advanced Configuration
-
-When adding an effect to the Library, you can pass additional Pixi filter properties that control how the shader is applied:
-
-| **Property**  | **Description**                                    |
-| ------------- | -------------------------------------------------- |
-| `autoFit`     | Automatically fit the output texture to the input. |
-| `noTransform` | Skip the transform when applying the filter.       |
-| `blendMode`   | Pixi blend mode for the filter pass.               |
-| `padding`     | Extra padding around the input texture in pixels.  |
-
-```typescript
-await Engine.getInstance().getLibrary().addEffect({
-  id: "shadow-effect",
-  name: "Shadow",
-  fragmentSrc,
-  autoFit: false,
-  padding: 32,
-});
-```
-
 ## Built-in Uniforms
 
 You can use several built-in uniforms in your effects, including:
@@ -305,32 +285,4 @@ You can use several built-in uniforms in your effects, including:
 | `inputPixel`  | `vec4`      | Pixel size of the input: `(1/width, 1/height, width, height)`.                |
 | `inputClamp`  | `vec4`      | Clamping boundaries for the input texture to prevent sampling outside bounds. |
 
-You can learn more about these uniforms [here](https://pixijs.download/v6.0.1/docs/PIXI.Filter.html).
-
-## Procedural Properties and Texture Inputs
-
-Effects can declare procedural properties (computed on the fly) and additional texture inputs on top of the fragment shader. Texture inputs are declared as regular `sampler2D` uniforms and can be populated from the Library or a custom `HTMLImageElement`/`HTMLVideoElement`.
-
-::: info
-Undo/redo of procedural properties and texture inputs is not currently handled. If you need to undo these changes, record them manually through the [`UndoManager`](/getting-started/undo-redo.md).
-:::
-
-## Passing Your Own PIXI.Filter
-
-For cases where the GLSL-only format is not enough (for example, multi-pass filters), you can pass your own `PIXI.Filter` instance when adding the effect:
-
-```typescript
-import { Pixi } from "@rendley/sdk";
-
-const myFilter = new Pixi.Filter(vertexSrc, fragmentSrc, uniforms);
-
-await Engine.getInstance().getLibrary().addEffect({
-  id: "my-custom-effect",
-  name: "My Custom Effect",
-  filter: myFilter,
-});
-```
-
-::: warning
-Custom filters provided via the `filter` option cannot be serialized. Re-register them through [`onSetupLibrary`](/getting-started/library.md#handling-missing-assets) on deserialization.
-:::
+You can learn more about these uniforms [here](https://pixijs.download/v7.x/docs/PIXI.Filter.html).

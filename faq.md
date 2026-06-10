@@ -9,7 +9,7 @@ No. By default, the SDK runs entirely in the browser, decoding, rendering, and e
 :::
 
 ::: details What browsers are supported?
-The SDK runs in any modern browser. Hardware-accelerated encoding and decoding through [WebCodecs](https://developer.mozilla.org/en-US/docs/Web/API/WebCodecs_API) is the fast path on Chrome, Edge, and recent Safari; the SDK falls back to a WASM pipeline elsewhere.
+The SDK runs in any modern browser. Hardware-accelerated encoding and decoding through [WebCodecs](https://developer.mozilla.org/en-US/docs/Web/API/WebCodecs_API).
 :::
 
 ::: details Where do I get a license?
@@ -82,10 +82,6 @@ No. Playback speed is positive only, in the range `[0.25, 4]` (`[0.25, 2]` on Sa
 
 ::: details How do I freeze the last frame of a video?
 Use [`VideoClip.setFreezeTime`](/getting-started/clips/video.md#freeze-a-frame). Pass the source timestamp you want to hold on.
-:::
-
-::: details Why do my clips rearrange themselves when I add one?
-By default, overlapping clips on the same layer push each other to make room. Disable with `{ adjustLayout: false }` on `addClip`. See [Adjust Layout on Add](/getting-started/clips.md#adjust-layout-on-add).
 :::
 
 ## State & Persistence

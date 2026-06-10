@@ -2,10 +2,6 @@
 
 Here are some best practices to achieve optimal performance with the SDK.
 
-## Do not add the same asset multiple times
-
-Instead of loading the same asset multiple times, reference it from [the Library](/getting-started/library.md). Every media entry is content-hashed, so the SDK automatically deduplicates identical files.
-
 ## Do not upload images for simple shapes
 
 If you need a rectangle, circle, or any other basic shape, it is better to use the [Shape](/getting-started/clips/shape.md) clip instead.
@@ -22,21 +18,13 @@ The Library processes media asynchronously (transcoding, hashing, filmstrip, sam
 
 For projects larger than 2GB enable [chunked output](/getting-started/export.md#large-files-and-chunked-output) and stream the chunks straight to disk or network. Merging chunks in the browser hits the single-blob allocation limit.
 
-## Reuse a Storage Provider across projects
-
-Change the project id with [`setProjectId`](/getting-started/engine.md#project-id) instead of destroying and recreating the Engine. Internally this destroys the current `StorageController`, re-creates it with the providers passed to `Engine.init`, and calls `init(newProjectId)` on each, so every provider rebinds to the new namespace without a full Engine teardown.
-
-## Layer composition carefully when using masks
-
-Masks use the clip's alpha channel. Hide the mask clip itself with `setVisible(false)` so it does not render on its own. Masked clips pay an extra render pass, so avoid nesting too many.
-
 ## Prefer xxHash for large files
 
 SHA-256 is slow on large inputs. For files larger than a few hundred MB, [switch to xxHash](/getting-started/settings.md#media-hash-algorithm). xxHash is non-cryptographic but sufficient for content addressing.
 
 ## Recompute layout after programmatic changes
 
-Methods like [`setPlaybackSpeed`](/getting-started/playback-speed.md) mutate the clip duration. Call [`Timeline.adjustClipsLayout()`](/getting-started/timeline.md#adjust-layout) afterwards so overlapping clips get reflowed.
+Methods like [`setPlaybackSpeed`](/getting-started/playback-speed.md), [`setStartTime`](/api-reference/classes/Clip.html#setstarttime), [`setLeftTrim`](/api-reference/classes/Clip.html#setlefttrim), and [`setRightTrim`](/api-reference/classes/Clip.html#setrighttrim) can change a clip’s position or duration in the timeline. Call [`Timeline.adjustClipsLayout()`](/getting-started/timeline.md#adjust-layout) afterwards so overlapping clips are reflowed.
 
 ## Scope Undo/Redo groups
 

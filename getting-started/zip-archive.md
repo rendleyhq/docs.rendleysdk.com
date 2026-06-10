@@ -33,7 +33,7 @@ Two ways to add content:
 - **`addFiles(paths[], targetDirectory?)`**: add multiple files in one call.
 
 ```typescript
-const ffmpeg = Engine.getInstance().getFFmpeg().getFFmpeg();
+const ffmpeg = Engine.getInstance().getFFmpeg();
 await ffmpeg.writeFile("/tmp/thumbnail.png", pngBytes);
 
 await archive.addFile("/tmp/thumbnail.png");
@@ -71,20 +71,11 @@ await archive.destroy();
 
 ## Downloading the Result
 
-After `save()`, read the archive back from the FFmpeg filesystem and hand it to the browser:
+After `save()`, download the file:
 
 ```typescript
-const ffmpeg = Engine.getInstance().getFFmpeg().getFFmpeg();
-const zipBytes = await ffmpeg.readFile("/tmp/my-project.zip");
-
-const blob = new Blob([zipBytes], { type: "application/zip" });
-const url = URL.createObjectURL(blob);
-
-const a = document.createElement("a");
-a.href = url;
-a.download = "my-project.zip";
-a.click();
-URL.revokeObjectURL(url);
+const ffmpeg = Engine.getInstance().getFFmpeg();
+await ffmpeg.downloadFile("/tmp/my-project.zip");
 ```
 
 ## See Also

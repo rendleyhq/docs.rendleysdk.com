@@ -76,8 +76,8 @@ Ready to build? Head to [Quick Start](/quick-start/installation.md) for setup, o
  </tr>
  <tr>
  <td class="icon-column"><div class="feature"><img src="/icons/arrow-path.svg" alt="Arrow Path" /></div></td>
- <td><strong>After Effects integration</strong></td>
- <td>Import compositions directly from After Effects and make them editable within the SDK, allowing users to tweak and modify parts with ease.</td>
+ <td><strong>After Effects animations in your videos</strong></td>
+ <td>Import Lottie animations exported from After Effects and make them editable within the SDK, allowing users to customize colors, shapes and text with ease.</td>
  </tr>
  <tr>
  <td class="icon-column"><div class="feature"><img src="/icons/no-server.svg" alt="No Server" /></div></td>

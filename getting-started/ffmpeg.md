@@ -6,12 +6,7 @@ The SDK bundles an FFmpeg WASM build for probing, transcoding, and audio mixing 
 
 ```typescript
 const ffmpegModule = Engine.getInstance().getFFmpeg();
-
-// The underlying @ffmpeg/ffmpeg-style instance for low-level calls:
-const ffmpeg = ffmpegModule.getFFmpeg();
 ```
-
-The outer `ffmpegModule` handles initialization and lifecycle. The inner `ffmpeg` is where you call the virtual filesystem and command execution APIs.
 
 ## Custom WASM Paths
 
@@ -69,29 +64,13 @@ await ffmpeg.exec([
 const result = await ffmpeg.readFile("/tmp/first-5-seconds.mp4");
 ```
 
-## Lifecycle
-
-```typescript
-// Reload after a crash or to flush state
-await ffmpegModule.reload();
-
-// Create a separate FFmpeg instance (e.g., for concurrent jobs)
-const isolated = await ffmpegModule.createCustomInstance();
-
-// Tear down when the whole Engine is being destroyed
-ffmpegModule.destroy();
-```
-
-The Engine's own [`destroy(true)`](/getting-started/engine.md#destroying) takes care of FFmpeg teardown for you, you only need to call `destroy()` manually if you created a custom instance.
-
 ## When to Use This Directly
 
 Most SDK features handle FFmpeg internally. Reach for direct FFmpeg access when you:
 
-- Need a file operation the SDK doesn't expose (e.g., probing with a specific ffprobe flag).
+- Need a file operation the SDK doesn't expose
 - Want to run a one-off transcode or demux outside the Engine's render pipeline.
 - Are building a [ZipArchive](/getting-started/zip-archive.md) and need to move files in and out of the sandbox.
-- Are implementing a [custom transcoder](https://docs.rendleysdk.com/api-reference/interfaces/ITranscodeProvider.html) and want to delegate to FFmpeg.
 
 ## See Also
 

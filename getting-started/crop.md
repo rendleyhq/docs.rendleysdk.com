@@ -1,6 +1,6 @@
 # Crop and Zoom
 
-The Crop API masks the visible area of a media clip without duplicating the asset. Cropping happens in the shader, so it is non-destructive and can be animated through the [Property Animator](/getting-started/property-animator.md).
+The Crop API masks the visible area of a media clip. Cropping is a non-destructive action and can be animated through the [Property Animator](/getting-started/property-animator.md).
 
 ::: info
 Crop is available on [VideoClip](/getting-started/clips/video.md), [ImageClip](/getting-started/clips/image.md), and [GifClip](/getting-started/clips/gif.md). It is not available on text, shapes, or Lottie clips.
@@ -82,33 +82,6 @@ The following properties are animatable through both animation systems:
 - `localPositionX`: `localPositionY` (position of the media inside the crop window)
 
 Read-only animation inputs are also available: `rawWidth`, `rawHeight`, `uncropWidth`, `uncropHeight`, `uncropRawWidth`, `uncropRawHeight`, `width`, `height`. Useful when building expressions that need the original dimensions.
-
-## Ken Burns Effect
-
-Combining `zoom` and `cropOffset` gives the slow-pan-and-zoom motion common in documentary footage:
-
-<LiveRun>
-
-```typescript
-const clip = await layer.addClip({
-  type: "shape",
-  shape: "rectangle",
-  startTime: 0,
-  duration: 6,
-  style: { fillColor: "#6d6ff2", width: 900, height: 500 },
-});
-clip.style.setPosition(960, 540);
-
-clip.propertyAnimator.addKeyframe("zoomX", 0, 1.0);
-clip.propertyAnimator.addKeyframe("zoomX", 6, 1.3);
-clip.propertyAnimator.addKeyframe("zoomY", 0, 1.0);
-clip.propertyAnimator.addKeyframe("zoomY", 6, 1.3);
-
-clip.propertyAnimator.addKeyframe("cropOffsetX", 0, -60);
-clip.propertyAnimator.addKeyframe("cropOffsetX", 6, 60);
-```
-
-</LiveRun>
 
 ## See Also
 

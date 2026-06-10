@@ -1,6 +1,6 @@
 # Styling
 
-Every clip exposes its visual state through the `style` property, an instance of [ClipStyle](https://docs.rendleysdk.com/api-reference/classes/ClipStyle.html). For text and shape clips, the style also includes type-specific fields (font, fill color, stroke). This page covers the shared controls. See [TextStyle](https://docs.rendleysdk.com/api-reference/classes/TextStyle.html) and [ShapeStyle](https://docs.rendleysdk.com/api-reference/classes/ShapeStyle.html) for type-specific extras.
+Every clip that contains a sprite (has visuals, ```clip.hasSprite()```) exposes its visual state through the `style` property, an instance of [ClipStyle](https://docs.rendleysdk.com/api-reference/classes/ClipStyle.html). For text and shape clips, the style also includes type-specific fields (font, fill color, stroke). This page covers the shared controls. See [TextStyle](https://docs.rendleysdk.com/api-reference/classes/TextStyle.html) and [ShapeStyle](https://docs.rendleysdk.com/api-reference/classes/ShapeStyle.html) for type-specific extras.
 
 You can apply style on creation or update it later on an existing clip.
 
@@ -116,7 +116,7 @@ clip.style.setCornerRadius(60);
 
 ## Relative Corner Radius
 
-By default, the corner radius is in pixels. Pass `true` as the second argument to interpret the values as a fraction of the clip's smaller dimension:
+By default, the corner radius is in absolute pixels. Pass `true` as the second argument to make the radius scale with the clip:
 
 ```typescript
 clip.style.setCornerRadius([0.5, 0.5, 0.5, 0.5], true); // fully circular
@@ -124,7 +124,7 @@ clip.style.setCornerRadius([0.5, 0.5, 0.5, 0.5], true); // fully circular
 
 ## Size
 
-On media clips, `width` and `height` are defined by the source. For text and shapes, you can set them via style fields at creation or with `setSize` afterwards:
+Clip size is determined by the source `width` and `height` and the clip’s `scale`. Use `setSize` to set an absolute size; the `scale` is computed automatically.
 
 ```typescript
 clip.style.setSize(400, 200);
@@ -153,7 +153,9 @@ const clip = await layer.addClip({
 
 ## Animating Style
 
-Every property documented above is animatable through the [Property Animator](/getting-started/property-animator.md). The track keys match the method names without `set`: `positionX`, `positionY`, `scaleX`, `scaleY`, `rotation`, `alpha`, `cornerRadius`.
+Most of the proeprties documented above are animatable through the [Property Animator](/getting-started/property-animator.md). The track keys match the method names without `set`: `positionX`, `positionY`, `scaleX`, `scaleY`, `rotation`, `alpha`, `cornerRadius`. 
+
+Use `getRegisteredProperties` method to get a description of the properties that can be animated.
 
 <LiveRun>
 

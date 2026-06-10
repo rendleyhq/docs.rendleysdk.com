@@ -86,7 +86,7 @@ const mediaId = await Engine.getInstance()
 
 ## 4. Create a Layer and Add a Clip
 
-Clips live on [layers](/getting-started/layer.md) that stack top-to-bottom. Each layer keeps its own stream of clips. Two clips can't overlap on the same layer, so use multiple layers for overlapping content.
+Clips live on [layers](/getting-started/layer.md) that stack bottom-to-top. Each layer keeps its own stream of clips. Two clips can't overlap on the same layer, so use multiple layers for overlapping content.
 
 ```typescript
 const layer = Engine.getInstance().getTimeline().createLayer();
@@ -115,7 +115,15 @@ When you're ready to produce the final video:
 ```typescript
 const result = await Engine.getInstance().export();
 if (result?.blob) {
-  downloadBlob(result.blob, "video." + result.extension);
+  const url = URL.createObjectURL(result.blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "video." + result.extension;
+  a.style.display = "none";
+  a.click();
+
+  URL.revokeObjectURL(url);
 }
 ```
 

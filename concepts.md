@@ -12,7 +12,7 @@ The [Display](/getting-started/display.md) is the WebGL canvas the SDK renders i
 
 ## Library
 
-The [Library](/getting-started/library.md) is the asset store. Every image, video, audio file, font, effect, filter, transition, and subtitle source goes in here before a clip can reference it. Media is content-hashed, so duplicates are deduplicated automatically.
+The [Library](/getting-started/library.md) is the asset store. Every image, video, audio file, font, effect, filter, transition, and subtitle source goes in here before a clip can reference it. Media is content-hashed, making assets easy to identify while preventing duplicate storage.
 
 ### MediaData
 
@@ -45,11 +45,11 @@ Two animation systems run side by side:
 
 ## Subtitles
 
-[Subtitles](/getting-started/subtitles.md) are a first-class asset type. Import from SRT or build programmatically. Style globally through the [SubtitlesManager](https://docs.rendleysdk.com/api-reference/classes/SubtitlesManager.html), every subtitles clip in the project picks up the current style.
+[Subtitles](/getting-started/subtitles.md) are managed as native project assets. Import from SRT or build programmatically. Style globally through the [SubtitlesManager](https://docs.rendleysdk.com/api-reference/classes/SubtitlesManager.html), every subtitles clip in the project picks up the current style.
 
 ## Storage
 
-By default, media is only in browser memory and disappears on refresh. Plug in a [Storage](/getting-started/storage.md) provider (IndexedDB for local, AWS S3 with presigned URLs for cloud) to persist.
+By default, media is stored only in browser memory and disappears on refresh. Plug in a [Storage](/getting-started/storage.md) provider (IndexedDB for local, AWS S3 with presigned URLs for cloud) to persist media across sessions. The SDK comes with a ready-to-use IndexedDB storage provider and examples for S3 storage.
 
 ## Events
 
@@ -65,4 +65,4 @@ Rendering runs through the Engine's [export](/getting-started/export.md) pipelin
 
 ## UI
 
-The SDK doesn't impose a user interface, you get a rendering engine and events, everything else is up to you. For a full editor experience out of the box, the [Video Editor UI](/video-editor-ui/overview.md) is a web component that wraps the SDK with a complete timeline, canvas handles, sidebar, and export dialog.
+The SDK is headless by default, giving you the rendering engine and events to build any interface you need. For teams that want a ready-to-use editor, the [Video Editor UI](/video-editor-ui/overview.md) wraps the SDK in a complete web component with a timeline, canvas handles, sidebar, and export dialog.

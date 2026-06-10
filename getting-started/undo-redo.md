@@ -39,9 +39,9 @@ Call `cancelGroup()` to discard a group that is still open.
 If you need to apply changes that should not be undoable (for example, temporary previews while a user drags), pause the recorder:
 
 ```typescript
-undoManager.pause();
+undoManager.setPause(true);
 // ... non-undoable changes ...
-undoManager.resume();
+undoManager.setPause(false);
 ```
 
 For nested pausing (recommended when the same flow can be entered from multiple places), use `pushPause()` and `popPause()`.
@@ -113,6 +113,14 @@ Engine.getInstance().events.on(
   "undo:process:custom",
   ({ undoRecord, redoGroup }) => {
     if (undoRecord.action === "my-app:rename") {
+      // Add a redo on undo
+      redoGroup.records.push(
+        new UndoRecord("my-app:rename", {
+          prev: undoRecord.data.next,
+          next: undoRecord.data.prev,
+        }),
+      );
+    
       applyName(undoRecord.data.prev);
     }
   },
@@ -152,14 +160,3 @@ const isOn = undoManager.getEnabled();
 ```
 
 Disabling clears both stacks. Useful when importing a project, you don't want the import operations to show up in the user's undo history.
-
-## Pause State
-
-Besides `pause()` / `resume()`, the manager exposes direct controls if you need them:
-
-```typescript
-undoManager.setPause(true);
-const paused = undoManager.getPause();
-```
-
-Prefer the stack-based `pushPause()` / `popPause()` for nested flows, they compose correctly when multiple subsystems want to suppress undo simultaneously.

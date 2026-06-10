@@ -44,16 +44,16 @@ Controls how video files are decoded during playback and export.
 
 Controls the preview and export render loop.
 
-| Setting                                | Default | Description                                                                                                                                      |
-| -------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `setRenderShowPreview(bool)`           | `true`  | Show frames on the canvas while exporting.                                                                                                       |
-| `setRenderAudioUseWorker(bool)`        | `true`  | Mix audio in a Web Worker instead of the main thread.                                                                                            |
-| `setRenderVideoUseDirectFrames(bool)`  | `true`  | Use a direct frame-grab path. Faster on most devices; can be slower on Apple Silicon. Disable through `forcedSettings` if you hit render issues. |
-| `setRenderMaxQueueSize(size)`          |         | Max async pixel buffer queue size.                                                                                                               |
-| `setRenderThrottleFactor(factor)`      |         | Back-pressure throttle when direct-frame rendering is enabled.                                                                                   |
-| `setRenderCancelFailTimeout(ms)`       |         | Failsafe for [`Engine.cancelExport`](/getting-started/export.md#canceling-an-export).                                                            |
-| `setRenderUseChunkedOutput(bool)`      | `false` | Split output into chunks for files >2GB. See [chunked output](/getting-started/export.md#large-files-and-chunked-output).                        |
-| `setRenderChunkedOutputMaxSize(bytes)` |         | Max size of each chunk when chunked output is on.                                                                                                |
+| Setting                                | Default | Description                                                                                                                                          |
+| -------------------------------------- | ------- | -----------------------------------------------------------------------------------------------------------------------------------------------------|
+| `setRenderShowPreview(bool)`           | `true`  | Show frames on the canvas while exporting.                                                                                                           |
+| `setRenderAudioUseWorker(bool)`        | `true`  | Mix audio in a Web Worker instead of the main thread.                                                                                                |
+| `setRenderVideoUseDirectFrames(bool)`  | `true`  | Use a direct frame-grab path. Faster on most devices. Default value should be the prefered value, unless settings it to false might fix some issues. |
+| `setRenderMaxQueueSize(size)`          |         | Max queue of frames to add to the encoder before throttling.                                                                                         |
+| `setRenderThrottleFactor(factor)`      |         | Back-pressure throttle factor (A wait multiplier based on the number of unprocessed frames.                                                          |
+| `setRenderCancelFailTimeout(ms)`       |         | Failsafe for [`Engine.cancelExport`](/getting-started/export.md#canceling-an-export).                                                                |
+| `setRenderUseChunkedOutput(bool)`      | `false` | Split output into chunks for files >2GB. See [chunked output](/getting-started/export.md#large-files-and-chunked-output).                            |
+| `setRenderChunkedOutputMaxSize(bytes)` |         | Max size of each chunk when chunked output is on.                                                                                                    |
 
 ## Clip Audio
 
@@ -109,7 +109,7 @@ Controls how the canvas responds to resolution changes.
 
 | Setting                               | Default   | Description                                                                                                                                                                                                     |
 | ------------------------------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `setMediaHashAlgorithm(algorithm)`    | `SHA_256` | Algorithm used for content hashing. Use `XX_HASH_64` / `XX_HASH_128` for files larger than a few hundred MB. See [`HashAlgorithmEnum`](https://docs.rendleysdk.com/api-reference/enums/HashAlgorithmEnum.html). |
+| `setMediaHashAlgorithm(algorithm)`    | `SHA_256` | Algorithm used for content hashing. Use `XXHash64` / `XXHash128` for files larger than a few hundred MB. See [`HashAlgorithmEnum`](https://docs.rendleysdk.com/api-reference/enums/HashAlgorithmEnum.html). |
 | `setM3u8MaxResolution(width, height)` |           | Cap the resolution picked from HLS/m3u8 sources.                                                                                                                                                                |
 | `setUseInternalTranscoder(bool)`      | `true`    | Use the SDK's built-in transcoder. Set to `false` when providing a custom [`ITranscodeProvider`](https://docs.rendleysdk.com/api-reference/interfaces/ITranscodeProvider.html).                                 |
 

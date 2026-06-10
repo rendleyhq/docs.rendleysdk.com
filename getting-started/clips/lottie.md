@@ -51,18 +51,12 @@ const properties = lottieClip.getProperties();
 const value = lottieClip.getProperty("propertyName");
 ```
 
-## Replace Colors, Text, and Images
+## Replace Images
 
-Lottie clips expose helpers for replacing specific elements in the composition using a path that matches the layer structure:
+Lottie clip handles all properties via get/setProperty, except images. In case you need to change an image you can use this (This is not officially supported):
 
 ```typescript
-lottieClip.replaceText("Title 01/Text 01", "New Title");
-lottieClip.replaceFillColor("Title 01/Text 01", [255, 0, 0, 255]);
-lottieClip.replaceStrokeColor("Title 01/Text 01", [0, 0, 0, 255]);
-lottieClip.replaceStrokeWidth("Title 01/Text 01", 4);
 lottieClip.replaceImage("Title 01/Image 01", "https://example.com/image.png");
-lottieClip.replaceGradientFillColor("Shape Layer/Gradient", gradientData);
-lottieClip.replaceGradientStrokeColor("Shape Layer/Gradient", gradientData);
 ```
 
 ## Playback Speed and Wrap Mode

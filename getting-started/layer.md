@@ -97,7 +97,7 @@ await layer.splitClip(clipId, 2.5); // split at time 2.5s
 layer.moveClipToLayer(clipId, otherLayerId);
 
 layer.getClipById(clipId);
-layer.getClipIds(); // in order
+layer.getClipIds(); // might be unsorted
 layer.getClips(); // { id: clip } dictionary
 ```
 

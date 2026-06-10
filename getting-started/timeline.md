@@ -48,6 +48,47 @@ await timeline.play();
 `seek` aligns the requested time to the closest frame boundary based on the configured FPS. Use [`alignTime`](#frame-alignment) if you need manual control over the rounding direction.
 :::
 
+## Property Keyframes
+
+Clips expose a `propertyAnimator` for keyframing individual clip properties over local clip time. Use it to animate properties such as position, scale, rotation, or opacity without configuring an animation preset.
+
+<LiveRun>
+
+```typescript
+// Add a rectangle to animate.
+const clip = await layer.addClip({
+  type: "shape",
+  shape: "rectangle",
+  startTime: 0,
+  duration: 4,
+  style: { fillColor: "#6d6ff2", width: 700, height: 400 },
+});
+
+clip.style.setPosition(960, 540);
+
+// Add keyframes in local clip time.
+// At second 0, the clip starts shifted left and transparent.
+clip.propertyAnimator.addKeyframe("positionX", 0, 560);
+clip.propertyAnimator.addKeyframe("alpha", 0, 0);
+
+// At second 1, it reaches its final position and opacity.
+clip.propertyAnimator.addKeyframe("positionX", 1, 960);
+clip.propertyAnimator.addKeyframe("alpha", 1, 1);
+
+// Add a subtle scale pulse between seconds 1 and 2.
+clip.propertyAnimator.addKeyframe("scale", 1, [1, 1]);
+clip.propertyAnimator.addKeyframe("scale", 1.5, [1.2, 1.2]);
+clip.propertyAnimator.addKeyframe("scale", 2, [1, 1]);
+
+const timeline = Engine.getInstance().getTimeline();
+timeline.seek(0);
+await timeline.play();
+```
+
+</LiveRun>
+
+Keyframe times are relative to the clip, not the global timeline. For example, a keyframe at `time: 1` plays one second after the clip starts.
+
 ## Frames Per Second
 
 ```typescript
@@ -147,6 +188,8 @@ const visible = clip.getTrimmedDuration(); // returns duration - leftTrim - righ
 ```
 
 For a video clip, trimming changes the visible range without re-encoding, playback and export seek into the source.
+
+Trimming values are positive towards the inside the clip (both `setLeftTrim(1)` and `setRightTrim(1)` reduces the duration of the Clip by 1 second)
 
 ## Moving Clips to Another Layer
 

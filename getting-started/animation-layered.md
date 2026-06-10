@@ -4,6 +4,8 @@ Every clip exposes an [AnimationController](https://docs.rendleysdk.com/api-refe
 
 The Animation Controller runs side by side with the [Keyframe Animation](/getting-started/property-animator.md) system. Use the controller when you want entrance, exit, and looping phases with fixed durations that fit the clip; use the keyframe animator when you want full control over keyframes, bezier handles, and effect or filter parameters.
 
+Animation keyframe times are normalized to fit the configured animation duration. For example, if an animation has keyframes at 0s and 10s, but its duration is set to 2s, the second keyframe will play at 2s.
+
 ## Animation Data
 
 Each In/Out/Loop zone is defined by an [`AnimationData`](https://docs.rendleysdk.com/api-reference/interfaces/AnimationData.html) object:

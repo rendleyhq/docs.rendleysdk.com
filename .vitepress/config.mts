@@ -289,7 +289,6 @@ export default defineConfig({
           { text: "Styling", link: "/getting-started/styling" },
           { text: "Crop & Zoom", link: "/getting-started/crop" },
           { text: "Playback Speed & Fades", link: "/getting-started/playback-speed" },
-          { text: "Masking", link: "/getting-started/masking" },
           { text: "Subtitles / Captions", link: "/getting-started/subtitles" },
           { text: "Filters", link: "/getting-started/filters" },
           { text: "Effects", link: "/getting-started/effects" },

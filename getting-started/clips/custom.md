@@ -89,11 +89,11 @@ await Engine.getInstance().init({
 
 const layer = Engine.getInstance().getTimeline().createLayer();
 
-const clip = Engine.getInstance().createCustomClipInstance(
-  PulseClip.TYPE,
-  { startTime: 0, duration: 6 },
-);
-await layer.addClip(clip);
+const clip = await layer.addClip({ 
+    type: PulseClip.TYPE,
+    startTime: 0, 
+    duration: 6 
+  });
 clip.style.setPosition(960, 540);
 
 await Engine.getInstance().getTimeline().play();

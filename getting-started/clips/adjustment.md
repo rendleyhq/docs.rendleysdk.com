@@ -50,7 +50,7 @@ Clips on `foregroundLayer` are unaffected by the adjustment because they render 
 
 ## Transforms
 
-Adjustment clips support position, scale, and rotation. These change the area of influence rather than drawing anything visible, handy for limiting a local blur or grade to a region of the frame.
+Adjustment clips support position, scale, and rotation.
 
 ## See Also
 
