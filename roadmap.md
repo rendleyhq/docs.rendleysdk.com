@@ -2,29 +2,29 @@
 
 ## High Priority
 
-#### Decrease RAM usage
+#### ✅ Decrease RAM usage
 
-> Currently, the SDK allocates more memory than necessary to avoid reallocation. After a recent update, we've observed that we do not need as much heap memory preallocated, and that reallocation is fast enough.
+> The SDK allocates more memory than necessary to avoid reallocation. After a recent update, we've observed that we do not need as much heap memory preallocated, and that reallocation is fast enough.
 
-#### Transcoding module
+#### ✅ Transcoding module
 
 > Implement a manager that will handle transcoding automatically for unsupported or unoptimized files. Similar to Storage, users will be able to create a custom implementation or use the built-in one.
 
-#### Improve audio mix speed
+#### ✅ Improve audio mix speed
 
 > Longer videos get stuck at the beginning of the rendering process until the audio mix is ready. We plan to improve this by making the mix happen in the background.
 
-#### Documentation improvement
+#### ✅ Documentation improvement
 
 > Add JSDoc comments to improve IDE highlighting and documentation clarity. Also, add more examples to the documentation.
 
 ## Medium Priority
 
-#### Faster media loading
+#### ✅ Faster media loading
 
 > Optimize asset loading to improve performance in both the library and the timeline.
 
-#### SVG Clip
+#### ✅ SVG Clip
 
 > Improve support for SVG clips.
 
@@ -38,11 +38,11 @@
 
 ## Low Priority
 
-#### Crop
+#### ✅ Crop
 
 > Add support for cropping media clips.
 
-#### More built-in filters
+#### ✅ More built-in filters
 
 > Add additional filters, such as blur, grayscale, and color correction.
 
@@ -50,11 +50,7 @@
 
 > Currently, only one subtitle style can be applied across the entire timeline. We aim to allow each clip to have its own subtitle style.
 
-#### UV Clip
-
-> Convert a video into a green placeholder, useful for mockup presentations where dynamic content replacement is needed.
-
-#### Video speed adjustment
+#### ✅ Video speed adjustment
 
 > Allow changing the speed of video or audio clips.
 

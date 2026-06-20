@@ -1,6 +1,6 @@
 # Render on Server
 
-The server approach utilizes the same SDK that is used on the client side; however, it operates in a controlled environment where you have greater control over the rendering process and resources. This method launches a headless Chromium browser to handle the rendering.
+The server approach uses the same SDK that is used on the client side; however, it operates in a controlled environment where you have greater control over the rendering process and resources. This method launches a headless Chromium browser to handle the rendering.
 
 You can find the full implementation on [GitHub](https://github.com/rendleyhq/video-rendering-server).
 
@@ -13,7 +13,7 @@ You can find the full implementation on [GitHub](https://github.com/rendleyhq/vi
 
 Compared to the client rendering approach, the server rendering method can chunk a large video into smaller parts and render them in parallel. These parts are then combined into a single video file.
 
-The number of chunks can equal the number of CPU cores available, as each chunk is processed in a separate process. Currently, the server performs chunking by default and is configured to utilize all available cores.
+The number of chunks can equal the number of CPU cores available, as each chunk is processed in a separate process. Currently, the server performs chunking by default and is configured to use all available cores.
 
 <hr />
 

@@ -16,6 +16,42 @@ const serialized = Engine.getInstance().serialize();
 The serialized state includes a schema version, which is used to ensure backward compatibility.
 :::
 
+### Try It
+
+Build a small composition, serialize it, log the JSON to the status bar, then clear the timeline and deserialize to see the composition come back exactly as it was.
+
+<LiveRun>
+
+```typescript
+// Build a small composition.
+const title = await layer.addClip({
+  type: "text",
+  text: "Serialize me",
+  startTime: 0,
+  duration: 4,
+  style: { fontSize: 140, color: "#FFFFFF" },
+});
+title.style.setPosition(960, 540);
+
+// 1. Serialize.
+const state = Engine.getInstance().serialize();
+console.log("Serialized state:", JSON.stringify(state).slice(0, 120), "...");
+
+// 2. Wipe the timeline.
+Engine.getInstance().getTimeline().reset();
+
+// 3. Restore from the saved state.
+await Engine.deserialize(state);
+
+await Engine.getInstance().getTimeline().play();
+```
+
+</LiveRun>
+
+::: tip
+Open the preview's status bar (bottom of the iframe) to see the serialized JSON preview that was printed.
+:::
+
 ::: details Example: Serialized State
 
 ```json
