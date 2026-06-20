@@ -360,7 +360,7 @@ export default defineConfig({
           { text: "Common Tasks", link: "/video-editor-ui/common-tasks" },
           { text: "Roadmap", link: "/video-editor-ui/roadmap" },
           { text: "Changelog", link: "/video-editor-ui/changelog" },
-          { text: "Pro Version ✨", link: "/video-editor-ui/pro" },
+          { text: "Source Code ✨", link: "/video-editor-ui/source-code" },
         ],
       },
       {

@@ -15,16 +15,20 @@ Both are optional. If you skip them, the editor boots with sensible defaults.
 | `licensekey`             | `string`                            |             | Your Rendley license key. Required unless `enableremotevalidation="true"`. |
 | `issublicense`           | `"true"` \| `"false"`               | `"false"`   | Use a sublicense for multi-subdomain setups.                               |
 | `enableremotevalidation` | `"true"` \| `"false"`               | `"false"`   | Fetch the license key from Rendley's servers at init time.                 |
-| `pexelsapikey`           | `string`                            |             | Enables the Pexels stock-images tab.                                       |
-| `giphyapikey`            | `string`                            |             | Enables the Giphy tab.                                                     |
-| `theme`                  | `"dark"` \| `"light"` \| `"system"` | `"dark"`    | UI theme. `"system"` follows the OS preference.                            |
+| `pexelsapikey`           | `string`                            |             | Pexels key for the Stock tab. **Both** `pexelsapikey` and `giphyapikey` must be set for the Stock tab to work. |
+| `giphyapikey`            | `string`                            |             | Giphy key for the Stock tab. **Both** `pexelsapikey` and `giphyapikey` must be set for the Stock tab to work.  |
+| `theme`                  | `"dark"` \| `"light"` \| `"system"` | `"system"`  | UI theme. `"system"` (the default) follows the OS preference.              |
 | `highcontrast`           | `boolean`                           | `false`     | Higher-contrast palette for accessibility.                                 |
-| `filtersPath`            | `string`                            | CDN default | Base URL for the LUT filter pack. Override if self-hosted.                 |
-| `effectsPath`            | `string`                            | CDN default | Base URL for the effect shader pack.                                       |
-| `transitionsPath`        | `string`                            | CDN default | Base URL for the transition shader pack.                                   |
-| `titlesPath`             | `string`                            | CDN default | Base URL for the Lottie titles pack.                                       |
-| `subtitlesStylesPath`    | `string`                            | CDN default | Base URL for the subtitles style presets.                                  |
-| `animationsPath`         | `string`                            | CDN default | Base URL for the keyframe animation presets.                               |
+| `filters-path`           | `string`                            | CDN default | Base URL for the LUT filter pack. Override if self-hosted.                 |
+| `effects-path`           | `string`                            | CDN default | Base URL for the effect shader pack.                                       |
+| `transitions-path`       | `string`                            | CDN default | Base URL for the transition shader pack.                                   |
+| `titles-path`            | `string`                            | CDN default | Base URL for the Lottie titles pack.                                       |
+| `subtitles-styles-path`  | `string`                            | CDN default | Base URL for the subtitles style presets.                                  |
+| `animations-path`        | `string`                            | CDN default | Base URL for the keyframe animation presets.                               |
+
+::: warning Attribute names are kebab-case
+These are HTML attributes, so the asset-pack paths must be written in kebab-case (`filters-path`, `subtitles-styles-path`, …). Writing them camelCase (`filtersPath`) does **not** work in plain HTML — the browser lowercases the attribute and the component never sees it. In JSX/TSX the camelCase prop names are fine.
+:::
 
 ## JSON Config
 
@@ -68,8 +72,7 @@ For everything that isn't a simple attribute, embed a JSON block inside the tag.
 | `aspectRatios`    | `AspectRatio[]`                                  | Replaces the default preset list shown in the composition resolution picker.            |
 | `composition`     | `{ width, height, backgroundColor }`             | Initial composition dimensions and background.                                          |
 | `modules`         | `{ media, text, stock, transitions, subtitles }` | Toggle visibility of sidebar modules.                                                   |
-| `navbar`          | `{ aspectRatios, export }`                       | Control the top navbar. Hide the Export button with `{ export: { isVisible: false } }`. |
-| `sidebar`         | `{ order, defaultActiveModule }`                 | Reorder the sidebar tabs and pick which one is active on boot.                          |
+| `sidebar`         | `{ order, defaultActiveModule }`                 | Pick which sidebar tab is active on boot (see note below on `order`).                   |
 | `controlsSidebar` | `Record<ClipType, ControlSteps>`                 | Toggle visibility of per-clip control panels (text editor, filters, animations, etc.).  |
 
 ### Aspect Ratio Preset
@@ -106,7 +109,7 @@ Hide a sidebar tab entirely:
 
 Valid keys: `media`, `text`, `stock`, `transitions`, `subtitles`.
 
-### Sidebar Order and Default
+### Sidebar Default Active Tab
 
 ```json
 {
@@ -117,7 +120,11 @@ Valid keys: `media`, `text`, `stock`, `transitions`, `subtitles`.
 }
 ```
 
-`defaultActiveModule` can be `null` to leave the sidebar collapsed on boot.
+`defaultActiveModule` decides which tab is open when the editor boots. It must name a visible module; if the named module is hidden (or you omit/`null` it), the editor opens the first visible tab from `order` instead.
+
+::: warning `order` does not visually reorder the tabs
+The on-screen tab order is fixed (`media`, `text`, `stock`, `transitions`, `subtitles`). `order` is only used as the lookup list for choosing the fallback default-active tab when `defaultActiveModule` is unset or hidden. Setting `defaultActiveModule` to `null` does **not** collapse the sidebar on desktop — it falls back to the first visible tab. (The sidebar only starts collapsed on mobile.)
+:::
 
 ### Per-Clip Control Panels
 
@@ -146,22 +153,17 @@ Valid steps: `edit_text`, `edit_lottie`, `edit_audio`, `filters`, `effects`, `su
 
 ## Self-Hosting Asset Packs
 
-The editor loads its filters, effects, transitions, titles, subtitles styles, and animation presets from Rendley's CDN by default. To self-host, override the `*Path` attributes with your own URLs:
+The editor loads its filters, effects, transitions, titles, subtitles styles, and animation presets from Rendley's CDN by default. To self-host, override the `*-path` attributes with your own URLs (remember: kebab-case in HTML):
 
 ```html
 <rendley-video-editor
   licensename="..."
   licensekey="..."
-  effectsPath="https://cdn.yourdomain.com/rendley/effects"
-  filtersPath="https://cdn.yourdomain.com/rendley/filters"
-  transitionsPath="https://cdn.yourdomain.com/rendley/transitions"
+  effects-path="https://cdn.yourdomain.com/rendley/effects"
+  filters-path="https://cdn.yourdomain.com/rendley/filters"
+  transitions-path="https://cdn.yourdomain.com/rendley/transitions"
 />
 ```
 
 Each pack has a specific file layout, mirror the files from Rendley's CDN when self-hosting.
 
-## See Also
-
-- [Installation](/video-editor-ui/installation.md)
-- [Events & Methods](/video-editor-ui/events-and-methods.md)
-- [Common Tasks](/video-editor-ui/common-tasks.md)

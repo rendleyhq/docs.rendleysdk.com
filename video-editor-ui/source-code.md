@@ -1,8 +1,8 @@
-# Video Editor UI Pro
+# Video Editor UI Source Code
 
-The Pro version of the Video Editor provides access to the source code that powers the video editor.
+Purchasing the source code gives you access to the code that powers the Video Editor, so you can modify it, remove the Rendley logo, integrate third-party services, and self-host it.
 
-After purchasing the Pro version, you will gain access to a GitHub repository where the source code is hosted.
+You can purchase it at [rendleysdk.com/javascript-video-editor](https://rendleysdk.com/javascript-video-editor). After purchasing, you will gain access to a GitHub repository where the source code is hosted.
 
 ## Installation
 

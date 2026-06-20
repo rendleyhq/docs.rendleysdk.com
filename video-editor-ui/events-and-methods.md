@@ -181,8 +181,3 @@ onUnmounted(() => {
 </template>
 ```
 
-## See Also
-
-- [Common Tasks](/video-editor-ui/common-tasks.md): practical recipes using these hooks.
-- [Listening to Events](/user-interface/listening-to-events.md): full SDK event catalog.
-- [Configuration](/video-editor-ui/configuration.md)

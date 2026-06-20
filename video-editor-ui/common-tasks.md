@@ -151,22 +151,6 @@ await Engine.getInstance()
 
 Custom items appear alongside the built-ins in the user-facing UI.
 
-## Undo / Redo From the Outside
-
-The editor has built-in keyboard shortcuts (Ctrl+Z / Ctrl+Shift+Z). If you need the same behavior from a custom toolbar button:
-
-```typescript
-const undo = Engine.getInstance().getUndoManager();
-
-myUndoButton.onclick = () => undo.undo();
-myRedoButton.onclick = () => undo.redo();
-
-Engine.getInstance().events.on("undo:redo:changed", ({ canUndo, canRedo }) => {
-  myUndoButton.disabled = !canUndo;
-  myRedoButton.disabled = !canRedo;
-});
-```
-
 ## Embed the Editor in a Modal
 
 Web components keep their state across mounts, but the SDK destroys itself when the element leaves the DOM. To show the editor in a modal that repeatedly opens and closes, either:
@@ -176,21 +160,3 @@ Web components keep their state across mounts, but the SDK destroys itself when 
 
 Option 1 is faster. Option 2 gives you a clean slate every open.
 
-## Check If It's Safe to Save
-
-Media processing is asynchronous, hashing, transcoding, waveform sampling, filmstrip generation. Before every save:
-
-```typescript
-if (Engine.getInstance().isSafeToSerialize()) {
-  save();
-} else {
-  // Retry later, or schedule the save after library:media:ready fires
-}
-```
-
-## See Also
-
-- [Events & Methods](/video-editor-ui/events-and-methods.md)
-- [Configuration](/video-editor-ui/configuration.md)
-- [Save & Restore the Project](/getting-started/save-restore.md): the SDK-level save/load reference.
-- [Listening to Events](/user-interface/listening-to-events.md): full SDK event catalog.

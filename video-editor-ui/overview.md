@@ -2,18 +2,22 @@
 
 A complete video editor interface built on top of the [Rendley SDK](/), shipped as a single web component. Drop `<rendley-video-editor>` into any page and you get a working editor with a timeline, preview canvas, media library, text / shape / lottie clips, transitions, effects, filters, subtitles, and export.
 
-![Video Editor Cover](https://docs.rendley.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fvideo-editor-cover.a87618bd.webp&w=3840&q=75)
-
 ## What's Included
 
-- **Media library** with drag-and-drop uploads, stock images (Pexels), and GIFs (Giphy).
-- **Timeline** with multiple layers, trim, split, drag-and-drop reorder, and transitions.
-- **Canvas preview** with move / resize / rotate handles and snap lines.
-- **Clip types**: video, audio, image, GIF, shape, text, subtitles, Lottie.
-- **Effects & filters**: built-in library plus support for custom GLSL shaders through the SDK.
-- **Subtitles**. SRT import, automatic word timing, style presets, highlight animations.
-- **Export**. MP4 / WebM output with the full SDK render pipeline, including chunked output for large files.
-- **Undo / redo**: keyboard shortcuts, theming, and localization.
+The interface is organized around a sidebar, a canvas, a timeline, and a top bar:
+
+- **Media sidebar** for uploading files via drag-and-drop and browsing stock content — Pexels images and videos, Giphy GIFs and stickers — then dropping them straight onto the canvas or timeline.
+- **Timeline** with multiple layers, drag-to-reorder, trim, split, zoom, and transitions between clips.
+- **Canvas editing** with on-screen move / resize / rotate handles and snap guides for positioning clips.
+- **Selection panel** that adapts to the selected clip — edit text, adjust audio, apply filters and effects, add in/out/loop animations, and style subtitles.
+- **Subtitles tab** for importing SRT files and applying style presets and highlight animations.
+- **Text, shapes, and Lottie** added as their own clips and styled directly in the editor.
+- **Top bar** with the resolution / aspect-ratio picker, background color, theme toggle, and the Export button.
+- **Built-in UX**: undo / redo keyboard shortcuts, light / dark / system themes, a high-contrast mode, and localization.
+
+The sidebar tabs and per-clip panels can be reordered or hidden through [configuration](/video-editor-ui/configuration.md), so you can tailor the UI to your use case.
+
+Beyond what the interface exposes, the editor is a thin layer over the Rendley SDK. Anything the SDK can do — custom GLSL effects and filters, advanced export options, keyframe animation, and much more — can be wired in from your own code through the [Engine](/video-editor-ui/events-and-methods.md), even when there's no built-in button for it yet.
 
 ## How It's Built
 
@@ -21,11 +25,6 @@ The editor is a [StencilJS](https://stenciljs.com/) web component, so it works i
 
 ## Licensing
 
-The editor requires a valid Rendley license. A free evaluation license is available at [app.rendleysdk.com](https://app.rendleysdk.com/). For production use or to unlock the Pro version (full source code, advanced customization), see the [Pro page](/video-editor-ui/pro.md).
+The editor requires a valid Rendley license to render. A free license is available at [app.rendleysdk.com](https://app.rendleysdk.com/) and lets you use the editor loaded from the Rendley CDN with all features.
 
-## Next Steps
-
-- [Installation](/video-editor-ui/installation.md). CDN and npm setups.
-- [Configuration](/video-editor-ui/configuration.md): props, JSON config, aspect ratios, sidebar modules.
-- [Events & Methods](/video-editor-ui/events-and-methods.md): hook into lifecycle and access the SDK.
-- [Common Tasks](/video-editor-ui/common-tasks.md): recipes for save/load, export, media upload, theming.
+The license does **not** include the editor's source code. If you want to modify the editor — change the source, remove the Rendley logo, integrate third-party services, or self-host on your own CDN — you can [purchase access to the source code](https://rendleysdk.com/javascript-video-editor) (GitHub repository) separately. See the [Source Code page](/video-editor-ui/source-code.md) for setup once you have access.

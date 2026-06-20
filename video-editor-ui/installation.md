@@ -7,10 +7,10 @@ The Video Editor UI is published as a web component, which means you can drop it
 Before you install, gather these keys:
 
 - **Rendley license**: required. Get one free at [app.rendleysdk.com](https://app.rendleysdk.com/).
-- **Pexels API key**: optional, enables the stock images tab. [Get a key](https://help.pexels.com/hc/en-us/articles/900004904026-How-do-I-get-an-API-key).
-- **Giphy API key**: optional, enables the GIF tab. [Get a key](https://support.giphy.com/hc/en-us/articles/360020283431-Request-A-GIPHY-API-Key).
+- **Pexels API key**: optional, powers the images and videos in the Stock tab. [Get a key](https://help.pexels.com/hc/en-us/articles/900004904026-How-do-I-get-an-API-key).
+- **Giphy API key**: optional, powers the GIFs and stickers in the Stock tab. [Get a key](https://support.giphy.com/hc/en-us/articles/360020283431-Request-A-GIPHY-API-Key).
 
-If you skip the Pexels or Giphy keys, the relevant tabs are simply hidden.
+Pexels and Giphy feed a single **Stock** tab (images, videos, GIFs, stickers). Both keys are required to enable it — providing only one leaves the tab disabled. The Stock tab is always present in the sidebar; without the keys it shows a "Missing stock media API keys" message instead of being hidden. To remove the tab entirely, hide the `stock` module via the [JSON config](/video-editor-ui/configuration.md#module-visibility).
 
 ## Setup
 
@@ -19,7 +19,7 @@ If you skip the Pexels or Giphy keys, the relevant tabs are simply hidden.
 
 ```html
 <script type="module">
-  import { defineCustomElements } from "https://cdn.rendleysdk.com/sdk/video-editor/1.8.20/loader/index.js";
+  import { defineCustomElements } from "https://cdn.rendleysdk.com/sdk/video-editor/1.0.0/loader/index.js";
   defineCustomElements();
 </script>
 
@@ -159,9 +159,3 @@ Once the page loads, the editor shows a loading screen while the SDK initializes
 - Check the browser console for license errors.
 - Make sure the parent element has a non-zero height.
 - Confirm the CDN URL is reachable (for CDN installs) or that `defineCustomElements()` ran (for npm installs).
-
-## Next Steps
-
-- [Configuration](/video-editor-ui/configuration.md): props, theme, sidebar modules, aspect ratios.
-- [Events & Methods](/video-editor-ui/events-and-methods.md): wait for `onReady`, listen for renders, access the Engine.
-- [Common Tasks](/video-editor-ui/common-tasks.md): save/load a project, trigger an export, react to media uploads.

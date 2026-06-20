@@ -1,5 +1,62 @@
 # Changelog
 
+## [1.8.20] - 2026-04-08
+
+### Changed
+
+- Updated `@rendley/sdk` to version 1.15.3
+- Changed the wrong text labels for `Subtitles` panel (border -> stroke)
+- Added new subtitles options (drop shadow and letter spacing)
+- Added missing background padding option
+
+### Fixed
+
+- Fixed incorrect target for padding option on subtitles panel
+
+## [1.8.19] - 2026-03-31
+
+### Changed
+
+- Updated `@rendley/sdk` to version 1.15.0, which includes keyframe animation support.
+- Reverted the fix for stopping playback during changes. (If any issues appear, please report them.)
+
+## [1.8.18] - 2026-02-15
+
+### Added
+
+- Support for outputting large content in chunks
+
+## [1.8.17] - 2025-12-12
+
+### Changed
+
+- Updated `@rendley/sdk` to version 1.12.23
+
+### Fixed
+
+- Fixed transitions getting removed when adjusting clips layout
+
+## [1.8.16] - 2025-12-02
+
+### Changed
+
+- Updated `@rendley/sdk` to version 1.12.21
+
+## [1.8.15] - 2025-12-02
+
+### Added
+
+- Added controls panel for transitions
+
+### Changed
+
+- Updated `@rendley/sdk` to version 1.12.20
+
+### Fixed
+
+- Fixed drag and drop highlight staying active
+- Fixed effect not getting removed when clicking second time
+
 ## [1.8.14] - 2025-10-25
 
 ### Fixed
