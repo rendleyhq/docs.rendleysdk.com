@@ -113,9 +113,20 @@ Controls how the canvas responds to resolution changes.
 | `setM3u8MaxResolution(width, height)` |           | Cap the resolution picked from HLS/m3u8 sources.                                                                                                                                                                |
 | `setUseInternalTranscoder(bool)`      | `true`    | Use the SDK's built-in transcoder. Set to `false` when providing a custom [`ITranscodeProvider`](https://docs.rendleysdk.com/api-reference/interfaces/ITranscodeProvider.html).                                 |
 
-## Forced Settings
+## Settings and Projects
 
-Some settings can be applied at init time and take precedence over anything stored in a serialized project:
+Settings are saved with the project: `Engine.serialize()` writes them into the payload, and loading a project (`Engine.deserialize()` or the `project` init option) applies them again. This lets one side hand its choices to another through the project itself. For example, an editor sets the codec, bitrate and chunked output, and a generic render server that loads the project exports with exactly those values.
+
+The order of precedence on a project load, lowest to highest:
+
+1. The SDK defaults.
+2. The settings stored in the project.
+3. The host-only settings the engine is currently running with (see below).
+4. `forcedSettings`.
+
+### Forced Settings
+
+Settings passed at init time take precedence over anything stored in a project, on the initial load and on every later `Engine.deserialize()`:
 
 ```typescript
 await Engine.getInstance().init({
@@ -127,7 +138,33 @@ await Engine.getInstance().init({
 });
 ```
 
-Useful when you want to override per-project values across the board (for example, to force software encoding on a specific deployment regardless of what the saved project requested).
+Use them for everything your deployment depends on, regardless of what a saved project requested: software encoding on a specific server, no filmstrips or waveforms on a headless renderer, your own timeouts and worker counts.
+
+### Host-Only Settings
+
+A few settings choose an implementation based on what the host and its browser support, so they are never saved into projects and a loaded project never changes them:
+
+`useMediaBunnyAsVideoPlayer`, `mediaBunnySeekForwardScanMax`, `mediaBunnyCatchupThreshold`, `mediaBunnyCatchupCooldown`, `mediaBunnyAudioScheduleAhead`, `mediaBunnyAudioResyncThreshold`, `mediaBunnyAudioInWorker`, `clipVideoFilmstripUseMediaBunny`
+
+Set them through their setters or through `forcedSettings`; the value stays in place across project loads.
+
+### Ignoring Project Settings
+
+Because a project can configure the engine that loads it, a payload you do not control can change how your host behaves: timeouts, worker counts, encoder limits, the render path. When you load projects from a source you do not trust to do that, typically a server rendering projects submitted by third parties, turn the project's settings off:
+
+```typescript
+await Engine.getInstance().init({
+  ignoreProjectSettings: true,
+  forcedSettings: {
+    // the configuration of this host
+  },
+  // ...license, display
+});
+```
+
+With `ignoreProjectSettings` the `settings` stored in a loaded project are skipped entirely: the engine keeps the settings it runs with (defaults and setters) and applies `forcedSettings` on top. It covers the `project` init option and every later `Engine.deserialize()`. It is off by default, so projects keep carrying their settings unless you opt out.
+
+See [Render on Server](/rendering/render-on-server.md#untrusted-projects) for the rest of the checklist.
 
 ## See Also
 
