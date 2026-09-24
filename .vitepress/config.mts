@@ -341,6 +341,7 @@ export default defineConfig({
             text: "Listening to events",
             link: "/user-interface/listening-to-events",
           },
+          { text: "Editing text on the canvas", link: "/user-interface/editing-text" },
           // { text: "Displaying assets", link: "/in-progress#" },
           // { text: "Playback", link: "/in-progress#" },
           // { text: "Drag elements", link: "/in-progress#" },

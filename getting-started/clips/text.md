@@ -112,4 +112,5 @@ textClip.style.setDropShadowAngle(Math.PI / 4);
 - [Styling](/getting-started/styling.md)
 - [Fonts](/getting-started/fonts.md)
 - [HTML Text](/getting-started/clips/html-text.md): for richer in-line markup.
+- [Editing text on the canvas](/user-interface/editing-text.md): let users type directly on the canvas.
 - API reference: [`TextClip`](https://docs.rendleysdk.com/api-reference/classes/TextClip.html), [`TextStyle`](https://docs.rendleysdk.com/api-reference/classes/TextStyle.html)
